@@ -90,6 +90,30 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .rec-dot { width: 36px; height: 36px; border-radius: 50%; background: var(--orange); animation: blink 1.2s steps(2, jump-none) infinite; }
 @keyframes blink { 50% { opacity: .15; } }
 
+/* old camcorder / CRT look: scanlines, vignette, flicker, fringing, tracking glitch */
+.record { overflow: hidden; }
+.record-title { text-shadow: 4px 0 rgba(255,60,60,.55), -4px 0 rgba(60,200,255,.55); animation: crt-jitter 5s infinite; }
+.record-sub, .rec, .cam-top, .cam-time { text-shadow: 2px 0 rgba(255,60,60,.5), -2px 0 rgba(60,200,255,.5); }
+.cam-top { position: absolute; top: 80px; left: 120px; font-size: 32px; }
+.cam-time { position: absolute; bottom: 80px; right: 120px; font-size: 32px; letter-spacing: .1em; }
+.vf { position: absolute; width: 90px; height: 90px; border: 0 solid rgba(242,242,235,.8); }
+.vf.tl { top: 40px; left: 60px; border-width: 5px 0 0 5px; } .vf.tr { top: 40px; right: 60px; border-width: 5px 5px 0 0; }
+.vf.bl { bottom: 40px; left: 60px; border-width: 0 0 5px 5px; } .vf.br { bottom: 40px; right: 60px; border-width: 0 5px 5px 0; }
+.crt { position: absolute; inset: 0; pointer-events: none; z-index: 5;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.28) 0 2px, transparent 2px 6px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.7) 100%);
+  animation: crt-flicker .12s steps(2, jump-none) infinite; }
+.crt::before { content: ""; position: absolute; left: 0; right: 0; height: 220px; top: -220px;
+  background: linear-gradient(to bottom, transparent, rgba(242,242,235,.09), transparent); animation: crt-roll 6s linear infinite; }
+.tape-bar { position: absolute; left: 0; right: 0; height: 14px; top: 0; z-index: 4; pointer-events: none;
+  background: rgba(242,242,235,.16); mix-blend-mode: screen; transform: translateX(0); animation: tape-glitch 7s steps(1) infinite; }
+@keyframes crt-flicker { 0% { opacity: .96; } 50% { opacity: 1; } }
+@keyframes crt-roll { to { transform: translateY(1500px); } }
+@keyframes crt-jitter { 0%, 92%, 100% { transform: none; } 93% { transform: translateX(-10px) skewX(-3deg); } 95% { transform: translateX(8px); } 97% { transform: translateX(-4px); } }
+@keyframes tape-glitch { 0% { top: 62%; opacity: 0; } 85% { top: 62%; opacity: 0; } 86% { top: 64%; opacity: 1; transform: translateX(-30px); } 88% { top: 66%; opacity: 1; transform: translateX(40px); } 90% { top: 66%; opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .crt, .crt::before, .tape-bar, .record-title { animation: none; } }
+
 /* ── about ───────────────────────────────────────── */
 .about { display: grid; grid-template-columns: 520px 1fr; gap: 96px; align-items: center; margin: auto 0; }
 .photo-frame { position: relative; width: 520px; height: 520px; }
