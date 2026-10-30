@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hacktoberfest 2026</title>
+<link rel="icon" href="assets/brand/hf-mark-forest.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ───────────── 01 · Cover ───────────── -->
+<section id="cover" class="cover" data-export="video" data-export-seconds="8" data-background-color="#2E4742">
+  <canvas class="scene" data-scene="pixelfield" data-seed="2026"></canvas>
+  <div class="cover-shade"></div>
+  <div class="cover-copy">
+    <img class="cover-logo" src="assets/brand/hacktoberfest-2026-horizontal-white.svg" alt="Hacktoberfest 2026">
+    <h1>Intro to open source<br><span class="hl-ochre">+ open source AI</span></h1>
+    <p class="mono byline">By Technickel · October 2026</p>
+  </div>
+  <div class="partners">
+    <span class="mono">Powered by</span>
+    <img src="assets/brand/mlh-logo-color.svg" alt="MLH">
+    <span class="x">×</span>
+    <img src="assets/brand/dev-logo-black.svg" alt="DEV">
+    <span class="mono sep">Presenting partner: DigitalOcean</span>
+  </div>
+  <aside class="notes">Welcome everyone. Hacktoberfest is back for its 13th year, and it looks very different this time. Today: what it is, who it's for, why you'd join, how to join, and some real contributions.</aside>
+</section>
+
+<!-- ───────────── 02 · Record reminder (skipped in exports) ───────────── -->
+<section id="record" class="record" data-export="skip" data-background-color="#231F20">
+  <div class="rec"><span class="rec-dot"></span><span class="mono">REC</span></div>
+  <h2 class="record-title">HEY ME,<br>REMEMBER TO <span class="hl-orange">RECORD</span> :)</h2>
+  <p class="mono record-sub">Andddd… action</p>
+  <aside class="notes">Start the recording! This slide is left out of the PPTX/PDF exports.</aside>
+</section>
+
+<!-- ───────────── 03 · About me ───────────── -->
+<section id="about" class="s" data-background-color="#3D5F58">
+  <p class="kicker">Who's talking</p>
+  <div class="about">
+    <div class="photo-frame"><img src="assets/img/bradley.jpg" alt="Bradley Leonard"></div>
+    <div class="about-copy">
+      <h2 class="title">Bradley Leonard<br><span class="hl-ochre">/ Technickel</span></h2>
+      <ul class="tags">
+        <li>Senior Full Stack Developer, Triplelift</li>
+        <li>AI Wrangler</li>
+        <li>3D Printing Enthusiast</li>
+      </ul>
+      <div class="stat"><span class="big" data-count="9">9</span><span class="mono">years of<br>Hacktoberfest</span></div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Quick intro. [Confirm title/role for 2026.] 2023 was year 6, so this is year 9.</aside>
+</section>
+
+<!-- ───────────── 04 · Agenda ───────────── -->
+<section id="agenda" class="s" data-background-color="#2E4742">
+  <p class="kicker">Agenda</p>
+  <h2 class="title">Today's plan</h2>
+  <div class="terminal agenda">
+    <div class="term-bar"><i></i><i></i><i></i><span>~/hacktoberfest-2026</span></div>
+    <pre><span class="prompt">$</span> ls agenda/
+<span class="fragment">01_the_what.md     <span class="dim"># what is Hacktoberfest, and what changed</span></span>
+<span class="fragment">02_the_who.md      <span class="dim"># who it's for</span></span>
+<span class="fragment">03_the_why.md      <span class="dim"># why you should join</span></span>
+<span class="fragment">04_the_how.md      <span class="dim"># how to join + how to contribute</span></span>
+<span class="fragment">05_show_and_tell/  <span class="dim"># real contributions + live walkthrough</span></span></pre>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">The usual what / who / why / how, plus a show and tell at the end.</aside>
+</section>
+
+<!-- ───────────── 05 · Section: What ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="5"></div>
+  <h2 class="mono type-line"><span class="type">&gt; What is Hacktoberfest?</span></h2>
+  <p class="divider-sub">A spooky time to get your hack on</p>
+</section>
+
+<!-- ───────────── 06 · What is it ───────────── -->
+<section id="what" class="s" data-background-color="#3D5F58">
+  <p class="kicker">What is Hacktoberfest?</p>
+  <h2 class="title">A month-long celebration<br>of open source</h2>
+  <div class="cards three">
+    <div class="card fragment fade-up" style="--c:var(--ochre)">
+      <p class="mono card-k">Every October since 2014</p>
+      <h3>13th year running</h3>
+      <p>Open source has been around forever. Hacktoberfest gives you a dedicated month to dive in.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--sky)">
+      <p class="mono card-k">2026 theme</p>
+      <h3>AI belongs to everyone</h3>
+      <p>This year is all about building with open-weight models, open source agents and open tooling.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--pink)">
+      <p class="mono card-k">Free · for everyone</p>
+      <h3>In person + online</h3>
+      <p>Join a local one-day Fest, take part online all month, or both. It's free.</p>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Hacktoberfest is a month-long celebration of open source every October. Run by MLH and DEV this year, with DigitalOcean (who started it in 2014) as presenting partner.</aside>
+</section>
+
+<!-- ───────────── 07 · History ───────────── -->
+<section id="history" class="s" data-background-color="#2E4742">
+  <p class="kicker">The story so far</p>
+  <h2 class="title">From four PRs to 500+ events</h2>
+  <ol class="timeline">
+    <li class="fragment" style="--c:var(--sky)">
+      <span class="yr">2014</span>
+      <h3>A challenge is born</h3>
+      <p>DigitalOcean launches Hacktoberfest: open four pull requests in October, earn a t-shirt.</p>
+    </li>
+    <li class="fragment" style="--c:var(--ochre)">
+      <span class="yr">2015–25</span>
+      <h3>A generation joins open source</h3>
+      <p>Thousands make their first contribution. Then maintainers face a flood of low-effort PRs and burnout.</p>
+    </li>
+    <li class="fragment" style="--c:var(--pink)">
+      <span class="yr">2026</span>
+      <h3>A new chapter</h3>
+      <p>MLH and DEV take over stewardship. Local Fests and online events, all about building with open source AI.</p>
+    </li>
+  </ol>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Source: hacktoberfest.com/mission. The big shift: AI tools made low-effort PRs trivial to generate, and maintainers were drowning.</aside>
+</section>
+
+<!-- ───────────── 08 · What changed ───────────── -->
+<section id="changed" class="s statement" data-background-color="#F5B726">
+  <p class="kicker ink">What changed in 2026</p>
+  <h2 class="huge"><span class="strike">Open 4 PRs → get a t-shirt</span></h2>
+  <h2 class="huge fragment fade-up">Learn. Build. Show up.</h2>
+  <p class="lead ink fragment fade-up">Pull requests <b>no longer count</b> toward rewards. Open source was never defined by a PR counter.</p>
+  <aside class="notes">Pull and merge requests no longer count toward Hacktoberfest rewards. They're listening to maintainer feedback. You're still encouraged to contribute to open source, it's just not the scoreboard anymore.</aside>
+</section>
+
+<!-- ───────────── 09 · Section: Who ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="9"></div>
+  <h2 class="mono type-line"><span class="type">&gt; Who is it for?</span></h2>
+  <p class="divider-sub">Spoiler: you</p>
+</section>
+
+<!-- ───────────── 10 · Who ───────────── -->
+<section id="who" class="s light" data-background-color="#F2F2EB">
+  <p class="kicker forest">Who is Hacktoberfest for?</p>
+  <h2 class="title">Anyone <span class="hl-forest">13+</span></h2>
+  <div class="cards three">
+    <div class="card fragment fade-up" style="--c:var(--sky)">
+      <h3>Beginners</h3>
+      <p>New to AI or open source? You don't need to build anything to attend a Meetup or watch a livestream. Come learn.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--ochre)">
+      <h3>Builders</h3>
+      <p>Already shipping? Hack Days, DEV Challenges and Global Hack Week are your excuse to build with open models.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--pink)">
+      <h3>Hosts</h3>
+      <p>A meetup group, a university club, or a few coworkers with a room. Anyone can host a Fest.</p>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-forest.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Participants 13 or older, subject to country rules. Individual Fests may have their own age limits.</aside>
+</section>
+
+<!-- ───────────── 11 · Section: Why ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="11"></div>
+  <h2 class="mono type-line"><span class="type">&gt; Why join?</span></h2>
+  <p class="divider-sub">Besides the stickers</p>
+</section>
+
+<!-- ───────────── 12 · Why ───────────── -->
+<section id="why" class="s" data-background-color="#3D5F58">
+  <p class="kicker">Why join Hacktoberfest?</p>
+  <h2 class="title">Instead of counting PRs, you'll…</h2>
+  <div class="grid-2x2">
+    <div class="tile fragment fade-up" style="--c:var(--ochre)"><span class="mono n">01</span><h3>Write your first <code>skills.md</code></h3></div>
+    <div class="tile fragment fade-up" style="--c:var(--sky)"><span class="mono n">02</span><h3>Build your own open source agent</h3></div>
+    <div class="tile fragment fade-up" style="--c:var(--pink)"><span class="mono n">03</span><h3>Fine-tune an open-weight model</h3></div>
+    <div class="tile fragment fade-up" style="--c:var(--paper)"><span class="mono n">04</span><h3>Meet the builders in your city</h3></div>
+  </div>
+  <p class="lead fragment fade-up">Open models keep the AI ecosystem healthy. Help build them, and you get better at the tools you use every day.</p>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">From the mission page: open innovation must be prioritized alongside proprietary tools. The older "why" still holds: improve the tools you use daily, learn how bigger projects work, give back, build cool stuff.</aside>
+</section>
+
+<!-- ───────────── 13 · Section: Rewards ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="13"></div>
+  <h2 class="mono type-line"><span class="type">&gt; Can I see your stickers?</span></h2>
+  <p class="divider-sub">Rewards</p>
+</section>
+
+<!-- ───────────── 14 · Sticker book ───────────── -->
+<section id="stickers" class="s" data-steps data-export="steps" data-background-color="#2E4742">
+  <p class="kicker">Rewards</p>
+  <h2 class="title">The sticker book: 24 to collect</h2>
+  <div class="sticker-layout">
+    <div class="sticker-book" aria-label="24 virtual stickers"></div>
+    <ol class="milestones">
+      <li data-from="1" style="--c:var(--ochre)"><span class="mono">3 stickers</span><h3>A real sticker pack, mailed to you</h3></li>
+      <li data-from="2" style="--c:var(--sky)"><span class="mono">10 stickers</span><h3>+ a bonus holographic sticker</h3></li>
+      <li data-from="3" style="--c:var(--pink)"><span class="mono">15 stickers</span><h3>Completionist: raffle for a t-shirt or Arduino Uno Q</h3></li>
+    </ol>
+  </div>
+  <p class="fine">At a Fest: t-shirts + swag while supplies last, a participation certificate, and DEV badges. Packs ship 8–12 weeks after October.</p>
+  <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Virtual stickers come from livestreams, DEV Challenges, Global Hack Week, tools (DevRelay, MLH Discord, DigitalOcean), surveys, and attending or hosting a Fest. Sign-in + address are required. Full list: hacktoberfest.com/activities.</aside>
+</section>
+
+<!-- ───────────── 15 · Section: How ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="15"></div>
+  <h2 class="mono type-line"><span class="type">&gt; How do I join?</span></h2>
+  <p class="divider-sub">Sign in, show up, collect stickers</p>
+</section>
+
+<!-- ───────────── 16 · How ───────────── -->
+<section id="how" class="s" data-background-color="#3D5F58">
+  <p class="kicker">How to join Hacktoberfest</p>
+  <h2 class="title">Three steps</h2>
+  <div class="terminal how">
+    <div class="term-bar"><i></i><i></i><i></i><span>~</span></div>
+    <pre><span class="prompt">$</span> hacktoberfest --init
+<span class="fragment"><span class="ok">01</span> Sign in with MyMLH at <a href="https://hacktoberfest.com/">hacktoberfest.com</a>
+   <span class="dim">└ add your address → your first 2 stickers</span></span>
+<span class="fragment"><span class="ok">02</span> Go to a Fest, or join online
+   <span class="dim">└ optional: connect DEV for badges + challenge credit</span></span>
+<span class="fragment"><span class="ok">03</span> Collect 3+ stickers → swag in the mail <span class="hl-ochre">✓</span></span></pre>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">The participant dashboard ("My Hacktoberfest") opens by October 1 and lists the activities. Signing in alone doesn't qualify for a pack.</aside>
+</section>
+
+<!-- ───────────── 17 · Fests globe ───────────── -->
+<section id="fests" class="s globe-slide" data-export="video" data-export-seconds="10" data-background-color="#22352F">
+  <canvas class="scene" data-scene="globe"></canvas>
+  <p class="kicker">In person</p>
+  <h2 class="title"><span data-fest-total>500+</span> Fests.<br><span class="hl-ochre"><span data-fest-countries>70+</span> countries.</span></h2>
+  <div class="fest-types">
+    <div class="ft" style="--c:var(--ochre)"><h3>Hack Day</h3><p>A mini-hackathon. Build with open models, demo at the end, prizes, usually food.</p></div>
+    <div class="ft" style="--c:var(--sky)"><h3>Meetup</h3><p>Talks, workshops or a panel. No project to ship, no team to find.</p></div>
+  </div>
+  <p class="fine">Find yours: <a href="https://hacktoberfest.com/fests/">hacktoberfest.com/fests</a> · <span data-fest-asof></span></p>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Every point is a real Fest from the public MLH events API (snapshot date shown on the slide). Fests are free, one day, and each has its own registration. Mention the closest local Fest here. [Add local Fest]</aside>
+</section>
+
+<!-- ───────────── 18 · Online ───────────── -->
+<section id="online" class="s" data-background-color="#2E4742">
+  <p class="kicker">Online, all October</p>
+  <h2 class="title">Can't get to a Fest?<br>Join from anywhere.</h2>
+  <div class="cards three">
+    <div class="card fragment fade-up" style="--c:var(--sky)">
+      <p class="mono card-k">Livestreams</p>
+      <h3>Learn live</h3>
+      <p>Sessions on open-weight models, agents and tools. Check in with the on-screen code for a sticker.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--ochre)">
+      <p class="mono card-k">DEV Challenges</p>
+      <h3>Weekly mini-hackathons</h3>
+      <p>A launch weekend challenge plus four weekly open source AI rounds, with cash prizes. <a href="https://dev.to/challenges">dev.to/challenges</a></p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--pink)">
+      <p class="mono card-k">Global Hack Week</p>
+      <h3>A week-long hacker festival</h3>
+      <p>Livestream sessions and challenges, with points to earn along the way.</p>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Schedule: hacktoberfest.com/schedule. T-shirts are not promised to online participants, but sticker packs are.</aside>
+</section>
+
+<!-- ───────────── 19 · Section: Open source still ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="19"></div>
+  <h2 class="mono type-line"><span class="type">&gt; But for reals, how?</span></h2>
+  <p class="divider-sub">Open source runs 365 days a year. PRs still matter, they just aren't the scoreboard.</p>
+</section>
+
+<!-- ───────────── 20 · Where to look ───────────── -->
+<section id="where" class="s" data-background-color="#3D5F58">
+  <p class="kicker">Git searching</p>
+  <h2 class="title">Where to look for repos?</h2>
+  <div class="where">
+    <ul class="links">
+      <li><span class="mono src">GitHub</span><a href="https://github.com/topics/hacktoberfest">github.com/topics/hacktoberfest</a></li>
+      <li><span class="mono src">GitLab</span><a href="https://go.gitlab.com/ubCLKL">go.gitlab.com/ubCLKL</a></li>
+      <li><span class="mono src">GitHub</span><a href="https://up-for-grabs.net/">up-for-grabs.net</a></li>
+      <li><span class="mono src">GitHub</span><a href="https://goodfirstissue.dev/">goodfirstissue.dev</a></li>
+      <li><span class="mono src">GitHub</span><a href="https://hacktoberfest-projects.vercel.app/">hacktoberfest-projects.vercel.app</a></li>
+    </ul>
+    <div class="where-side">
+      <div class="callout" style="--c:var(--ochre)"><h3>Ask AI</h3><p>"Find beginner-friendly issues in tools I already use."</p></div>
+      <div class="callout" style="--c:var(--sky)"><h3>Look around</h3><p>Pull inspiration from your work, your stack, your browser tabs.</p></div>
+    </div>
+  </div>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">[Check these links still work in 2026, since the hacktoberfest topic may be quieter now that PRs don't count.] Good first issue labels are still the best entry point.</aside>
+</section>
+
+<!-- ───────────── 21 · Section: Seriously how ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="21"></div>
+  <h2 class="mono type-line"><span class="type">&gt; But seriously, how?</span></h2>
+  <p class="divider-sub">Steps to contributing to open source</p>
+</section>
+
+<!-- ───────────── 22 · Making a change (stepper) ───────────── -->
+<section id="steps" class="s" data-steps data-export="steps" data-background-color="#2E4742">
+  <p class="kicker">Making a change</p>
+  <h2 class="title">Six steps to your first PR</h2>
+  <div class="stepper">
+    <ol class="step-list">
+      <li data-at="0"><span class="mono">01</span>Find an issue + communicate</li>
+      <li data-at="1"><span class="mono">02</span>Fork the repo</li>
+      <li data-at="2"><span class="mono">03</span>Clone it with Git</li>
+      <li data-at="3"><span class="mono">04</span>Make the changes</li>
+      <li data-at="4"><span class="mono">05</span>Stage, commit + push</li>
+      <li data-at="5"><span class="mono">06</span>Open the pull request!</li>
+    </ol>
+    <div class="step-stage">
+      <figure data-at="0"><img src="assets/img/step-issue.png" alt="Commenting on a GitHub issue"><figcaption>Comment before you code. Ask to be assigned.</figcaption></figure>
+      <figure data-at="1"><img src="assets/img/step-fork.png" alt="Forking a repository"><figcaption>Your own copy to experiment in.</figcaption></figure>
+      <figure data-at="2"><img src="assets/img/step-clone.png" alt="Cloning a repository"><figcaption><code>git clone https://github.com/&lt;you&gt;/&lt;repo&gt;.git</code></figcaption></figure>
+      <figure data-at="3"><img src="assets/img/step-change.gif" alt="Making a change"><figcaption>Read CONTRIBUTING.md first. Keep it focused.</figcaption></figure>
+      <figure data-at="4" class="code-fig"><pre><span class="prompt">$</span> git checkout -b better-readme
+<span class="prompt">$</span> git add README.md
+<span class="prompt">$</span> git commit -m "More descriptive README"
+<span class="prompt">$</span> git push origin better-readme</pre><img src="assets/img/step-open-pr.png" alt="Fork is one commit ahead"><figcaption><a href="https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/">Git basics in 10 minutes (freeCodeCamp)</a></figcaption></figure>
+      <figure data-at="5"><img src="assets/img/step-pr-form.png" alt="Creating a pull request"><figcaption>Say what changed, and link the issue it closes.</figcaption></figure>
+    </div>
+  </div>
+  <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Walk the six steps. Each click advances one step. The example is my own low-poly repo README PR.</aside>
+</section>
+
+<!-- ───────────── 23 · AI etiquette ───────────── -->
+<section id="etiquette" class="s light" data-background-color="#F2F2EB">
+  <p class="kicker forest">Contributing in the age of AI</p>
+  <h2 class="title">Don't be the reason PRs stopped counting</h2>
+  <ol class="rules">
+    <li class="fragment fade-up"><span class="mono">01</span><div><h3>Read the rules</h3><p>CONTRIBUTING.md, and the project's AI policy if it has one.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">02</span><div><h3>Talk first</h3><p>Comment on the issue before you open a PR.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">03</span><div><h3>Own every line</h3><p>If AI wrote it, you reviewed it, tested it and can explain it.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">04</span><div><h3>Quality over quantity</h3><p>One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</p></div></li>
+  </ol>
+  <footer class="foot"><img src="assets/brand/hf-mark-forest.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">New slide for 2026. This ties back to why the rules changed: low-effort AI PRs burned maintainers out.</aside>
+</section>
+
+<!-- ───────────── 24 · Section: Show and tell ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="24"></div>
+  <h2 class="mono type-line"><span class="type">&gt; Show and tell</span></h2>
+  <p class="divider-sub">Example past open source contributions</p>
+</section>
+
+<!-- ───────────── 25 · Contributions carousel ───────────── -->
+<section id="contribs" class="s carousel-slide" data-steps data-export="steps" data-background-color="#2E4742">
+  <p class="kicker">My past contributions</p>
+  <div class="carousel">
+    <div class="details">
+      <article data-at="0"><p class="mono tagline">Podcast website</p><h2 class="title">Syntax FM</h2><p>Syntax is a podcast about web development.</p><h3>My contributions</h3><ul><li>Added episode metadata</li></ul><a class="mono repo" href="https://github.com/syntaxfm/website">github.com/syntaxfm/website</a></article>
+      <article data-at="1"><p class="mono tagline">3D / AR web component</p><h2 class="title">&lt;model-viewer&gt;</h2><p>Google's web component for interactive 3D models, optionally in AR.</p><h3>My contributions</h3><ul><li>Better link previews (Open Graph metadata)</li><li>AR button accessibility</li></ul><a class="mono repo" href="https://github.com/google/model-viewer">github.com/google/model-viewer</a></article>
+      <article data-at="2"><p class="mono tagline">Pets to boost productivity</p><h2 class="title">VS Code Pets</h2><p>Interactive pets of many kinds in your editor.</p><h3>My contributions</h3><ul><li>New pet names</li><li>Code refactor</li><li>Pet name tags <span class="dim">(not merged)</span></li></ul><a class="mono repo" href="https://github.com/tonybaloney/vscode-pets">github.com/tonybaloney/vscode-pets</a></article>
+      <article data-at="3"><p class="mono tagline">React to AR and VR</p><h2 class="title">React XR</h2><p>React components and hooks for AR/VR apps with @react-three/fiber.</p><h3>My contributions</h3><ul><li>AR hit testing</li></ul><a class="mono repo" href="https://github.com/pmndrs/react-xr">github.com/pmndrs/react-xr</a></article>
+      <article data-at="4"><p class="mono tagline">Have Twitch help you code</p><h2 class="title">Twitch Highlighter</h2><p>Lets Twitch chat highlight lines and leave comments in VS Code.</p><h3>My contributions</h3><ul><li>Moved tests to @vscode/test-electron</li><li>TSLint → ESLint <span class="dim">(not merged)</span></li></ul><a class="mono repo" href="https://github.com/clarkio/vscode-twitch-highlighter">github.com/clarkio/vscode-twitch-highlighter</a></article>
+      <article data-at="5"><p class="mono tagline">Even music can be open source</p><h2 class="title">Shuttle <span class="dim">(archived)</span></h2><p>An open source local music player for Android.</p><h3>My contributions</h3><ul><li>Icon active visibility</li><li>Shake to shuffle <span class="dim">(not merged)</span></li></ul><a class="mono repo" href="https://github.com/timusus/Shuttle">github.com/timusus/Shuttle</a></article>
+      <article data-at="6"><p class="mono tagline">Start your own!</p><h2 class="title">Low Poly</h2><p>React + WASM site that generates low-poly-style digital art.</p><h3>My contributions</h3><ul><li>I AM the maintainer</li></ul><a class="mono repo" href="https://github.com/Technickel-Dev/low-poly">github.com/Technickel-Dev/low-poly</a></article>
+      <article data-at="7"><p class="mono tagline">2026</p><h2 class="title">[This year's project]</h2><p>[Add a 2026 open source AI contribution or Fest project here.]</p></article>
+    </div>
+    <div class="ring-wrap"><div class="ring">
+      <div class="ring-card"><img src="assets/img/syntax.png" alt="Syntax FM website"></div>
+      <div class="ring-card"><img src="assets/img/model-viewer.png" alt="model-viewer"></div>
+      <div class="ring-card"><img src="assets/img/vscode-pets.png" alt="VS Code Pets"></div>
+      <div class="ring-card"><img src="assets/img/react-xr.png" alt="React XR"></div>
+      <div class="ring-card"><img src="assets/img/twitch-highlighter.png" alt="VS Code Twitch Highlighter"></div>
+      <div class="ring-card"><img src="assets/img/shuttle.png" alt="Shuttle music player"></div>
+      <div class="ring-card"><img src="assets/img/low-poly.png" alt="Low Poly"></div>
+      <div class="ring-card placeholder"><span class="mono">2026 ?</span></div>
+    </div></div>
+  </div>
+  <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
+  <footer class="foot"><img src="assets/brand/hf-mark-white.svg" alt=""><span>Hacktoberfest 2026 · Technickel</span></footer>
+  <aside class="notes">Each click spins the carousel to the next project. Not every PR gets merged, and that's fine. The last card is a placeholder for something from this year.</aside>
+</section>
+
+<!-- ───────────── 26 · Section: Walkthrough ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="26"></div>
+  <h2 class="mono type-line"><span class="type">&gt; Live walkthrough</span></h2>
+  <p class="divider-sub">Let's make a contribution together</p>
+  <aside class="notes">Switch to the browser and do a live contribution walkthrough.</aside>
+</section>
+
+<!-- ───────────── 27 · Questions ───────────── -->
+<section id="end" class="cover end" data-export="video" data-export-seconds="8" data-background-color="#2E4742">
+  <canvas class="scene" data-scene="pixelfield" data-seed="31" data-variant="end"></canvas>
+  <div class="cover-shade"></div>
+  <div class="cover-copy">
+    <h2 class="huge">Questions?</h2>
+    <h2 class="huge hl-ochre">Happy hacking!</h2>
+    <ul class="contact mono">
+      <li>Learn more · <a href="https://hacktoberfest.com/">hacktoberfest.com</a></li>
+      <li>Contact · <a href="mailto:bradley@technickel.dev">bradley@technickel.dev</a></li>
+    </ul>
+  </div>
+  <div class="partners">
+    <span class="mono">Powered by</span>
+    <img src="assets/brand/mlh-logo-color.svg" alt="MLH">
+    <span class="x">×</span>
+    <img src="assets/brand/dev-logo-black.svg" alt="DEV">
+    <span class="mono sep">Presenting partner: DigitalOcean</span>
+  </div>
+  <aside class="notes">Thanks! Questions?</aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+<script src="data/fests.js"></script>
+<script src="js/scenes.js"></script>
+<script src="js/deck.js"></script>
+</body>
+</html>

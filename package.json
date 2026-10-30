@@ -1,0 +1,14 @@
+{
+  "name": "hacktoberfest-2026-deck",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "python -m http.server 5173",
+    "fests": "node tools/snapshot-fests.mjs",
+    "export": "node tools/export.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.48.0",
+    "pptxgenjs": "^3.12.0"
+  }
+}
