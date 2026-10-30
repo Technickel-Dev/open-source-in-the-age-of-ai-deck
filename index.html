@@ -64,20 +64,49 @@
   <div class="terminal agenda">
     <div class="term-bar"><i></i><i></i><i></i><span>~/open-source-ai</span></div>
     <pre><span class="prompt">$</span> ls agenda/
-<span class="fragment">01_the_origin.md   <span class="dim"># how Hacktoberfest inspired this, and what changed</span></span>
-<span class="fragment">02_the_where.md    <span class="dim"># where to find repos</span></span>
-<span class="fragment">03_the_how.md      <span class="dim"># making your first contribution</span></span>
-<span class="fragment">04_the_ai.md       <span class="dim"># contributing in the age of AI</span></span>
-<span class="fragment">05_show_and_tell/  <span class="dim"># real contributions + live walkthrough</span></span></pre>
+<span class="fragment">01_the_what.md     <span class="dim"># what is Open Source</span></span>
+<span class="fragment">02_my_origin.md    <span class="dim"># how Hacktoberfest inspired me</span></span>
+<span class="fragment">03_the_now.md      <span class="dim"># why it matters more than ever</span></span>
+<span class="fragment">04_the_where.md    <span class="dim"># where to find repos</span></span>
+<span class="fragment">05_the_how.md      <span class="dim"># making your first contribution</span></span>
+<span class="fragment">06_the_ai.md       <span class="dim"># contributing in the age of AI</span></span>
+<span class="fragment">07_show/           <span class="dim"># real contributions</span></span>
+<span class="fragment">08_and_tell/       <span class="dim"># live walkthrough</span></span></pre>
   </div>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">Origin, where to look, how to contribute, AI etiquette, then a show and tell.</aside>
+  <aside class="notes">What Open Source is, the Hacktoberfest origin, where to look, how to contribute, AI, then a show and tell.</aside>
+</section>
+
+<!-- ───────────── 05 · What is Open Source ───────────── -->
+<section id="what" class="s" data-background-color="#3D5F58">
+  <p class="kicker">The basics</p>
+  <h2 class="title">What is Open Source?</h2>
+  <p class="lead">Software whose source code is public, shared under a license that lets anyone use it.</p>
+  <div class="cards three">
+    <div class="card fragment fade-up" style="--c:var(--sky)">
+      <p class="mono card-k">Read it</p>
+      <h3>The code is public</h3>
+      <p>Anyone can see how it works, learn from it and check what it does.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--ochre)">
+      <p class="mono card-k">Change it</p>
+      <h3>Anyone can improve it</h3>
+      <p>Fix a bug, add a feature or improve the docs, then send it back to the project.</p>
+    </div>
+    <div class="card fragment fade-up" style="--c:var(--pink)">
+      <p class="mono card-k">Share it</p>
+      <h3>The license says you can</h3>
+      <p>Use it, fork it and build on it, within the terms of its license.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Keep this short. Open Source means the source code is available under a license that allows use, study, modification and sharing. Examples people know: Linux, Python, React, VS Code. The license matters, so check it before reusing anything.</aside>
 </section>
 
 <!-- ───────────── 05 · Where this started ───────────── -->
 <section id="origin" class="s" data-background-color="#2E4742">
   <p class="kicker">Where this started</p>
-  <h2 class="title">Hacktoberfest got a lot of us<br>into Open Source</h2>
+  <h2 class="title">Hacktoberfest brought<br>Open Source to the masses</h2>
   <ol class="timeline">
     <li class="fragment" style="--c:var(--sky)">
       <span class="yr">2014</span>
@@ -99,13 +128,64 @@
   <aside class="notes">Hacktoberfest is where I started, and it inspired this talk. Source: hacktoberfest.com/mission. AI tools made low-effort PRs trivial to generate and maintainers were burning out.</aside>
 </section>
 
-<!-- ───────────── 06 · What changed ───────────── -->
-<section id="changed" class="s statement" data-background-color="#F5B726">
-  <p class="kicker ink">So we changed too</p>
-  <h2 class="huge"><span class="strike">Open 4 PRs in October</span></h2>
-  <h2 class="huge fragment fade-up">Contribute well. All year.</h2>
-  <p class="lead ink fragment fade-up">Hacktoberfest was the inspiration. Open Source was never defined by a PR counter, so this talk is about doing it well, with and without AI.</p>
-  <aside class="notes">The pivot: this used to be a Hacktoberfest talk. Now Hacktoberfest is the origin story, and the rest is how to contribute to Open Source in the age of AI.</aside>
+<!-- ───────────── 06 · October vs. all year ───────────── -->
+<section id="changed" class="s calendar" data-background-color="#2E4742">
+  <p class="kicker">Beyond Hacktoberfest</p>
+  <h2 class="title">Two versions of the same year</h2>
+  <div class="versions">
+    <div class="panel myth fragment fade-up">
+      <p class="mono panel-k">What it looked like</p>
+      <h3>Open Source happens in October</h3>
+      <div class="year" data-mode="myth"></div>
+    </div>
+    <div class="panel real fragment fade-up">
+      <p class="mono panel-k">What it really is</p>
+      <h3>Open Source happens all year</h3>
+      <div class="year" data-mode="real"></div>
+    </div>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Left: the Hacktoberfest-era perception, where October is the only month anyone sees open source happen. Right: reality, where commits, issues and releases land every month. Hacktoberfest was the spotlight, not the whole show.</aside>
+</section>
+
+<!-- ───────────── 07 · The now (+ xkcd 2347) ───────────── -->
+<section id="now" class="s" data-reset data-background-color="#3D5F58">
+  <p class="kicker">The now</p>
+  <h2 class="title">Nothing has changed</h2>
+  <div class="now">
+    <div class="now-main">
+      <p class="lead">We need Open Source more than ever.</p>
+      <p class="mono eg">A few examples</p>
+      <div class="facts">
+        <div class="fact fragment fade-up" style="--c:var(--ochre)">
+          <p class="mono card-k">Linux</p><h3>Runs everything</h3>
+          <p>The cloud, Android phones and your broken CI/CD pipeline.</p>
+        </div>
+        <div class="fact fragment fade-up" style="--c:var(--sky)">
+          <p class="mono card-k">Your daily tools</p><h3>Built on Open Source</h3>
+          <p>Git, Python, React, Node.js, PostgreSQL and curl.</p>
+        </div>
+        <div class="fact fragment fade-up" style="--c:var(--pink)">
+          <p class="mono card-k">The AI stack</p><h3>Open Source underneath</h3>
+          <p>PyTorch, Transformers and open-weight models.</p>
+        </div>
+      </div>
+      <p class="lead fragment fade-up">But it all leans on tiny projects and a few underappreciated maintainers.</p>
+    </div>
+    <figure class="xkcd fragment fade-up">
+      <div class="tw-box">
+        <svg id="tower" viewBox="0 0 770 978" role="img" aria-label="xkcd 2347, Dependency: a tower of blocks resting on one tiny block">
+          <defs><clipPath id="xk-text"><rect x="60" y="20" width="420" height="95"/><rect x="80" y="115" width="380" height="39"/><rect x="85" y="150" width="30" height="42"/><rect x="420" y="150" width="30" height="42"/><rect x="470" y="520" width="280" height="260"/><rect x="490" y="770" width="40" height="40"/><rect x="405" y="812" width="100" height="45"/></clipPath></defs>
+          <image id="xk-label" href="assets/img/xkcd-dependency.png" width="770" height="978" clip-path="url(#xk-text)" style="mix-blend-mode: multiply"/>
+          <image class="fallback" href="assets/img/xkcd-dependency.png" width="770" height="978"/>
+        </svg>
+      </div>
+      <figcaption><a href="https://xkcd.com/2347/" target="_blank" rel="noopener">xkcd.com/2347</a> · Randall Munroe · CC BY-NC 2.5 · animated</figcaption>
+    </figure>
+  </div>
+  <span class="fragment collapse"></span>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Hacktoberfest changed its rules, but the need for Open Source did not. Linux runs the cloud, Android and, yes, your broken CI/CD pipeline. Most tools we use daily are Open Source, and so is the foundation of modern AI. Then the catch: xkcd 2347, "Dependency", a tower of modern infrastructure resting on one tiny block that a single person maintains. This is why contributing well matters.</aside>
 </section>
 
 <!-- ───────────── 19 · Section: Open Source still ───────────── -->
@@ -171,20 +251,6 @@
   <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">Walk the six steps. Each click advances one step. The example is my own low-poly repo README PR.</aside>
-</section>
-
-<!-- ───────────── 23 · AI etiquette ───────────── -->
-<section id="etiquette" class="s light" data-background-color="#F2F2EB">
-  <p class="kicker forest">Contributing in the age of AI</p>
-  <h2 class="title">Don't be the reason PRs stopped counting</h2>
-  <ol class="rules">
-    <li class="fragment fade-up"><span class="mono">01</span><div><h3>Read the rules</h3><p>CONTRIBUTING.md, and the project's AI policy if it has one.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">02</span><div><h3>Talk first</h3><p>Comment on the issue before you open a PR.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">03</span><div><h3>Own every line</h3><p>If AI wrote it, you reviewed it, tested it and can explain it.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">04</span><div><h3>Quality over quantity</h3><p>One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</p></div></li>
-  </ol>
-  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">New slide for 2026. This ties back to why the rules changed: low-effort AI PRs burned maintainers out.</aside>
 </section>
 
 <!-- ───────────── 24 · Section: Show and tell ───────────── -->
@@ -254,6 +320,9 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script src="js/scenes.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<script src="js/tower-data.js"></script>
+<script src="js/tower.js"></script>
 <script src="js/deck.js"></script>
 </body>
 </html>

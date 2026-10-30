@@ -13,6 +13,24 @@
     return () => { a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
   }
 
+  // Two versions of 2026: "myth" lights only October, "real" lights every month
+  const COBWEB = '<svg class="web" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1"><path d="M0 0L100 0M0 0L90 40M0 0L65 65M0 0L40 90M0 0L0 100"/><path d="M30 0Q26 26 0 30M55 0Q48 48 0 55M80 0Q70 70 0 80"/></g></svg>';
+  const SPIDER = '<svg class="spider" viewBox="0 0 20 20" aria-hidden="true"><g stroke="currentColor" stroke-width="1.2" fill="none" stroke-linecap="round"><path d="M7 8L2 4M7 10L1 10M7 12L2 17M8 14L5 19M13 8L18 4M13 10L19 10M13 12L18 17M12 14L15 19"/></g><circle cx="10" cy="11" r="3.6" fill="currentColor"/><circle cx="10" cy="7.6" r="2.2" fill="currentColor"/></svg>';
+  document.querySelectorAll('.year').forEach((year) => {
+    const year_ = 2026;
+    let out = '';
+    for (let m = 0; m < 12; m++) {
+      const rand = rng(m * 97 + 11);
+      const lead = new Date(year_, m, 1).getDay(), days = new Date(year_, m + 1, 0).getDate();
+      const name = new Date(year_, m, 1).toLocaleString('en-US', { month: 'short' });
+      let cells = '<b class="gap"></b>'.repeat(lead);
+      for (let d = 1; d <= days; d++) { const o = 0.35 + rand() * 0.65; let lvl = rand() < 0.14 ? 0 : 1 + Math.floor(rand() * 4); if ((m === 11 && d >= 20) || (m === 0 && d <= 4)) lvl = o > 0.93 ? 2 : o > 0.72 ? 1 : 0; else if ((m === 11 && d >= 16) || (m === 0 && d <= 7)) lvl = Math.min(lvl, 2); cells += `<b data-l="${lvl}" style="--o:${o.toFixed(2)}"></b>`; }
+      const hot = m === 9 && year.dataset.mode === 'myth';
+      out += `<div class="cal-month${hot ? ' oct' : ''}"><p class="mono cal-name">${name}${hot ? ' <i>Hacktoberfest</i>' : ''}</p><div class="cal-days">${cells}</div>${hot ? COBWEB + SPIDER : ''}</div>`;
+    }
+    year.innerHTML = out;
+  });
+
   // Camcorder timecode on the record slide
   const tc = document.querySelector('[data-timecode]');
   if (tc) {
@@ -85,6 +103,20 @@
     document.querySelector('.reveal').classList.toggle('light-current', slide.classList.contains('light') || slide.classList.contains('statement'));
   }
 
+  // Everything except click-through (`data-steps`) slides reveals its fragments on its own.
+  let autoTimer = null;
+  function autoReveal(slide) {
+    clearTimeout(autoTimer);
+    if (EXPORT || !slide || slide.hasAttribute('data-steps')) return;
+    const next = () => {
+      // fragments marked .collapse wait for the presenter's own click
+      const upcoming = slide.querySelector('.fragment:not(.visible)');
+      if (Reveal.getCurrentSlide() !== slide || (upcoming && upcoming.classList.contains('collapse')) || !Reveal.nextFragment()) return;
+      autoTimer = setTimeout(next, 500);
+    };
+    autoTimer = setTimeout(next, 600);
+  }
+
   Reveal.initialize({
     width: 1920,
     height: 1080,
@@ -103,8 +135,18 @@
     plugins: [RevealNotes],
   }).then(() => {
     onSlide(Reveal.getCurrentSlide());
-    Reveal.on('slidechanged', (e) => onSlide(e.currentSlide));
+    autoReveal(Reveal.getCurrentSlide());
+    Reveal.on('slidechanged', (e) => {
+      // Slides marked data-reset replay from the top each time they're entered
+      const prev = e.previousSlide;
+      if (prev && prev.hasAttribute('data-reset')) prev.querySelectorAll('.fragment').forEach((f) => f.classList.remove('visible', 'current-fragment'));
+      if (prev && prev.id === 'now' && window.Tower) Tower.reset();
+      onSlide(e.currentSlide); autoReveal(e.currentSlide);
+    });
     Reveal.on('fragmentshown', () => applySteps(Reveal.getCurrentSlide()));
+    // The xkcd tower: the presenter's next click kicks out the small block; stepping back puts it back
+    Reveal.on('fragmentshown', (e) => { if (!EXPORT && window.Tower && e.fragment.classList.contains('collapse')) Tower.collapse(); });
+    Reveal.on('fragmenthidden', (e) => { if (window.Tower && e.fragment.classList.contains('collapse')) Tower.reset(); });
     Reveal.on('fragmenthidden', () => applySteps(Reveal.getCurrentSlide()));
     window.__deckReady = true;
   });
