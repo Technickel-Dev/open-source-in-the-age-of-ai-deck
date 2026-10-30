@@ -256,7 +256,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .xkcd figcaption { font-family: var(--mono); font-size: 15px; opacity: .75; white-space: nowrap; }
 
 /* ── carousel ────────────────────────────────────── */
-.carousel { display: grid; grid-template-columns: 720px 1fr; gap: 40px; height: 760px; }
+.carousel { display: grid; grid-template-columns: 640px 1fr; gap: 40px; height: 760px; }
 .details { position: relative; z-index: 2; }
 .details article { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 18px; justify-content: center; opacity: 0; transform: translateX(-30px); transition: opacity .5s, transform .5s; }
 .details article.active { opacity: 1; transform: none; }
@@ -266,11 +266,14 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .details h3 { font-family: var(--mono); font-size: 22px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin-top: 18px !important; }
 .details ul { padding-left: 1.1em; font-size: 32px; line-height: 1.5; }
 .details .repo { font-size: 22px; margin-top: 12px; }
-.ring-wrap { position: relative; perspective: 2400px; perspective-origin: 50% 35%; display: grid; place-items: center; overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 14%, #000 86%, transparent 100%); }
-.ring { position: relative; width: 600px; height: 390px; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.6,0,.2,1); transform: translateZ(-740px) rotateX(-8deg) rotateY(calc(var(--step, 0) * -45deg)); }
-.ring-card { position: absolute; inset: 0; border-radius: 12px; overflow: hidden; background: var(--ink); border: 4px solid rgba(242,242,235,.15); transform: rotateY(calc(var(--i) * 45deg)) translateZ(740px); transition: border-color .5s, filter .5s; filter: brightness(.4); }
+.ring-wrap { position: relative; perspective: 2600px; perspective-origin: 50% 50%; display: grid; place-items: center; overflow: hidden;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
+.ring { position: relative; width: 900px; height: 470px; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.6,0,.2,1); transform: translateZ(-1350px) rotateX(calc(var(--step, 0) * 20deg)); }
+.ring-card { position: absolute; inset: 0; border-radius: 12px; overflow: hidden; background: var(--ink); border: 4px solid rgba(242,242,235,.15); transform: rotateX(calc(var(--i) * -20deg)) translateZ(1350px); transition: border-color .5s, filter .5s; filter: brightness(.4); }
 .ring-card img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+/* tall phone screenshots: show the whole image, with a blurred copy filling the sides */
+.ring-card.portrait::before { content: ""; position: absolute; inset: -30px; background: url(../assets/img/shuttle.png) center / 100% 100%; filter: blur(34px); }
+.ring-card.portrait img { position: relative; object-fit: contain; object-position: center; }
 .ring-card.active { border-color: var(--ochre); filter: none; }
 .ring-card.placeholder { display: grid; place-items: center; border-style: dashed; background: var(--deeper); }
 .ring-card.placeholder span { font-size: 60px; color: var(--ochre); }
