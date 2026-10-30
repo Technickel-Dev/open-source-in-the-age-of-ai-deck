@@ -56,6 +56,9 @@ html, body, .reveal-viewport { background: var(--deep); }
 .light .card p { color: rgba(35,31,32,.8); }
 .light .foot { color: var(--ink); }
 .reveal.light-current .slide-number { color: var(--ink); }
+.global-foot .reveal .slides .foot { display: none; }
+.deck-foot { position: absolute; z-index: 30; line-height: 1; font-family: var(--mono); font-size: 16px; text-transform: uppercase; letter-spacing: .08em; color: var(--paper); opacity: .7; pointer-events: none; }
+.reveal.light-current .deck-foot { color: var(--ink); }
 
 /* ── cards ───────────────────────────────────────── */
 .cards { display: grid; gap: 32px; margin-top: auto; margin-bottom: auto; }

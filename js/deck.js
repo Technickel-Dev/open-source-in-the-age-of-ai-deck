@@ -117,6 +117,28 @@
     autoTimer = setTimeout(next, 600);
   }
 
+  // Footer text sits on the slide-number line (outside the scaled slide) instead of inside each slide
+  let globalFoot = null;
+  if (!EXPORT) {
+    document.documentElement.classList.add('global-foot');
+    globalFoot = document.createElement('div');
+    globalFoot.className = 'deck-foot';
+    document.querySelector('.reveal').appendChild(globalFoot);
+  }
+  function placeFoot(slide) {
+    if (!globalFoot) return;
+    const src = slide && slide.querySelector('.foot span');
+    globalFoot.textContent = src ? src.textContent : '';
+    globalFoot.style.display = src ? '' : 'none';
+    const num = document.querySelector('.reveal .slide-number');
+    if (num) {
+      const r = num.getBoundingClientRect();
+      globalFoot.style.left = `${Math.round(r.right + 16)}px`;
+      // centre the text on the slide number's own line
+      globalFoot.style.top = `${Math.round((r.top + r.bottom) / 2 - globalFoot.offsetHeight / 2)}px`;
+    }
+  }
+
   Reveal.initialize({
     width: 1920,
     height: 1080,
@@ -135,13 +157,15 @@
     plugins: [RevealNotes],
   }).then(() => {
     onSlide(Reveal.getCurrentSlide());
+    placeFoot(Reveal.getCurrentSlide());
+    window.addEventListener('resize', () => placeFoot(Reveal.getCurrentSlide()));
     autoReveal(Reveal.getCurrentSlide());
     Reveal.on('slidechanged', (e) => {
       // Slides marked data-reset replay from the top each time they're entered
       const prev = e.previousSlide;
       if (prev && prev.hasAttribute('data-reset')) prev.querySelectorAll('.fragment').forEach((f) => f.classList.remove('visible', 'current-fragment'));
       if (prev && prev.id === 'now' && window.Tower) Tower.reset();
-      onSlide(e.currentSlide); autoReveal(e.currentSlide);
+      onSlide(e.currentSlide); placeFoot(e.currentSlide); autoReveal(e.currentSlide);
     });
     Reveal.on('fragmentshown', () => applySteps(Reveal.getCurrentSlide()));
     // The xkcd tower: the presenter's next click kicks out the small block; stepping back puts it back
