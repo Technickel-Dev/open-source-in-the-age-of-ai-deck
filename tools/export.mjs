@@ -101,7 +101,7 @@ for (let h = 0; h < slides.length; h++) {
 // ── PPTX ──────────────────────────────────────────
 const pptx = new PptxGenJS();
 pptx.layout = 'LAYOUT_WIDE'; // 13.333 × 7.5 in
-pptx.title = 'Open source in the age of AI';
+pptx.title = 'Open Source in the age of AI';
 pptx.author = 'Bradley Leonard / Technickel';
 const IN = 13.333 / 1920;
 const CLEAR_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';

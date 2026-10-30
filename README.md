@@ -1,6 +1,6 @@
-# Open source in the age of AI
+# Open Source in the age of AI
 
-HTML/JS slides (reveal.js + three.js) on contributing to open source in the age of AI. Hacktoberfest is the origin story, covered in two slides. Includes an exporter that bakes the animations into a normal PowerPoint.
+HTML/JS slides (reveal.js + three.js) on contributing to Open Source in the age of AI. Hacktoberfest is the origin story, covered in two slides. Includes an exporter that bakes the animations into a normal PowerPoint.
 
 ## Present
 

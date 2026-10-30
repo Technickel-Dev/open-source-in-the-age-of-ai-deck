@@ -66,12 +66,12 @@
   // Count-up numbers
   function countUp(slide) {
     slide.querySelectorAll('[data-count]').forEach((el) => {
-      const target = Number(el.dataset.count);
-      if (EXPORT) { el.textContent = target; return; }
+      const target = Number(el.dataset.count), suffix = el.dataset.suffix || '';
+      if (EXPORT) { el.textContent = target + suffix; return; }
       const start = performance.now();
       const tick = (t) => {
         const p = Math.min(1, (t - start) / 1200);
-        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix;
         if (p < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
