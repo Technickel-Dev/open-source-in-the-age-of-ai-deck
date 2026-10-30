@@ -89,85 +89,8 @@
     return { init, render, get ready() { return !!r; } };
   }
 
-  /* ── Fest globe: every confirmed Fest from the MLH events API ── */
-  function festGlobe(canvas) {
-    let r, scene, camera, group;
-    const R = 5.4;
-
-    function toVec(lat, lng, rad) {
-      const phi = (90 - lat) * Math.PI / 180, th = (lng + 180) * Math.PI / 180;
-      return new THREE.Vector3(-rad * Math.sin(phi) * Math.cos(th), rad * Math.cos(phi), rad * Math.sin(phi) * Math.sin(th));
-    }
-
-    function init() {
-      const rand = rng(42);
-      const data = (window.FESTS && window.FESTS.points) || [];
-      r = renderer(canvas);
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(35, W / H, 0.1, 100);
-      camera.position.set(0, 0, 26);
-      scene.add(new THREE.HemisphereLight(BRAND.paper, 0x101a17, 1.0));
-      const key = new THREE.DirectionalLight(0xffffff, 1.4);
-      key.position.set(-10, 8, 14);
-      scene.add(key);
-
-      group = new THREE.Group();
-      group.position.set(5.2, 0, 0);
-      group.rotation.x = 0.32;
-      scene.add(group);
-
-      group.add(new THREE.Mesh(
-        new THREE.SphereGeometry(R, 72, 48),
-        new THREE.MeshStandardMaterial({ color: BRAND.deep, roughness: 0.95 })
-      ));
-      // faint dotted shell so the sphere reads as a globe
-      const n = 5200, shell = new Float32Array(n * 3);
-      for (let i = 0; i < n; i++) {
-        const y = 1 - (i / (n - 1)) * 2, rr = Math.sqrt(1 - y * y), th = i * 2.399963;
-        shell.set([Math.cos(th) * rr * R * 1.004, y * R * 1.004, Math.sin(th) * rr * R * 1.004], i * 3);
-      }
-      const sg = new THREE.BufferGeometry();
-      sg.setAttribute('position', new THREE.BufferAttribute(shell, 3));
-      group.add(new THREE.Points(sg, new THREE.PointsMaterial({ color: 0x8fb3aa, size: 0.05, transparent: true, opacity: 0.6 })));
-      // atmosphere
-      group.add(new THREE.Mesh(
-        new THREE.SphereGeometry(R * 1.06, 48, 32),
-        new THREE.MeshBasicMaterial({ color: BRAND.sky, transparent: true, opacity: 0.07, side: THREE.BackSide })
-      ));
-
-      const colorOf = { fest: BRAND.ochre, member: BRAND.sky, popup: BRAND.pink };
-      const geo = new THREE.BoxGeometry(0.075, 1, 0.075);
-      geo.translate(0, 0.5, 0);
-      const spikes = new THREE.InstancedMesh(geo, new THREE.MeshStandardMaterial({ roughness: 0.4, emissiveIntensity: 0.35 }), data.length);
-      const tips = new Float32Array(data.length * 3), tipCol = new Float32Array(data.length * 3);
-      const up = new THREE.Vector3(0, 1, 0), m = new THREE.Matrix4(), q = new THREE.Quaternion(), c = new THREE.Color();
-      data.forEach(([lat, lng, kind], i) => {
-        const p = toVec(lat, lng, R), nrm = p.clone().normalize(), h = 0.12 + rand() * 0.45;
-        q.setFromUnitVectors(up, nrm);
-        m.compose(p, q, new THREE.Vector3(1, h, 1));
-        spikes.setMatrixAt(i, m);
-        c.setHex(colorOf[kind] || BRAND.ochre);
-        spikes.setColorAt(i, c);
-        tips.set(p.clone().addScaledVector(nrm, h).toArray(), i * 3);
-        tipCol.set([c.r, c.g, c.b], i * 3);
-      });
-      group.add(spikes);
-      const tg = new THREE.BufferGeometry();
-      tg.setAttribute('position', new THREE.BufferAttribute(tips, 3));
-      tg.setAttribute('color', new THREE.BufferAttribute(tipCol, 3));
-      group.add(new THREE.Points(tg, new THREE.PointsMaterial({ size: 0.2, vertexColors: true })));
-    }
-
-    function render(t) {
-      group.rotation.y = 1.2 + t * 0.14 + mouse.x * 0.25;
-      r.render(scene, camera);
-    }
-
-    return { init, render, get ready() { return !!r; } };
-  }
-
   /* ── registry + shared clock ── */
-  const factories = { pixelfield: pixelField, globe: festGlobe };
+  const factories = { pixelfield: pixelField };
   const instances = new Map();
   let active = [], raf = null, manual = null;
   const t0 = performance.now();

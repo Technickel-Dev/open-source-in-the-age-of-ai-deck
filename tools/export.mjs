@@ -1,4 +1,4 @@
-// Exports the HTML deck to dist/Hacktoberfest-2026.pptx (+ .pdf) with the animations baked in.
+// Exports the HTML deck to dist/Open-Source-in-the-Age-of-AI.pptx (+ .pdf) with the animations baked in.
 //
 //   <section data-export="video" data-export-seconds="8">  → recorded frame-by-frame into an MP4 that plays in PowerPoint
 //   <section data-export="steps">                          → one slide per click state (carousel, stepper, …)
@@ -101,7 +101,7 @@ for (let h = 0; h < slides.length; h++) {
 // ── PPTX ──────────────────────────────────────────
 const pptx = new PptxGenJS();
 pptx.layout = 'LAYOUT_WIDE'; // 13.333 × 7.5 in
-pptx.title = 'Hacktoberfest 2026';
+pptx.title = 'Open source in the age of AI';
 pptx.author = 'Bradley Leonard / Technickel';
 const IN = 13.333 / 1920;
 const CLEAR_PNG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==';
@@ -120,7 +120,7 @@ for (const item of out) {
   }
   if (item.notes) slide.addNotes(item.notes);
 }
-const pptxPath = path.join(dist, 'Hacktoberfest-2026.pptx');
+const pptxPath = path.join(dist, 'Open-Source-in-the-Age-of-AI.pptx');
 await pptx.writeFile({ fileName: pptxPath });
 console.log(`\n→ ${pptxPath}`);
 
@@ -131,7 +131,7 @@ const htmlPath = path.join(work, 'pdf.html');
 fs.writeFileSync(htmlPath, `<!doctype html><style>@page{size:1920px 1080px;margin:0}body{margin:0}img{display:block;width:1920px;height:1080px;break-after:page}</style>${imgs}`);
 await pdfPage.goto(pathToFileURL(htmlPath).href);
 await pdfPage.waitForLoadState('load');
-const pdfPath = path.join(dist, 'Hacktoberfest-2026.pdf');
+const pdfPath = path.join(dist, 'Open-Source-in-the-Age-of-AI.pdf');
 await pdfPage.pdf({ path: pdfPath, width: '1920px', height: '1080px', printBackground: true });
 console.log(`→ ${pdfPath}`);
 

@@ -1,10 +1,9 @@
 {
-  "name": "hacktoberfest-2026-deck",
+  "name": "open-source-in-the-age-of-ai-deck",
   "private": true,
   "type": "module",
   "scripts": {
-    "serve": "python -m http.server 5173",
-    "fests": "node tools/snapshot-fests.mjs",
+    "serve": "python3 -m http.server 5173",
     "export": "node tools/export.mjs"
   },
   "devDependencies": {

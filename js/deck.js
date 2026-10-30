@@ -45,22 +45,6 @@
   // Typewriter headings know their own length
   document.querySelectorAll('.type').forEach((el) => el.style.setProperty('--n', el.textContent.length));
 
-  // Sticker book tiles
-  const STICKERS = ['Sign in', 'Add address', '1 stream', '3 streams', '5 streams', 'Launch stream', 'Connect DEV', 'Launch weekend', 'DEV week 1', 'DEV week 2', 'DEV week 3', 'DEV week 4', 'GHW signup', 'GHW stream', 'GHW 10 pts', 'GHW 20 pts', 'GHW 30 pts', 'DevRelay', 'MLH Discord', 'Digital­Ocean', 'Pre-survey', 'Post-survey', 'Attend a Fest', 'Host a Fest'];
-  const STICKER_COLORS = ['var(--ochre)', 'var(--sky)', 'var(--pink)', 'var(--paper)'];
-  document.querySelectorAll('.sticker-book').forEach((book) => {
-    book.innerHTML = STICKERS.map((name, i) =>
-      `<div class="stk" style="--c:${STICKER_COLORS[i % 4]}"><b class="back">${i + 1}</b><b class="front">${name}</b></div>`).join('');
-  });
-  const STICKER_GOALS = [0, 3, 10, 15];
-
-  // Fest stats from the API snapshot
-  if (window.FESTS) {
-    document.querySelectorAll('[data-fest-total]').forEach((el) => (el.textContent = window.FESTS.total));
-    document.querySelectorAll('[data-fest-countries]').forEach((el) => (el.textContent = window.FESTS.countries));
-    document.querySelectorAll('[data-fest-asof]').forEach((el) => (el.textContent = `MLH events API, ${window.FESTS.asOf}`));
-  }
-
   // Carousel cards are placed around a ring
   document.querySelectorAll('.ring-card').forEach((card, i) => card.style.setProperty('--i', i));
 
@@ -77,13 +61,6 @@
     slide.querySelectorAll('[data-from]').forEach((el) => el.classList.toggle('shown', step >= Number(el.dataset.from)));
     slide.querySelectorAll('.ring').forEach((ring) => ring.style.setProperty('--step', step));
     slide.querySelectorAll('.ring-card').forEach((c, i) => c.classList.toggle('active', i === step));
-    slide.querySelectorAll('.sticker-book').forEach((book) => {
-      const goal = STICKER_GOALS[Math.min(step, STICKER_GOALS.length - 1)];
-      [...book.children].forEach((t, i) => {
-        t.style.setProperty('--delay', `${Math.max(0, i - (STICKER_GOALS[step - 1] || 0)) * 0.06}s`);
-        t.classList.toggle('on', i < goal);
-      });
-    });
   }
 
   // Count-up numbers
