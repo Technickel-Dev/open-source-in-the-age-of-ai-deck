@@ -280,10 +280,19 @@
 <section id="own" class="s" data-background-color="#2E4742">
   <p class="kicker">Contributing in the age of AI</p>
   <h2 class="title">Own your AI output</h2>
-  <p class="own-big">If you don't know what it's doing, <span class="hl-ochre">don't contribute it.</span></p>
+  <p class="own-big">If you don't know what it's doing, <span class="hl-ochre">don't contribute it.</span> Don't be a <span class="hl-red">MEAT proxy.</span></p>
   <div class="cons fragment fade-up">
     <div class="con" style="--c:var(--orange)"><h3>It looks bad on you</h3><p>A PR you can't explain costs you trust.</p></div>
     <div class="con" style="--c:var(--pink)"><h3>It makes the maintainer's life harder</h3><p>They review, debug and fix what you couldn't.</p></div>
+  </div>
+  <div class="prompts fragment fade-up">
+    <p class="mono prompts-k">Prompts that help you understand</p>
+    <ul>
+      <li><span>&gt;</span>"Walk me through this diff line by line, like I'm new to this codebase."</li>
+      <li><span>&gt;</span>"What could this change break? List the edge cases and risks."</li>
+      <li><span>&gt;</span>"What would a maintainer push back on, given CONTRIBUTING.md and the code style?"</li>
+      <li><span>&gt;</span>"Explain how X works and why you did it that way instead of the alternatives."</li>
+    </ul>
   </div>
   <div class="proof fragment fade-up">
     <p class="mono proof-k">Prove it works <span>· and let AI automate the proof</span></p>
@@ -296,7 +305,7 @@
     <p class="fine">Proof helps the review. It never replaces understanding the change.</p>
   </div>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">If you can't explain what the AI wrote, don't send it. It looks bad on you and it makes the maintainer's life harder. Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change.</aside>
+  <aside class="notes">If you can't explain what the AI wrote, don't send it, and don't be a meat proxy: a human who just passes the AI's output along without understanding it. It looks bad on you and it makes the maintainer's life harder. Use AI to interrogate its own output: ask it to explain the diff, list what could break, predict maintainer pushback and explain the parts you'd have to defend. Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change.</aside>
 </section>
 
 <!-- ───────────── 25 · The siege ───────────── -->
