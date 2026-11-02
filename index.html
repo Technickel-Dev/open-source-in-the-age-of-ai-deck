@@ -6,7 +6,7 @@
 <title>Open Source in the age of AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;600&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
 <link rel="stylesheet" href="css/theme.css">
 </head>
@@ -155,19 +155,21 @@
   <div class="now">
     <div class="now-main">
       <p class="lead">We need Open Source more than ever.</p>
-      <p class="mono eg">A few examples</p>
-      <div class="facts">
-        <div class="fact fragment fade-up" style="--c:var(--ochre)">
-          <p class="mono card-k">Linux</p><h3>Runs everything</h3>
-          <p>The cloud, Android phones and your broken CI/CD pipeline.</p>
-        </div>
-        <div class="fact fragment fade-up" style="--c:var(--sky)">
-          <p class="mono card-k">Your daily tools</p><h3>Built on Open Source</h3>
-          <p>Git, Python, React, Node.js, PostgreSQL and curl.</p>
-        </div>
-        <div class="fact fragment fade-up" style="--c:var(--pink)">
-          <p class="mono card-k">The AI stack</p><h3>Open Source underneath</h3>
-          <p>PyTorch, Transformers and open-weight models.</p>
+      <div class="examples fragment fade-up">
+        <p class="mono eg">A few examples</p>
+        <div class="facts">
+          <div class="fact" style="--c:var(--ochre)">
+            <p class="mono card-k">Linux</p><h3>Runs everything</h3>
+            <p>The cloud, Android phones and your broken CI/CD pipeline.</p>
+          </div>
+          <div class="fact" style="--c:var(--sky)">
+            <p class="mono card-k">Your daily tools</p><h3>Built on Open Source</h3>
+            <p>Git, Python, React, Node.js, PostgreSQL and curl.</p>
+          </div>
+          <div class="fact" style="--c:var(--pink)">
+            <p class="mono card-k">The AI stack</p><h3>Open Source underneath</h3>
+            <p>PyTorch, Transformers and open-weight models.</p>
+          </div>
         </div>
       </div>
       <p class="lead fragment fade-up">But it all leans on tiny projects and a few underappreciated maintainers.</p>
@@ -253,6 +255,118 @@
   <aside class="notes">Walk the six steps. Each click advances one step. The example is my own low-poly repo README PR.</aside>
 </section>
 
+<!-- ───────────── 23 · AI etiquette ───────────── -->
+<section id="etiquette" class="s" data-background-color="#3D5F58">
+  <p class="kicker">Contributing in the age of AI</p>
+  <h2 class="title">Don't be the reason PRs stopped counting</h2>
+  <ol class="rules">
+    <li class="fragment fade-up"><span class="mono">01</span><div><h3>Read the rules</h3><p>CONTRIBUTING.md, and the project's AI policy if it has one.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">02</span><div><h3>Talk first</h3><p>Comment on the issue before you open a PR.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">03</span><div><h3>Own every line</h3><p>If AI wrote it, you reviewed it, tested it and can explain it.</p></div></li>
+    <li class="fragment fade-up"><span class="mono">04</span><div><h3>Quality over quantity</h3><p>One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</p></div></li>
+  </ol>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Etiquette for contributing with AI. This ties back to why PRs stopped counting: low-effort AI PRs burned maintainers out. Follow the project's rules, talk before you code, and stand behind every line you send.</aside>
+</section>
+
+<!-- ───────────── 24 · Own your AI output ───────────── -->
+<section id="own" class="s" data-background-color="#2E4742">
+  <p class="kicker">Contributing in the age of AI</p>
+  <h2 class="title">Own your AI output</h2>
+  <p class="own-big">If you don't know what it's doing, <span class="hl-ochre">don't contribute it.</span></p>
+  <div class="cons fragment fade-up">
+    <div class="con" style="--c:var(--orange)"><h3>It looks bad on you</h3><p>A PR you can't explain costs you trust.</p></div>
+    <div class="con" style="--c:var(--pink)"><h3>It makes the maintainer's life harder</h3><p>They review, debug and fix what you couldn't.</p></div>
+  </div>
+  <div class="proof fragment fade-up">
+    <p class="mono proof-k">Prove it works <span>· and let AI automate the proof</span></p>
+    <ul>
+      <li><b>✓</b>Tests</li>
+      <li><b>✓</b>Screenshots</li>
+      <li><b>✓</b>Short recordings</li>
+      <li><b>✓</b>Before / after</li>
+    </ul>
+    <p class="fine">Proof helps the review. It never replaces understanding the change.</p>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">If you can't explain what the AI wrote, don't send it. It looks bad on you and it makes the maintainer's life harder. Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change.</aside>
+</section>
+
+<!-- ───────────── 24 · Section: The AI ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="27"></div>
+  <h2 class="mono type-line"><span class="type">&gt; The AI</span></h2>
+  <p class="divider-sub">Walls go up, doors open</p>
+</section>
+
+<!-- ───────────── 25 · The siege ───────────── -->
+<section id="siege" class="s siege" data-background-color="#2E4742" data-export="video" data-export-seconds="14">
+  <p class="kicker">The AI</p>
+  <h2 class="title">AI is at the gates</h2>
+  <div class="siege-stage" role="img" aria-label="A swarm of robots and a giant AI boss attack a castle of maintainers, who raise the drawbridge">
+    <canvas class="scene" data-scene="siege"></canvas>
+    <p class="siege-stamp mono">AI contributions: blocked</p>
+    <p class="siege-fallback mono"><span>🤖🤖🤖 → 🏰</span>MAINTAINERS · AI contributions: blocked</p>
+  </div>
+  <p class="lead fragment fade-up">AI made sending a PR effortless, so projects are raising walls: AI policies, contribution gates and PR limits.</p>
+  <aside class="notes">Animation plays on its own: a swarm of bots and a giant AI boss march on the castle of maintainers, who pull up the drawbridge to block AI contributions. This is the onslaught of low-effort AI contributions, and open source building walls to keep up. Move on to the next slide for the other side of the story.</aside>
+</section>
+
+<!-- ───────────── 26 · The panic (newspaper) ───────────── -->
+<section id="panic" class="s light news" data-background-color="#E8DDBF">
+  <header class="np-head">
+    <p class="np-top"><span>Vol. 2026 · No. 42</span><span>Late Edition</span><span>Price: one patch</span></p>
+    <h2 class="np-name">The Open Source Gazette</h2>
+    <p class="np-sub"><span>Friday, October 30, 2026</span><b>All the news that's fit to patch</b><span>Special AI Security Supplement</span></p>
+  </header>
+  <div class="np-cols">
+    <article class="np-art lead-story fragment fade-up">
+      <p class="np-tag">Bulletin</p>
+      <h3>PHP Cracked Open! AI-Found Flaws Hit Millions of Sites</h3>
+      <p class="np-by">"PHP2Shell" · CVE-2026-109618 and CVE-2026-109619 · severity 9.2</p>
+      <p>Two critical remote-code-execution bugs in PHP core, found by Wiz Research with help from frontier AI models, reach nearly every PHP version back to 5.4, the language Wiz says powers 70% of websites. Reported in August and patched on October 21 (8.5.12, 8.4.27, 8.3.36, 8.2.35), they are already being used against exposed PAN-OS management interfaces. Palo Alto counts over 22 million potentially vulnerable instances.</p>
+    </article>
+    <article class="np-art fragment fade-up">
+      <p class="np-tag">Extra! Extra!</p>
+      <h3>AI Gateway Seized by Attackers!</h3>
+      <p class="np-by">LiteLLM · CVE-2026-42271 · on CISA's exploited list</p>
+      <p>A command-injection hole in a popular open source AI gateway let anyone with an API key run commands on the host. Chained with a Host-header bug, no key was needed. CISA listed it on June 8, five weeks after the fix. Attackers planted web shells and lifted credentials.</p>
+    </article>
+    <article class="np-art fragment fade-up">
+      <p class="np-tag">Agents Outwitted</p>
+      <h3>Coding Agents Tricked by a Git Config</h3>
+      <p class="np-by">"GitSpawn" · eight flaws in seven tools</p>
+      <p>Manifold Security found a repo's own git settings can name a command that AI coding agents run outside their sandbox, without asking. Fixed in Claude Code, Cursor and goose; others still ran it on retest. No exploitation reported.</p>
+    </article>
+  </div>
+  <p class="np-foot fragment fade-up"><b>The moral:</b> AI now finds bugs faster than ever, and so do attackers. Patch fast, sandbox what you run, and read the advisories.</p>
+  <p class="np-src">Sources: Wiz Research and Palo Alto Unit 42 (PHP2Shell) · Cloud Security Alliance and CISA KEV (LiteLLM) · Manifold Security via The Hacker News (GitSpawn)</p>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">The recent run of AI-related CVEs, framed as breaking news. Lead story: PHP2Shell, two critical PHP RCEs (CVE-2026-109618 and -109619) that Wiz Research found with frontier AI models, reported in August and patched October 21; Palo Alto Unit 42 reports active exploitation against exposed PAN-OS management interfaces and counts over 22 million potentially vulnerable instances. LiteLLM CVE-2026-42271 was added to CISA's known-exploited list on June 8. GitSpawn (Manifold Security, September) found eight flaws in seven coding agents via git config. The point: it is ordinary software with ordinary bugs, but AI is speeding up both finding and exploiting them. Verify details against the primary advisories before quoting.</aside>
+</section>
+
+<!-- ───────────── 26 · The other side ───────────── -->
+<section id="superpower" class="s" data-background-color="#3D5F58">
+  <p class="kicker">The AI</p>
+  <h2 class="title">But it also opens the doors</h2>
+  <div class="doors">
+    <div class="door fragment" style="--c:var(--sky)">
+      <div class="door-in"><p class="mono card-k">Get it running</p><h3>Dev setup in minutes</h3><p>Clone a project and let AI work out the install, build and test steps.</p></div>
+      <div class="door-leaf"><span class="mono">Get it running</span></div>
+    </div>
+    <div class="door fragment" style="--c:var(--ochre)">
+      <div class="door-in"><p class="mono card-k">Read the code</p><h3>Understand any repo</h3><p>Ask for a map of the architecture and walk through unfamiliar code.</p></div>
+      <div class="door-leaf"><span class="mono">Read the code</span></div>
+    </div>
+    <div class="door fragment" style="--c:var(--pink)">
+      <div class="door-in"><p class="mono card-k">Read the history</p><h3>Why it's this way</h3><p>Summarise old issues, PRs and commits to learn the decisions behind the code.</p></div>
+      <div class="door-leaf"><span class="mono">Read the history</span></div>
+    </div>
+  </div>
+  <p class="lead fragment fade-up">Use it to learn the project, then own every line you send.</p>
+  <aside class="notes">The same tools that flood maintainers also lower the barrier for contributors: getting a project into a dev environment, understanding the code, and digging through past decisions. The rule is to use it to learn, not to spam.</aside>
+</section>
+
 <!-- ───────────── 24 · Section: Show and tell ───────────── -->
 <section class="divider" data-background-color="#2E4742">
   <div class="pixels" data-seed="24"></div>
@@ -320,6 +434,7 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
 <script src="js/scenes.js"></script>
+<script src="js/siege.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
 <script src="js/tower-data.js"></script>
 <script src="js/tower.js"></script>

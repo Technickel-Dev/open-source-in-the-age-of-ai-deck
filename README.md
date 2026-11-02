@@ -18,7 +18,7 @@ Or serve it: `npm run serve`, then http://localhost:5173 (uses `python3`).
 
 - **Slides** are `<section>`s in `index.html`, one per slide, in order. Speaker notes go in `<aside class="notes">`.
 - **Look** is `css/theme.css` (brand colors and fonts are at the top).
-- **3D scenes** are in `js/scenes.js`: `pixelfield` (cover/closing). Put `<canvas class="scene" data-scene="…">` in any slide to use one. Scenes only run while their slide is showing.
+- **3D scenes** are in `js/scenes.js`: `pixelfield` (cover/closing), plus `siege` in `js/siege.js` (registered via `Scenes.register`). Put `<canvas class="scene" data-scene="…">` in any slide to use one. Scenes only run while their slide is showing.
 - **Click-through slides** (six steps, carousel) use `data-steps` plus invisible `<span class="fragment step">` markers. Each click shows the next `[data-at="n"]` element.
 - Placeholders to fill are in `[square brackets]`.
 

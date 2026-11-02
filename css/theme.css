@@ -247,6 +247,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 /* ── the now (+ xkcd 2347) ───────────────────────── */
 .now { margin: auto 0; }
 .now-main { max-width: 1000px; display: flex; flex-direction: column; gap: 22px; }
+.examples { display: flex; flex-direction: column; gap: 22px; }
 .eg { font-size: 22px; text-transform: uppercase; letter-spacing: .1em; color: var(--ochre); margin-bottom: -8px; }
 .facts { display: flex; flex-direction: column; gap: 16px; }
 .fact { border-left: 10px solid var(--c); padding: 6px 0 6px 28px; }
@@ -258,17 +259,85 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 #tower { display: block; width: 598px; height: 760px; }
 .xkcd figcaption { font-family: var(--mono); font-size: 15px; opacity: .75; white-space: nowrap; }
 
+/* ── the siege (AI at the castle gates): three.js scene in js/siege.js ── */
+.siege-stage { position: relative; height: 520px; border-radius: 6px; overflow: hidden; background: linear-gradient(#16261f, #2E4742 45%, #d98a45 80%, #3d5f58 80%); }
+.siege-stage canvas.scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+.siege-stamp { position: absolute; left: 85%; top: 15%; margin: 0; opacity: 0; padding: 10px 20px; border: 4px solid #fff; border-radius: 6px; background: rgba(229,57,39,.94); color: #fff; font-size: 22px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 0 0 4px var(--orange), 0 14px 30px rgba(0,0,0,.45); pointer-events: none; }
+.siege-fallback { display: none; }
+.siege-stage.no-webgl canvas, .siege-stage.no-webgl .siege-stamp { display: none; }
+.siege-stage.no-webgl .siege-fallback { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; position: absolute; inset: 0; margin: 0; font-size: 30px; text-transform: uppercase; letter-spacing: .08em; }
+.siege-fallback span { font-size: 96px; letter-spacing: 0; }
+
+/* ── rules (etiquette) ───────────────────────────── */
+.rules { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 36px 64px; margin: auto 0; }
+.rules li { display: flex; gap: 28px; align-items: flex-start; }
+.rules .mono { font-size: 26px; background: var(--ochre); color: var(--ink); padding: 12px 14px; border-radius: 4px; }
+.rules h3 { font-family: var(--display); font-size: 54px; font-weight: 700; line-height: 1; }
+.rules p { font-size: 30px; line-height: 1.4; margin-top: 10px !important; color: rgba(242,242,235,.86); }
+
+/* ── own your AI output ───────────────────────────── */
+.own-big { font-family: var(--display); font-weight: 800; font-size: 78px; line-height: 1.02; text-transform: uppercase; max-width: 1500px; }
+.cons { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.con { border-left: 10px solid var(--c); padding: 6px 0 6px 28px; }
+.con h3 { font-family: var(--display); font-size: 46px; font-weight: 700; line-height: 1.05; }
+.con p { font-size: 30px; line-height: 1.35; color: rgba(242,242,235,.86); margin-top: 8px !important; }
+.proof { background: rgba(242,242,235,.06); border: 2px solid rgba(242,242,235,.14); border-top: 10px solid var(--sky); border-radius: 6px; padding: 24px 36px 26px; display: flex; flex-direction: column; gap: 16px; }
+.proof-k { font-size: 24px; text-transform: uppercase; letter-spacing: .08em; color: var(--sky); }
+.proof-k span { color: rgba(242,242,235,.7); }
+.proof ul { list-style: none; padding: 0; display: flex; gap: 22px; flex-wrap: wrap; }
+.proof li { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 42px; background: rgba(139,178,222,.14); border-radius: 4px; padding: 6px 22px 6px 14px; }
+.proof li b { color: #5CB87A; font-size: 36px; }
+.proof .fine { margin: 0; }
+
+/* ── newspaper slide ──────────────────────────────── */
+.news { color: #1d1a14; padding-top: 70px !important; padding-bottom: 150px !important; gap: 22px; background-image: radial-gradient(ellipse at center, transparent 55%, rgba(110,80,30,.28) 100%); }
+.np-head { text-align: center; border-bottom: 5px double #1d1a14; padding-bottom: 14px; }
+.np-top, .np-sub { display: flex; justify-content: space-between; font-family: "Old Standard TT", serif; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; border-top: 2px solid #1d1a14; border-bottom: 2px solid #1d1a14; padding: 6px 4px; }
+.np-top { margin-bottom: 4px; }
+.np-sub { margin-top: 6px; }
+.np-sub b { font-style: italic; text-transform: none; font-weight: 400; font-size: 24px; }
+.np-name { font-family: "UnifrakturCook", serif; font-weight: 700; font-size: 150px; line-height: 1.05; margin: 2px 0; letter-spacing: .01em; }
+.np-cols { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 0; flex: 1; }
+.np-art { padding: 0 34px; border-left: 2px solid #1d1a14; font-family: "Old Standard TT", serif; }
+.np-art:first-child { border-left: 0; padding-left: 0; }
+.np-art:last-child { padding-right: 0; }
+.lead-story h3 { font-size: 64px; }
+.lead-story p:not(.np-tag):not(.np-by) { font-size: 27px; }
+.np-tag { display: inline-block; font-size: 20px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; background: #1d1a14; color: #E8DDBF; padding: 3px 12px; margin-bottom: 10px; }
+.np-art h3 { font-family: "Playfair Display", serif; font-weight: 900; font-size: 54px; line-height: 1.02; letter-spacing: -.01em; margin-bottom: 8px; }
+.np-by { font-size: 21px; font-style: italic; border-top: 1px solid #1d1a14; border-bottom: 1px solid #1d1a14; padding: 3px 0; margin-bottom: 10px !important; }
+.np-art p:not(.np-tag):not(.np-by) { font-size: 26px; line-height: 1.32; text-align: justify; hyphens: auto; }
+.np-foot { font-family: "Playfair Display", serif; font-size: 34px; text-align: center; border-top: 5px double #1d1a14; padding-top: 12px; }
+.np-foot b { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
+.np-src { font-family: "Old Standard TT", serif; font-size: 16px; font-style: italic; text-align: center; opacity: .7; margin-top: -8px; }
+
+/* ── doors (the AI opens doors) ───────────────────── */
+.doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin: auto 0; }
+.door { position: relative; height: 440px; perspective: 1800px; overflow: hidden; border-radius: 130px 130px 6px 6px; }
+#superpower .door.fragment { opacity: 1; visibility: visible; }
+.door-in, .door-leaf { position: absolute; inset: 0; border-radius: 130px 130px 6px 6px; }
+.door-in { border: 6px solid var(--c); background: radial-gradient(ellipse at 50% 100%, rgba(245,183,38,.42), rgba(18,30,27,.96) 72%); padding: 118px 38px 34px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
+.door-in h3 { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1.05; }
+.door-in p { font-size: 30px; line-height: 1.4; color: rgba(242,242,235,.9); }
+.door-in .card-k { font-size: 22px; text-transform: uppercase; letter-spacing: .08em; color: var(--c); }
+.door-leaf { transform-origin: 0 50%; transition: transform 1.1s cubic-bezier(.5, 0, .2, 1); display: grid; place-items: center; border: 6px solid rgba(0,0,0,.3); box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  background: repeating-linear-gradient(90deg, rgba(0,0,0,.14) 0 3px, transparent 3px 46px), linear-gradient(180deg, color-mix(in srgb, var(--c) 85%, #fff), color-mix(in srgb, var(--c) 70%, #000)); }
+.door-leaf::after { content: ""; position: absolute; right: 30px; top: 54%; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); box-shadow: inset 0 0 0 5px var(--paper); }
+.door-leaf span { font-size: 30px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink); font-weight: 600; text-align: center; padding: 0 70px 0 30px; line-height: 1.3; }
+.door.visible .door-leaf { transform: rotateY(-100deg); }
+@media (prefers-reduced-motion: reduce) { .door-leaf { transition: none; } }
+
 /* ── carousel ────────────────────────────────────── */
 .carousel { display: grid; grid-template-columns: 640px 1fr; gap: 40px; height: 760px; }
 .details { position: relative; z-index: 2; }
-.details article { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 18px; justify-content: center; opacity: 0; transform: translateX(-30px); transition: opacity .5s, transform .5s; }
-.details article.active { opacity: 1; transform: none; }
+.details article { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 18px; justify-content: center; opacity: 0; transform: translateX(-30px); transition: opacity .15s, transform .15s; }
+.details article.active { opacity: 1; transform: none; transition: opacity .4s .2s, transform .4s .2s; }
 .details .tagline { font-size: 24px; color: var(--ochre); text-transform: uppercase; letter-spacing: .08em; }
 .details .title { font-size: 80px; }
 .details p { font-size: 32px; line-height: 1.4; }
 .details h3 { font-family: var(--mono); font-size: 22px; text-transform: uppercase; letter-spacing: .08em; opacity: .7; margin-top: 18px !important; }
 .details ul { padding-left: 1.1em; font-size: 32px; line-height: 1.5; }
-.details .repo { font-size: 22px; margin-top: 12px; }
+.details .repo { font-size: 22px; margin-top: 12px; letter-spacing: 0; white-space: nowrap; }
 .ring-wrap { position: relative; perspective: 2600px; perspective-origin: 50% 50%; display: grid; place-items: center; overflow: hidden;
   -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
 .ring { position: relative; width: 900px; height: 470px; transform-style: preserve-3d; transition: transform 1.1s cubic-bezier(.6,0,.2,1); transform: translateZ(-1350px) rotateX(calc(var(--step, 0) * 20deg)); }

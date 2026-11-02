@@ -103,23 +103,36 @@
       instances.set(canvas, f(canvas, canvas.dataset));
     }
     const s = instances.get(canvas);
-    if (!s.ready) s.init();
+    if (!s.ready && !s.failed) {
+      try { s.init(); } catch (e) { s.failed = true; console.warn('scene failed', e); if (s.fallback) s.fallback(); }
+    }
+    if (s.failed) return null;
     return s;
   }
 
+  // each scene's clock restarts when its slide is entered; a manual time is used as-is
+  const local = (s) => (manual !== null ? manual : now() - s.t0);
   function loop() {
-    active.forEach((s) => s.render(now()));
+    active.forEach((s) => s.render(local(s)));
     raf = requestAnimationFrame(loop);
   }
 
   window.Scenes = {
     // run the scenes inside `slide`, pause everything else
     show(slide) {
+      // entering a slide always plays live; a frozen debug time (renderAt) only sticks while exporting
+      if (manual !== null && !/[?&]export\b/.test(location.search)) manual = null;
+      const prev = active;
       active = slide ? [...slide.querySelectorAll('canvas[data-scene]')].map(get).filter(Boolean) : [];
+      active.forEach((s) => { if (!prev.includes(s)) s.t0 = now(); });
       if (active.length && !raf && manual === null) raf = requestAnimationFrame(loop);
       if (!active.length && raf) { cancelAnimationFrame(raf); raf = null; }
-      active.forEach((s) => s.render(now()));
+      active.forEach((s) => s.render(local(s)));
     },
+    // extra scenes (js/siege.js) register themselves here
+    register(name, factory) { factories[name] = factory; },
+    util: { rng, BRAND },
+    manualTime: () => manual,
     // exporter hook: freeze the clock and render one exact frame at time t (seconds); null resumes real time
     renderAt(t) {
       manual = t;
