@@ -64,7 +64,7 @@
   <div class="terminal agenda">
     <div class="term-bar"><i></i><i></i><i></i><span>~/open-source-ai</span></div>
     <pre><span class="prompt">$</span> ls agenda/
-<span class="fragment">01_the_what.md     <span class="dim"># what is Open Source</span></span>
+<span class="fragment">01_the_what.md     <span class="dim"># what is Open Source, and its licenses</span></span>
 <span class="fragment">02_my_origin.md    <span class="dim"># how Hacktoberfest inspired me</span></span>
 <span class="fragment">03_the_now.md      <span class="dim"># why it matters more than ever</span></span>
 <span class="fragment">04_the_where.md    <span class="dim"># where to find repos</span></span>
@@ -75,6 +75,12 @@
   </div>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">What Open Source is, the Hacktoberfest origin, where to look, how to contribute, AI, then a show and tell.</aside>
+</section>
+
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="3"></div>
+  <h2 class="mono type-line"><span class="type">&gt; What is Open Source?</span></h2>
+  <p class="divider-sub">Start with the basics</p>
 </section>
 
 <!-- ───────────── 05 · What is Open Source ───────────── -->
@@ -101,6 +107,43 @@
   </div>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">Keep this short. Open Source means the source code is available under a license that allows use, study, modification and sharing. Examples people know: Linux, Python, React, VS Code. The license matters, so check it before reusing anything.</aside>
+</section>
+
+<!-- ───────────── Licenses ───────────── -->
+<section id="licenses" class="s" data-background-color="#2E4742">
+  <p class="kicker">The basics</p>
+  <h2 class="title">Open Source runs on licenses</h2>
+  <div class="spectrum fragment fade-up">
+    <div class="sp-ends mono"><span>A few examples</span></div>
+    <div class="sp-bar">
+      <i style="left:4.5%">MIT</i><i style="left:13.5%">BSD</i><i style="left:24.5%">Apache 2.0</i><i style="left:38%">LGPL</i><i style="left:49%">GPL</i><i style="left:60%">AGPL</i><i class="na" style="left:74%">BSL</i><i class="na" style="left:84.5%">SSPL</i><i class="na" style="left:94.5%">Elastic</i>
+    </div>
+    <div class="sp-kind mono"><span style="width:32%">Permissive</span><span style="width:35%">Copyleft</span><span style="width:33%">Source-available · not open source</span></div>
+  </div>
+  <div class="lic-row">
+    <div class="matrix">
+      <div class="mrow mhead mono fragment fade-up"><b></b><span>MIT</span><span>Apache 2.0</span><span>GPL</span><span>AGPL</span></div>
+        <div class="mrow fragment fade-up"><b>Use it in a product</b><span class="yes">✓</span><span class="yes">✓</span><span class="yes">✓</span><span class="yes">✓</span></div>
+        <div class="mrow fragment fade-up"><b>Change it</b><span class="yes">✓</span><span class="yes">✓</span><span class="yes">✓</span><span class="yes">✓</span></div>
+        <div class="mrow fragment fade-up"><b>Ship your changes closed</b><span class="yes">✓</span><span class="yes">✓</span><span class="no">✕</span><span class="no">✕</span></div>
+        <div class="mrow fragment fade-up"><b>Run it as a web service, keep changes private</b><span class="yes">✓</span><span class="yes">✓</span><span class="yes">✓</span><span class="no">✕</span></div>
+    </div>
+    <div class="nolic fragment fade-up">
+      <p class="lock">🔒</p>
+      <p class="mono card-k">No license</p>
+      <h3>Looks open, isn't</h3>
+      <p>Public code with no license is all rights reserved: the author hasn't given anyone permission to use it.</p>
+    </div>
+  </div>
+  <p class="lead fragment fade-up">Check the license before you use or contribute to any project.</p>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Quick tour, not legal advice. The bar runs from permissive licenses (MIT, BSD, Apache 2.0), which let you do almost anything with a notice, to copyleft licenses (LGPL, GPL, AGPL), which require derived work you distribute to stay open under the same terms. The grid shows what each lets you do: all four allow commercial use and changes; MIT and Apache let you ship changes closed; GPL and AGPL do not; only the AGPL also counts offering it as a network service as distribution. Apache 2.0 also grants patent rights. The red end of the bar is the copyleft licenses; past it, the dark end holds source-available licenses (BSL, SSPL, Elastic), where you can read the code but the license restricts what you do with it, so they are not open source by the usual definition. Code with no license is not open source either: the author keeps all rights. For anything at work, check with Legal.</aside>
+</section>
+
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="7"></div>
+  <h2 class="mono type-line"><span class="type">&gt; My origin</span></h2>
+  <p class="divider-sub">How Hacktoberfest got me into Open Source</p>
 </section>
 
 <!-- ───────────── 05 · Where this started ───────────── -->
@@ -146,6 +189,12 @@
   </div>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">Left: the Hacktoberfest-era perception, where October is the only month anyone sees open source happen. Right: reality, where commits, issues and releases land every month. Hacktoberfest was the spotlight, not the whole show.</aside>
+</section>
+
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="13"></div>
+  <h2 class="mono type-line"><span class="type">&gt; The now</span></h2>
+  <p class="divider-sub">Why it matters more than ever</p>
 </section>
 
 <!-- ───────────── 07 · The now (+ xkcd 2347) ───────────── -->

@@ -67,6 +67,8 @@ html, body, .reveal-viewport { background: var(--deep); }
 .card { background: rgba(242,242,235,.06); border: 2px solid rgba(242,242,235,.14); border-top: 10px solid var(--c); border-radius: 6px; padding: 40px 44px 48px; display: flex; flex-direction: column; gap: 18px; }
 .card h3 { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1.05; }
 .card p { font-size: 30px; line-height: 1.4; color: rgba(242,242,235,.86); }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto !important; }
+.chips span { font-family: var(--mono); font-size: 20px; padding: 6px 12px; border-radius: 4px; background: rgba(242,242,235,.12); border: 1px solid rgba(242,242,235,.25); }
 .card .card-k { font-size: 22px; text-transform: uppercase; letter-spacing: .08em; color: var(--c); }
 .light .card .card-k { color: var(--forest); }
 
@@ -344,6 +346,27 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .wall-head b a { color: inherit; text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 4px; text-underline-offset: 6px; }
 .chip { margin-left: auto; font-family: var(--mono); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; padding: 4px 8px; border-radius: 3px; background: var(--c); color: var(--ink); white-space: nowrap; }
 .wall p { font-size: 26px; line-height: 1.25; color: rgba(242,242,235,.9); }
+
+/* ── licenses ─────────────────────────────────────── */
+.spectrum { display: flex; flex-direction: column; gap: 10px; }
+.sp-ends { display: flex; justify-content: space-between; font-size: 24px; text-transform: uppercase; letter-spacing: .1em; color: rgba(242,242,235,.75); }
+.sp-kind { display: flex; font-size: 20px; opacity: .7; }
+.sp-kind span { text-align: center; }
+.sp-bar i.na { background: #0f1011; box-shadow: 0 0 0 3px rgba(242,242,235,.55); }
+.sp-bar { position: relative; height: 76px; border-radius: 38px; background: linear-gradient(90deg, #8bb2de 0%, #f5b726 38%, #e53927 64%, #5a5b61 69%, #2a2b30 100%); }
+.sp-bar i { position: absolute; top: 50%; transform: translate(-50%, -50%); font-style: normal; font-family: var(--mono); font-weight: 600; font-size: 26px; padding: 9px 16px; border-radius: 22px; background: var(--ink); color: var(--paper); box-shadow: 0 0 0 3px rgba(242,242,235,.9); white-space: nowrap; }
+.lic-row { display: grid; grid-template-columns: 1fr 440px; gap: 40px; align-items: stretch; }
+.matrix { display: flex; flex-direction: column; gap: 10px; }
+.mrow { display: grid; grid-template-columns: 2.3fr repeat(4, 1fr); align-items: center; gap: 8px; background: rgba(242,242,235,.06); border-radius: 6px; padding: 16px 20px; }
+.mrow b { font-family: var(--display); font-size: 36px; font-weight: 700; line-height: 1.05; }
+.mrow span { text-align: center; font-size: 42px; font-weight: 700; }
+.mrow .yes { color: #5CB87A; } .mrow .no { color: #E97B77; }
+.mhead { background: none; padding-top: 0; padding-bottom: 0; } .mhead span { white-space: nowrap; font-size: 22px; font-weight: 600; letter-spacing: .04em; color: var(--ochre); }
+.nolic { border: 2px dashed rgba(233,123,119,.7); border-radius: 8px; padding: 20px 28px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+.nolic .lock { font-size: 76px; line-height: 1; }
+.nolic .card-k { font-size: 22px; text-transform: uppercase; letter-spacing: .08em; color: var(--pink); }
+.nolic h3 { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1.05; }
+.nolic p { font-size: 30px; line-height: 1.35; color: rgba(242,242,235,.9); }
 
 /* ── carousel ────────────────────────────────────── */
 .carousel { display: grid; grid-template-columns: 640px 1fr; gap: 40px; height: 760px; }
