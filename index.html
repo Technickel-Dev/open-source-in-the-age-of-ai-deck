@@ -422,48 +422,142 @@
 </section>
 
 <!-- ───────────── 26 · The other side ───────────── -->
-<section id="superpower" class="s" data-background-color="#3D5F58">
-  <p class="kicker">The AI</p>
-  <h2 class="title">But it also opens the doors</h2>
-  <div class="doors">
+<section id="door1" class="s" data-background-color="#3D5F58">
+  <p class="kicker">But it also opens the doors · 1 of 3</p>
+  <h2 class="title">Dev setup in minutes</h2>
+  <div class="dslide">
     <div class="door fragment" style="--c:var(--sky)">
-      <div class="door-in"><p class="mono card-k">Get it running</p><h3>Dev setup in minutes</h3><p>Clone a project and let AI work out the install, build and test steps.</p></div>
+      <div class="door-in"><div class="sc sc1">
+        <p class="mono sc-k">$ get it running</p>
+        <ul class="chk"><li style="--n:0">read README + CONTRIBUTING</li><li style="--n:1">install dependencies</li><li style="--n:2">build it</li><li style="--n:3">run the tests</li></ul>
+        <div class="prog"><b></b></div>
+        <p class="rdy mono">● ready · localhost:3000</p>
+      </div></div>
       <div class="door-leaf"><span class="mono">Get it running</span></div>
     </div>
-    <div class="door fragment" style="--c:var(--ochre)">
-      <div class="door-in"><p class="mono card-k">Read the code</p><h3>Understand any repo</h3><p>Ask for a map of the architecture and walk through unfamiliar code.</p></div>
-      <div class="door-leaf"><span class="mono">Read the code</span></div>
-    </div>
-    <div class="door fragment" style="--c:var(--pink)">
-      <div class="door-in"><p class="mono card-k">Read the history</p><h3>Why it's this way</h3><p>Summarise old issues, PRs and commits to learn the decisions behind the code.</p></div>
-      <div class="door-leaf"><span class="mono">Read the history</span></div>
+    <div class="dright">
+      <div class="prompts one fragment fade-up">
+        <p class="mono prompts-k">Prompts to get up and running</p>
+        <ul>
+        <li><span>&gt;</span>"Read the README and CONTRIBUTING.md. Give me the exact steps to install, build and run the tests."</li>
+        <li><span>&gt;</span>"I'm on macOS with Node 22. What's missing, and how do I fix it?"</li>
+        <li><span>&gt;</span>"The build fails with this error. What's wrong, and what do I run next?"</li>
+        <li><span>&gt;</span>"Which tests should I run for the files I'm changing?"</li>
+        </ul>
+      </div>
+      <p class="lead fragment fade-up">Let AI do the setup, and spend your time on the change.</p>
     </div>
   </div>
-  <p class="lead fragment fade-up">Use it to learn the project, then own every line you send.</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">The same tools that flood maintainers also lower the barrier for contributors: getting a project into a dev environment, understanding the code, and digging through past decisions. The rule is to use it to learn, not to spam.</aside>
+  <aside class="notes">Door one: getting a project running used to eat an afternoon. Paste in the README and CONTRIBUTING, tell it your OS and tool versions, and let it work out the install, build and test steps. When something fails, paste the error. The checklist in the doorway is an illustration, not a real run.</aside>
+</section>
+
+<section id="door2" class="s" data-background-color="#2E4742">
+  <p class="kicker">But it also opens the doors · 2 of 3</p>
+  <h2 class="title">Understand any repo</h2>
+  <div class="dslide">
+    <div class="door fragment" style="--c:var(--ochre)">
+      <div class="door-in"><div class="sc sc2">
+        <p class="mono sc-k">flowchart LR</p>
+        <svg class="mm" viewBox="0 0 440 390" role="img" aria-label="Architecture map: CLI to Parser to Core, which connects to Plugins and Store"><path class="e" pathLength="1" d="M220 66L220 104" style="--n:0"/><path class="e" pathLength="1" d="M220 148L220 192" style="--n:1"/><path class="e" pathLength="1" d="M190 234L120 300" style="--n:2"/><path class="e" pathLength="1" d="M250 234L320 300" style="--n:3"/><g class="n" style="--c:var(--sky); --n:0"><rect x="158" y="22" width="124" height="44" rx="8"/><text x="220" y="51">CLI</text></g><g class="n" style="--c:var(--ochre); --n:1"><rect x="158" y="104" width="124" height="44" rx="8"/><text x="220" y="133">Parser</text></g><g class="n" style="--c:var(--pink); --n:2"><rect x="158" y="192" width="124" height="44" rx="8"/><text x="220" y="221">Core</text></g><g class="n" style="--c:var(--sky); --n:3"><rect x="42" y="300" width="124" height="44" rx="8"/><text x="104" y="329">Plugins</text></g><g class="n" style="--c:var(--ochre); --n:4"><rect x="274" y="300" width="124" height="44" rx="8"/><text x="336" y="329">Store</text></g><circle class="here" cx="220" cy="214" r="40"/><text class="you" x="292" y="220">← you are here</text></svg>
+      </div></div>
+      <div class="door-leaf"><span class="mono">Read the code</span></div>
+    </div>
+    <div class="dright">
+      <div class="prompts one fragment fade-up">
+        <p class="mono prompts-k">Prompts to understand the architecture</p>
+        <ul>
+        <li><span>&gt;</span>"Give me a map of this repo: the main modules, the entry points and how they connect."</li>
+        <li><span>&gt;</span>"Trace what happens when a user does X, from the first call to the last."</li>
+        <li><span>&gt;</span>"Where would I change Y, and what else does that touch?"</li>
+        <li><span>&gt;</span>"Draw it as a Mermaid diagram."</li>
+        </ul>
+      </div>
+      <p class="lead fragment fade-up">A picture of the code is the fastest way to find your way around it.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Door two: ask for the architecture, not just the answer. Have it map modules and entry points, trace a request end to end, and generate a Mermaid diagram you can paste into the PR description or a README. The map in the doorway is an illustrative example, not a real repo.</aside>
+</section>
+
+<section id="door3" class="s" data-background-color="#3D5F58">
+  <p class="kicker">But it also opens the doors · 3 of 3</p>
+  <h2 class="title">Read the history</h2>
+  <div class="dslide">
+    <div class="door fragment" style="--c:var(--pink)">
+      <div class="door-in"><div class="sc sc3">
+        <p class="mono sc-k">git blame</p>
+        <svg class="tl" viewBox="0 0 440 440" role="img" aria-label="A timeline of commits going back in time, one of them highlighted with its reason"><path class="spine" pathLength="1" d="M60 420V30"/><g class="c" style="--n:0; --o:1.00"><circle cx="60" cy="410" r="12"/><text class="cd" x="92" y="408">now</text><text class="cm" x="92" y="432"></text></g><g class="c hl" style="--n:1; --o:0.86"><circle cx="60" cy="290" r="11"/><text class="cd" x="92" y="288">2024-01</text><text class="cm" x="92" y="312">fix: empty token (#412)</text></g><g class="c" style="--n:2; --o:0.72"><circle cx="60" cy="205" r="9"/><text class="cd" x="92" y="203">2023-09</text><text class="cm" x="92" y="227">refactor auth</text></g><g class="c" style="--n:3; --o:0.58"><circle cx="60" cy="125" r="8"/><text class="cd" x="92" y="123">2023-04</text><text class="cm" x="92" y="147">add check()</text></g><g class="c" style="--n:4; --o:0.44"><circle cx="60" cy="50" r="7"/><text class="cd" x="92" y="48">2022-11</text><text class="cm" x="92" y="72">initial import</text></g><circle class="ping" cx="60" cy="290" r="11"/><g class="why"><rect x="92" y="330" width="300" height="42" rx="8"/><text x="242" y="357" text-anchor="middle" textLength="270" lengthAdjust="spacingAndGlyphs">why? empty token crash</text></g></svg>
+      </div></div>
+      <div class="door-leaf"><span class="mono">Read the history</span></div>
+    </div>
+    <div class="dright">
+      <div class="prompts one fragment fade-up">
+        <p class="mono prompts-k">Prompts to learn why it's this way</p>
+        <ul>
+        <li><span>&gt;</span>"Run git blame on this function and summarise why each part changed."</li>
+        <li><span>&gt;</span>"Find the PR and issue that introduced this line, and explain the reasoning."</li>
+        <li><span>&gt;</span>"Has this been tried and reverted before? Check git log and closed PRs."</li>
+        <li><span>&gt;</span>"Summarise this issue thread: decisions, objections and open questions."</li>
+        </ul>
+      </div>
+      <p class="lead fragment fade-up">Every odd line has a reason. The history usually knows it.</p>
+    </div>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Door three: code looks strange until you know the story. git blame shows who changed a line and when; the commit message links to the PR and issue with the reasoning. Have AI read that trail and summarise it, including whether an idea was already tried and reverted. The timeline is illustrative only.</aside>
 </section>
 
 <section id="owndevices" class="s" data-background-color="#2E4742">
   <p class="kicker">The trend</p>
-  <h2 class="title">Own your own devices</h2>
-  <p class="lead">People are taking back the hardware and software they paid for.</p>
-  <div class="frame-wall fragment">
-    <figure class="fr hero" style="--c:var(--ochre); --i:0">
-      <div class="scr"><p class="clock">9:41</p><p class="date mono">Sat 7 Nov</p><div class="mini-cal"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div><p class="wx mono">☀ 18°  Rain at 4</p></div>
-      <figcaption><a href="https://github.com/wesbos/photo-frame-dashboard">wesbos/photo-frame-dashboard</a></figcaption>
-    </figure>
-    <figure class="fr" style="--c:var(--sky); --i:1"><div class="scr"><p class="mono k">Calendar</p><div class="mini-cal"><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div></div><figcaption>Family calendar</figcaption></figure>
-    <figure class="fr" style="--c:var(--pink); --i:2"><div class="scr"><p class="mono k">Weather</p><p class="big">18°</p><p class="mono">Sunny</p></div><figcaption>Weather</figcaption></figure>
-    <figure class="fr" style="--c:var(--ochre); --i:3"><div class="scr"><p class="mono k">To-do</p><ul class="ticks"><li class="done">Bins</li><li class="done">Call mum</li><li>Fix frame</li></ul></div><figcaption>To-do</figcaption></figure>
-    <figure class="fr" style="--c:var(--pink); --i:4"><div class="scr"><p class="mono k">Now playing</p><p class="big">♪</p><div class="bar"><b></b></div></div><figcaption>Now playing</figcaption></figure>
-    <figure class="fr" style="--c:var(--sky); --i:5"><div class="scr"><p class="mono k">Shopping</p><ul class="ticks"><li>Milk</li><li class="done">Eggs</li><li>Coffee</li></ul></div><figcaption>Shopping list</figcaption></figure>
-    <figure class="fr" style="--c:var(--ochre); --i:6"><div class="scr"><p class="mono k">Agent</p><p class="mono term">&gt; build ok<br>&gt; PR opened<span class="cur">_</span></p></div><figcaption>Agent status</figcaption></figure>
+  <h2 class="title">Give old hardware new life</h2>
+  <p class="lead">People are taking back the hardware they paid for, and keeping it running.</p>
+  <div class="cord-wall fragment">
+    <svg viewBox="0 0 1664 600" role="img" aria-label="Devices hanging from a vendor cloud; the cords are cut and the devices link to each other instead">
+      <g class="cloud">
+        <g fill="#8a9591"><circle cx="772" cy="78" r="36"/><circle cx="822" cy="56" r="44"/><circle cx="880" cy="70" r="40"/><circle cx="916" cy="92" r="26"/><circle cx="752" cy="98" r="24"/><rect x="752" y="80" width="190" height="44" rx="22"/></g>
+        <text x="832" y="96" text-anchor="middle" class="ctext">VENDOR CLOUD</text>
+        <g class="badges"><rect x="950" y="40" width="250" height="34" rx="17"/><text x="1075" y="63" text-anchor="middle">subscription required</text><rect x="470" y="84" width="200" height="34" rx="17"/><text x="570" y="107" text-anchor="middle">account locked</text></g>
+      </g>
+      <g class="cord" style="--d:1.0s">
+        <path class="cord-top" d="M644 128L402 215"/>
+        <path class="cord-bot" d="M402 215L160 302"/>
+        <text class="snip" x="402" y="223" text-anchor="middle">✂</text>
+      </g><g class="cord" style="--d:1.6s">
+        <path class="cord-top" d="M739 128L620 223"/>
+        <path class="cord-bot" d="M620 223L501 306"/>
+        <text class="snip" x="620" y="231" text-anchor="middle">✂</text>
+      </g><g class="cord" style="--d:2.2s">
+        <path class="cord-top" d="M925 128L1044 214"/>
+        <path class="cord-bot" d="M1044 214L1163 300"/>
+        <text class="snip" x="1044" y="222" text-anchor="middle">✂</text>
+      </g><g class="cord" style="--d:2.8s">
+        <path class="cord-top" d="M1020 128L1262 220"/>
+        <path class="cord-bot" d="M1262 220L1504 288"/>
+        <text class="snip" x="1262" y="228" text-anchor="middle">✂</text>
+      </g><g class="cord" style="--d:3.6s">
+        <path class="cord-top" d="M832 128L832 198"/>
+        <path class="cord-bot" d="M832 198L832 268"/>
+        <text class="snip" x="832" y="206" text-anchor="middle">✂</text>
+      </g><g class="dev dev-tv" style="--c:var(--sky); --d:1.0s" transform="translate(160 350)"><g class="dev-in"><rect x="-72" y="-48" width="144" height="92" rx="9"/><path d="M-32 58H32M0 44V58"/></g></g>
+      <text class="dlabel dl-tv" x="160" y="478" text-anchor="middle" style="--c:var(--sky); --d:1.0s">TV</text>
+      <text class="ddesc" x="160" y="512" text-anchor="middle" style="--d:1.0s">Clean up the smart TV<tspan x="160" dy="28">you already paid for</tspan></text><g class="dev dev-cam" style="--c:var(--pink); --d:1.6s" transform="translate(501 350)"><g class="dev-in"><rect x="-62" y="-42" width="124" height="80" rx="8"/><path d="M-84 52H84L70 38H-70Z"/></g></g>
+      <text class="dlabel dl-cam" x="501" y="478" text-anchor="middle" style="--c:var(--pink); --d:1.6s">Old laptop</text>
+      <text class="ddesc" x="501" y="512" text-anchor="middle" style="--d:1.6s">Put Linux on the laptop<tspan x="501" dy="28">the vendor stopped updating</tspan></text><g class="dev dev-bike" style="--c:var(--sky); --d:2.2s" transform="translate(1163 350)"><g class="dev-in"><circle cx="-50" cy="28" r="30"/><circle cx="50" cy="28" r="30"/><path d="M-50 28L-10 -18H34L50 28M-10 -18L-20 -40H-4M34 -18L28 -40H44"/></g></g>
+      <text class="dlabel dl-bike" x="1163" y="478" text-anchor="middle" style="--c:var(--sky); --d:2.2s">Bike</text>
+      <text class="ddesc" x="1163" y="512" text-anchor="middle" style="--d:2.2s">Hack a Peloton to run<tspan x="1163" dy="28">your own software</tspan></text><g class="dev dev-gym" style="--c:var(--pink); --d:2.8s" transform="translate(1504 350)"><g class="dev-in"><rect x="-34" y="-62" width="68" height="124" rx="12"/><path d="M-10 -46H10M-8 46H8"/></g></g>
+      <text class="dlabel dl-gym" x="1504" y="478" text-anchor="middle" style="--c:var(--pink); --d:2.8s">Old phone</text>
+      <text class="ddesc" x="1504" y="512" text-anchor="middle" style="--d:2.8s">A custom OS on a phone<tspan x="1504" dy="28">no longer getting updates</tspan></text><g class="dev dev-frame" style="--c:var(--ochre); --d:3.6s" transform="translate(832 350)"><g class="dev-in"><rect x="-108" y="-76" width="216" height="152" rx="12"/><rect x="-90" y="-58" width="180" height="116" rx="4"/><text class="fclock" x="0" y="8" text-anchor="middle">9:41</text><path class="fcal" d="M-70 32H70M-70 44H20"/></g></g>
+      <text class="dlabel dl-frame" x="832" y="478" text-anchor="middle" style="--c:var(--ochre); --d:3.6s">Photo frame</text>
+      <text class="ddesc" x="832" y="512" text-anchor="middle" style="--d:3.6s">Root a $50 Android frame<tspan x="832" dy="28">and run your own dashboard</tspan></text>
+      
+      <text class="osrc" x="832" y="104" text-anchor="middle">OPEN SOURCE</text>
+      <text class="repo" x="832" y="580" text-anchor="middle">wesbos/photo-frame-dashboard</text>
+    </svg>
   </div>
-  <p class="mono wall-cap fragment fade-up">One guide, many frames</p>
-  <p class="lead fragment fade-up">AI makes it easier to start. Open Source is what lets everyone share the result.</p>
+  <p class="lead fragment fade-up late">AI makes it easier to start. Open Source is what lets everyone share the result.</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">A recent trend: owning your own devices and software. Wes Bos's $50 photo frame hack turned into a community project (Syntax #1048 "Deno Is Dead", segment "I Accidentally Started a $50 Photo Frame Movement", and #1050 "Everyone Is Hacking Their TV"). The pattern is the same everywhere: one person documents the hack in the open, others fork it and add their own builds. Verify the details against the episodes and the repo before presenting.</aside>
+  <aside class="notes">A recent trend: owning your own devices and giving old hardware new life. Wes Bos's $50 photo frame hack turned into a community project (Syntax #1048 "Deno Is Dead", segment "I Accidentally Started a $50 Photo Frame Movement", and #1050 "Everyone Is Hacking Their TV"). The pattern is the same everywhere: one person documents the hack in the open, others fork it and add their own builds. Verify the details against the episodes and the repo before presenting.</aside>
 </section>
 
 <!-- ───────────── 24 · Section: Show and tell ───────────── -->

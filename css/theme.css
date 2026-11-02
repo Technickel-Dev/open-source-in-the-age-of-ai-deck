@@ -206,7 +206,10 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .step-stage { position: relative; }
 .step-stage figure { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 22px; opacity: 0; transform: translateY(30px) scale(.98); transition: opacity .45s, transform .45s; }
 .step-stage figure.active { opacity: 1; transform: none; }
-.step-stage img { max-width: 100%; max-height: 560px; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4); align-self: center; }
+.step-stage img { max-width: 100%; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4); align-self: center; }
+.step-stage .pts img { max-height: 300px; }
+.step-points { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 24px; line-height: 1.3; opacity: .92; }
+.step-points b { color: var(--ochre); }
 .step-stage figcaption { font-size: 30px; text-align: center; opacity: .9; }
 .code-fig pre { font-family: var(--mono); font-size: 26px; line-height: 1.7; background: var(--ink); padding: 26px 32px; border-radius: 8px; }
 .code-fig img { max-height: 300px; }
@@ -257,6 +260,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .fact h3 { font-family: var(--display); font-size: 42px; font-weight: 700; line-height: 1.05; }
 .fact p { font-size: 26px; line-height: 1.35; color: rgba(242,242,235,.86); }
 .fact .card-k { font-size: 20px; text-transform: uppercase; letter-spacing: .08em; color: var(--c); }
+#now .title { font-size: 88px; }
 .xkcd { position: absolute; right: var(--pad-x); top: 186px; display: flex; flex-direction: column; gap: 14px; }
 .tw-box { width: 598px; height: 760px; background: #fff; padding: 14px; border-radius: 6px; box-sizing: content-box; overflow: hidden; }
 #tower { display: block; width: 598px; height: 760px; }
@@ -323,7 +327,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 /* ── doors (the AI opens doors) ───────────────────── */
 .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin: auto 0; }
 .door { position: relative; height: 440px; perspective: 1800px; overflow: hidden; border-radius: 130px 130px 6px 6px; }
-#superpower .door.fragment { opacity: 1; visibility: visible; }
+.dslide .door.fragment { opacity: 1; visibility: visible; }
 .door-in, .door-leaf { position: absolute; inset: 0; border-radius: 130px 130px 6px 6px; }
 .door-in { border: 6px solid var(--c); background: radial-gradient(ellipse at 50% 100%, rgba(245,183,38,.42), rgba(18,30,27,.96) 72%); padding: 118px 38px 34px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
 .door-in h3 { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1.05; }
@@ -399,3 +403,99 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .export .reveal .slides section { transition: none !important; }
 
 #tower { cursor: pointer; }
+
+/* ── cord cut (own your own devices) ───────────────────────── */
+.cord-wall { flex: none; margin-top: 4px; }
+.cord-wall svg { display: block; width: 100%; height: 560px; overflow: visible; }
+.cord-wall .dev, .cord-wall .dev-in { fill: none; stroke: #7c8985; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.cord-wall .cord path { fill: none; stroke: #9aa5a1; stroke-width: 3; stroke-dasharray: 9 7; }
+.cord-wall .snip { font-size: 34px; fill: var(--ochre); opacity: 0; }
+.cord-wall .dlabel { font-family: var(--mono); font-size: 22px; fill: #7c8985; text-transform: uppercase; letter-spacing: .08em; }
+.cord-wall .ctext { font-family: var(--mono); font-size: 19px; fill: #2b3a37; letter-spacing: .1em; }
+.cord-wall .badges rect { fill: none; stroke: #9aa5a1; stroke-width: 2; }
+.cord-wall .badges text { font-family: var(--mono); font-size: 16px; fill: #9aa5a1; }
+.cord-wall .fclock { font-family: var(--display); font-weight: 700; font-size: 44px; fill: var(--c); stroke: none; opacity: 0; }
+.cord-wall .fcal { stroke: var(--c); opacity: 0; }
+.cord-wall .osrc, .cord-wall .repo { font-family: var(--mono); font-size: 30px; fill: var(--ochre); letter-spacing: .14em; opacity: 0; }
+.cord-wall .repo { font-size: 24px; letter-spacing: .04em; }
+.cord-wall.visible .cord-top { animation: cut-up .5s ease-in var(--d) forwards; }
+.cord-wall.visible .cord-bot { animation: cut-down .6s ease-in var(--d) forwards; }
+.cord-wall.visible .snip { animation: snip .7s ease-out var(--d) forwards; }
+.cord-wall.visible .dev { animation: own .6s cubic-bezier(.3,1.5,.5,1) calc(var(--d) + .1s) forwards; }
+.cord-wall.visible .dev-in { animation: own-in .6s ease calc(var(--d) + .1s) forwards; }
+.cord-wall.visible .dlabel { animation: own-label .5s ease calc(var(--d) + .1s) forwards; }
+.cord-wall.visible .dev-frame .fclock, .cord-wall.visible .dev-frame .fcal { animation: show .6s ease calc(var(--d) + .5s) forwards; }
+.cord-wall.visible .cloud { animation: cloud-out .7s ease 4.2s forwards; }
+.cord-wall.visible .osrc { animation: show .6s ease 5s forwards; }
+.cord-wall.visible .dl-frame { animation: own-label .5s ease 3.7s forwards; }
+.cord-wall .ddesc { font-size: 22px; fill: rgba(242,242,235,.88); opacity: 0; }
+.cord-wall.visible .ddesc { animation: show .6s ease calc(var(--d) + .5s) forwards; }
+.cord-wall.visible .repo { animation: show .6s ease 5.4s forwards; }
+.late.visible { transition-delay: 5.8s; }
+@keyframes cut-up { to { opacity: 0; transform: translateY(-22px); } }
+@keyframes cut-down { to { opacity: 0; transform: translateY(26px); } }
+@keyframes snip { 0% { opacity: 0; transform: scale(.6); } 25% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0; transform: scale(1); } }
+@keyframes own { from { translate: 0 0; } to { translate: 0 16px; } }
+@keyframes own-in { to { stroke: var(--c); } }
+@keyframes own-label { to { fill: var(--c); } }
+@keyframes cloud-out { to { opacity: 0; transform: translateY(-30px); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes show { to { opacity: 1; } }
+@keyframes hide { to { opacity: 0; } }
+
+/* ── door slides ─────────────────────────────────────────── */
+.dslide { display: grid; grid-template-columns: 560px 1fr; gap: 56px; align-items: center; margin-top: 10px; }
+.dslide .door { height: 560px; }
+.dslide .door-in { padding: 92px 34px 28px; background: radial-gradient(ellipse at 50% 100%, rgba(245,183,38,.3), rgba(14,24,22,.97) 72%); }
+.dright { display: flex; flex-direction: column; gap: 28px; }
+.prompts.one ul { grid-template-columns: 1fr; }
+.sc { display: flex; flex-direction: column; gap: 14px; height: 100%; }
+.door-in .sc-k { font-size: 16px; text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; color: var(--c); }
+/* door 1: setup checklist */
+.chk { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; font-family: var(--mono); font-size: 20px; margin-top: 6px; }
+.chk li { display: flex; gap: 14px; align-items: center; opacity: .55; }
+.chk li::before { content: "✓"; display: grid; place-items: center; width: 30px; height: 30px; border: 3px solid var(--c); border-radius: 6px; font-size: 20px; color: transparent; flex: none; }
+.prog { height: 12px; border-radius: 6px; background: rgba(242,242,235,.14); margin-top: 8px; }
+.prog b { display: block; width: 0; height: 100%; border-radius: 6px; background: var(--c); }
+.door-in .rdy { font-size: 20px; color: #5CB87A; opacity: 0; margin-top: auto; }
+.door.visible .chk li { animation: chk-on .4s ease calc(1.3s + var(--n) * .75s) forwards; }
+.door.visible .chk li::before { animation: chk-box .4s ease calc(1.3s + var(--n) * .75s) forwards; }
+.door.visible .prog b { animation: fill 3.2s linear 1.2s forwards; }
+.door.visible .rdy { animation: show .5s ease 4.5s forwards, glow 1.6s ease-in-out 5s infinite; }
+@keyframes chk-on { to { opacity: 1; } }
+@keyframes chk-box { to { background: var(--c); color: var(--ink); } }
+@keyframes fill { to { width: 100%; } }
+@keyframes glow { 50% { text-shadow: 0 0 14px #5CB87A; } }
+/* door 2: architecture map */
+.sc2 { background-image: radial-gradient(rgba(242,242,235,.12) 2px, transparent 2px); background-size: 28px 28px; margin: 0 -34px; padding: 0 34px; }
+.mm { width: 100%; height: auto; }
+.mm .e { fill: none; stroke: #F2F2EB; stroke-width: 3; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.mm .n rect { fill: #1c1f22; stroke: var(--c); stroke-width: 3; }
+.mm .n text { font-family: var(--mono); font-size: 24px; fill: #F2F2EB; text-anchor: middle; }
+.mm .n { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.mm .here { fill: none; stroke: var(--ochre); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.mm .you { font-family: var(--mono); font-size: 16px; fill: var(--ochre); opacity: 0; }
+.door.visible .mm .n { animation: node-in .45s cubic-bezier(.3,1.5,.5,1) calc(1.3s + var(--n) * .7s) forwards; }
+.door.visible .mm .e { animation: draw .5s ease calc(1.6s + var(--n) * .7s) forwards; }
+.door.visible .mm .here { animation: show .3s ease 4.8s forwards, ring 1.6s ease-out 4.8s infinite; }
+.door.visible .mm .you { animation: show .5s ease 4.9s forwards; }
+@keyframes node-in { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: none; } }
+@keyframes ring { from { transform: scale(.7); opacity: .9; } to { transform: scale(1.5); opacity: 0; } }
+/* door 3: commit timeline */
+.tl { width: 100%; height: auto; }
+.tl .spine { fill: none; stroke: rgba(242,242,235,.5); stroke-width: 4; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.tl .c { opacity: 0; }
+.tl .c circle { fill: var(--c); }
+.tl .cd { font-family: var(--mono); font-size: 25px; fill: rgba(242,242,235,.75); }
+.tl .cm { font-family: var(--mono); font-size: 22px; fill: rgba(242,242,235,.55); }
+.tl .c.hl .cd, .tl .c.hl .cm { fill: #F2F2EB; }
+.tl .ping { fill: none; stroke: var(--c); stroke-width: 3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.tl .why { opacity: 0; }
+.tl .why rect { fill: var(--c); }
+.tl .why text { font-family: var(--mono); font-size: 21px; fill: var(--ink); font-weight: 600; }
+.door.visible .tl .spine { animation: draw 2.6s ease-in-out 1.2s forwards; }
+.door.visible .tl .c { animation: show-o .4s ease calc(1.3s + var(--n) * .55s) forwards; }
+.door.visible .tl .c.hl { --o: 1; }
+@keyframes show-o { to { opacity: var(--o, 1); } }
+.door.visible .tl .ping { animation: show .2s ease 4s forwards, ring 1.4s ease-out 4s 3; }
+.door.visible .tl .why { animation: show .5s ease 4.3s forwards; }
