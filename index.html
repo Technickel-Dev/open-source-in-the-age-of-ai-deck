@@ -366,16 +366,16 @@
       <p class="np-cite">Source: Cloud Security Alliance and CISA KEV</p>
     </article>
     <article class="np-art fragment fade-up">
-      <p class="np-tag">Agents Outwitted</p>
-      <h3>Coding Agents Tricked by a Git Config</h3>
-      <p class="np-by">"GitSpawn" · eight flaws in seven tools</p>
-      <p>Manifold Security found a repo's own git settings can name a command that AI coding agents run outside their sandbox, without asking. Fixed in Claude Code, Cursor and goose; others still ran it on retest. No exploitation reported.</p>
-      <p class="np-cite">Source: Manifold Security via The Hacker News</p>
+      <p class="np-tag">Squeezed Shut</p>
+      <h3>Brotli2Shell: Unzipping Data Can Hand Over the Server</h3>
+      <p class="np-by">CVE-2026-111497 · also "HTTP2Shell" · severity 9.2</p>
+      <p>A memory-writing bug in Google's Brotli decoder lets crafted compressed data take over any program that unpacks it, and Node.js, Python packages, .NET, Bun and Envoy all bundle it. Patches shipped October 21, and CISA put it on its exploited list on October 27.</p>
+      <p class="np-cite">Source: BleepingComputer and Cynet</p>
     </article>
   </div>
   <p class="np-foot fragment fade-up"><b>The moral:</b> AI now finds bugs faster than ever, and so do attackers. Patch fast, sandbox what you run, and read the advisories.</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">The recent run of AI-related CVEs, framed as breaking news. Lead story: PHP2Shell, two critical PHP RCEs (CVE-2026-109618 and -109619) that Wiz Research found with frontier AI models, reported in August and patched October 21; Palo Alto Unit 42 reports active exploitation against exposed PAN-OS management interfaces and counts over 22 million potentially vulnerable instances. LiteLLM CVE-2026-42271 was added to CISA's known-exploited list on June 8. GitSpawn (Manifold Security, September) found eight flaws in seven coding agents via git config. The point: it is ordinary software with ordinary bugs, but AI is speeding up both finding and exploiting them. Verify details against the primary advisories before quoting.</aside>
+  <aside class="notes">The recent run of AI-related CVEs, framed as breaking news. Lead story: PHP2Shell, two critical PHP RCEs (CVE-2026-109618 and -109619) that Wiz Research found with frontier AI models, reported in August and patched October 21; Palo Alto Unit 42 reports active exploitation against exposed PAN-OS management interfaces and counts over 22 million potentially vulnerable instances. LiteLLM CVE-2026-42271 was added to CISA's known-exploited list on June 8. Brotli2Shell (also called HTTP2Shell, CVE-2026-111497) is a critical out-of-bounds write in Google's Brotli decoder, patched October 21 and added to CISA's exploited list on October 27; it reaches Node.js, Python packages, .NET, Bun and Envoy. The point: it is ordinary software with ordinary bugs, but AI is speeding up both finding and exploiting them. Verify details against the primary advisories before quoting.</aside>
 </section>
 
 <!-- ───────────── 26 · The other side ───────────── -->
