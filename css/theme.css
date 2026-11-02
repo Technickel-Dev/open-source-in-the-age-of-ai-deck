@@ -297,26 +297,26 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .proof .fine { margin: 0; }
 
 /* ── newspaper slide ──────────────────────────────── */
-.news { color: #1d1a14; padding-top: 70px !important; padding-bottom: 150px !important; gap: 22px; background-image: radial-gradient(ellipse at center, transparent 55%, rgba(110,80,30,.28) 100%); }
+.news { color: #1d1a14; padding-top: 44px !important; padding-bottom: 150px !important; gap: 16px; background-image: radial-gradient(ellipse at center, transparent 55%, rgba(110,80,30,.28) 100%); }
 .np-head { text-align: center; border-bottom: 5px double #1d1a14; padding-bottom: 14px; }
 .np-top, .np-sub { display: flex; justify-content: space-between; font-family: "Old Standard TT", serif; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; border-top: 2px solid #1d1a14; border-bottom: 2px solid #1d1a14; padding: 6px 4px; }
 .np-top { margin-bottom: 4px; }
 .np-sub { margin-top: 6px; }
 .np-sub b { font-style: italic; text-transform: none; font-weight: 400; font-size: 24px; }
-.np-name { font-family: "UnifrakturCook", serif; font-weight: 700; font-size: 150px; line-height: 1.05; margin: 2px 0; letter-spacing: .01em; }
+.np-name { font-family: "UnifrakturCook", serif; font-weight: 700; font-size: 128px; line-height: 1.02; margin: 0; letter-spacing: .01em; }
 .np-cols { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 0; flex: 1; }
 .np-art { display: flex; flex-direction: column; padding: 0 34px; border-left: 2px solid #1d1a14; font-family: "Old Standard TT", serif; }
 .np-art:first-child { border-left: 0; padding-left: 0; }
 .np-art:last-child { padding-right: 0; }
-.lead-story h3 { font-size: 64px; }
-.lead-story p:not(.np-tag):not(.np-by):not(.np-cite) { font-size: 27px; }
+.lead-story h3 { font-size: 58px; }
+.lead-story p:not(.np-tag):not(.np-by):not(.np-cite) { font-size: 25px; }
 .np-tag { display: inline-block; font-size: 20px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; background: #1d1a14; color: #E8DDBF; padding: 3px 12px; margin-bottom: 10px; }
-.np-art h3 { font-family: "Playfair Display", serif; font-weight: 900; font-size: 54px; line-height: 1.02; letter-spacing: -.01em; margin-bottom: 8px; }
-.np-by { font-size: 21px; font-style: italic; border-top: 1px solid #1d1a14; border-bottom: 1px solid #1d1a14; padding: 3px 0; margin-bottom: 10px !important; }
-.np-art p:not(.np-tag):not(.np-by):not(.np-cite) { font-size: 26px; line-height: 1.32; text-align: justify; hyphens: auto; }
-.np-foot { font-family: "Playfair Display", serif; font-size: 34px; text-align: center; border-top: 5px double #1d1a14; padding-top: 12px; }
+.np-art h3 { font-family: "Playfair Display", serif; font-weight: 900; font-size: 49px; line-height: 1.02; letter-spacing: -.01em; margin-bottom: 8px; }
+.np-by { font-size: 19px; font-style: italic; border-top: 1px solid #1d1a14; border-bottom: 1px solid #1d1a14; padding: 3px 0; margin-bottom: 10px !important; }
+.np-art p:not(.np-tag):not(.np-by):not(.np-cite) { font-size: 24px; line-height: 1.32; text-align: justify; hyphens: auto; }
+.np-foot { font-family: "Playfair Display", serif; font-size: 30px; text-align: center; border-top: 5px double #1d1a14; padding-top: 12px; }
 .np-foot b { font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
-.np-cite { margin-top: auto !important; padding-top: 10px; border-top: 1px solid #1d1a14; font-family: "Old Standard TT", serif; font-size: 20px; font-style: italic; opacity: .8; }
+.np-cite { margin-top: auto !important; padding-top: 10px; border-top: 1px solid #1d1a14; font-family: "Old Standard TT", serif; font-size: 17px; font-style: italic; opacity: .8; }
 
 /* ── doors (the AI opens doors) ───────────────────── */
 .doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin: auto 0; }
