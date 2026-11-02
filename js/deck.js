@@ -172,6 +172,23 @@
     Reveal.on('fragmentshown', (e) => { if (!EXPORT && window.Tower && e.fragment.classList.contains('collapse')) Tower.collapse(); });
     Reveal.on('fragmenthidden', (e) => { if (window.Tower && e.fragment.classList.contains('collapse')) Tower.reset(); });
     Reveal.on('fragmenthidden', () => applySteps(Reveal.getCurrentSlide()));
+    // Going back is one action: straight to the previous slide with everything already shown (no stepping back
+    // through fragments, and no fight with the auto-reveal). Going forward still plays each slide's reveals.
+    const goBack = () => {
+      clearTimeout(autoTimer);
+      const i = Reveal.getIndices();
+      if (i.h > 0) Reveal.slide(i.h - 1, 0, -1);
+    };
+    ['navigateLeft', 'navigateUp', 'navigatePrev', 'prev'].forEach((fn) => { Reveal[fn] = goBack; });
+    // Reveal's own keyboard and arrow-button handling steps back through fragments, so catch "back" first
+    const BACK_KEYS = new Set(['ArrowLeft', 'ArrowUp', 'PageUp', 'h', 'k', 'p']);
+    window.addEventListener('keydown', (e) => {
+      if (Reveal.isOverview() || e.ctrlKey || e.metaKey || e.altKey || /^(INPUT|TEXTAREA|SELECT)$/.test((e.target || {}).tagName)) return;
+      if (BACK_KEYS.has(e.key) || (e.key === ' ' && e.shiftKey)) { e.preventDefault(); e.stopImmediatePropagation(); goBack(); }
+    }, true);
+    document.querySelector('.reveal').addEventListener('click', (e) => {
+      if (e.target.closest('.navigate-left, .navigate-up')) { e.preventDefault(); e.stopImmediatePropagation(); goBack(); }
+    }, true);
     window.__deckReady = true;
   });
 })();
