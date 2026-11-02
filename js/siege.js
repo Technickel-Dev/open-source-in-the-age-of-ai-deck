@@ -1,4 +1,4 @@
-/* "AI is at the gates": a robot swarm and a colossal AI charge the maintainers' castle,
+/* "AI is at the gates": a robot swarm and a colossal AI charge the walled castle of code,
    who raise the drawbridge. Every frame is a pure function of t (seconds since the slide opened). */
 (function () {
   const { rng, BRAND } = Scenes.util;
@@ -11,23 +11,35 @@
   const easeOut = (v) => 1 - Math.pow(1 - clamp(v), 3);
 
   // timeline (seconds)
-  const RAISE_AT = 4.2, RAISE_DUR = 1.25, RAISE_MAX = 1.38, SIGN_AT = 5.5;
-  // the colossal "AI": one word, one rigid block, "walked" like a fridge: rocking from one base corner to the other
-  const BOSS_T0 = 0.5, BOSS_P = 1.5, BOSS_STEPS = 8, BOSS_STRIDE = 2.9, BOSS_Z = -22, LS = 1.4; // LS: word scale
+  const RAISE_AT = 3.5, RAISE_DUR = 1.25, RAISE_MAX = 1.38;
+  // the colossal "AI": one word, one rigid block, "walked" like a fridge. Every rock plants one base corner and
+  // twists the whole word about it, so the far corner swings forward in an arc: the travel comes from the rotation.
+  const BOSS_T0 = 0.5, BOSS_P = 1.4, BOSS_LAST = 2.6, BOSS_STEPS = 8, BOSS_Z = -22, BOSS_X = -22, LS = 1.4; // LS: word scale
   const SLAM = 0.78; // fraction of a rock at which the raised corner thuds back down
-  const LETTERS = [{ ch: 'AI', x1: -22, delay: 0, half: 12.7 }]; // the whole word is one body, 25.4 units wide
-  // facing at the start of each rock (radians): it swings left and right as it walks, and squares up to the camera at the end
-  const YAW = [-1.15, 0.7, -1.0, 0.85, -0.75, 0.55, -0.3, 0, 0];
-  const yawAt = (step, ff) => YAW[step] + (YAW[step + 1] - YAW[step]) * (ff * ff * (3 - 2 * ff));
-  // half the word's width as seen along x, so the pivot corner sits on the ground whatever way it faces
-  const reach = (L, yaw) => (L.half * Math.cos(yaw) + 2.9 * Math.abs(Math.sin(yaw))) * LS;
-  // every landing: { t, x, z } in world space, sorted by time
-  const IMPACTS = LETTERS.flatMap((L) => Array.from({ length: BOSS_STEPS }, (_, i) => ({
-    t: BOSS_T0 + L.delay + BOSS_P * (i + SLAM), x: L.x1 - BOSS_STRIDE * (BOSS_STEPS - 1 - i) + (i % 2 ? -1 : 1) * reach(L, yawAt(i, SLAM)), z: BOSS_Z,
-  }))).sort((p, q) => p.t - q.t);
+  const LETTERS = [{ ch: 'AI', half: 12.7 }]; // the whole word is one body, 25.4 units wide
+  const BOSS_A = 12.7 * LS; // half the word's width in world units
+  const WALK = (() => {
+    const D = 0.2, H = 1.15; // wiggle per rock, and the side-on heading it walks at
+    const side = [], psi = [], c = [[0, 0]], T = [BOSS_T0], P = [];
+    for (let i = 0; i <= BOSS_STEPS; i++) { side[i] = i % 2 ? -1 : 1; psi[i] = i === BOSS_STEPS ? 0 : H - side[i] * D / 2; }
+    for (let i = 0; i < BOSS_STEPS; i++) {
+      P[i] = i === BOSS_STEPS - 1 ? BOSS_LAST : BOSS_P; // the last rock is the long swing round to face the camera
+      T[i + 1] = T[i] + P[i];
+      const s = side[i], u0 = [Math.cos(psi[i]), -Math.sin(psi[i])], u1 = [Math.cos(psi[i + 1]), -Math.sin(psi[i + 1])];
+      c[i + 1] = [c[i][0] + s * BOSS_A * (u0[0] - u1[0]), c[i][1] + s * BOSS_A * (u0[1] - u1[1])];
+    }
+    const dx = BOSS_X - c[BOSS_STEPS][0], dz = BOSS_Z - c[BOSS_STEPS][1];
+    c.forEach((p) => { p[0] += dx; p[1] += dz; });
+    return { side, psi, c, T, P };
+  })();
+  // every landing: { t, x, z } in world space, sorted by time (the raised corner is the one that comes down)
+  const IMPACTS = Array.from({ length: BOSS_STEPS }, (_, i) => {
+    const { side, psi, c, T, P } = WALK, s = side[i], k = psi[i + 1];
+    return { t: T[i] + P[i] * SLAM, x: c[i + 1][0] - s * BOSS_A * Math.cos(k), z: c[i + 1][1] + s * BOSS_A * Math.sin(k) };
+  });
 
   // layout
-  const MOAT_L = 6, MOAT_R = 10.6, WATER_Y = -1.25, HINGE_X = 10.8, BRIDGE_LEN = 4.9, BRIDGE_Z = -1.2;
+  const MOAT_L = 1.5, MOAT_R = 9, WATER_Y = -1.25, HINGE_X = 10.3, BRIDGE_LEN = 9.6, BRIDGE_Z = -1.2; // towers (x >= 9.6) stand on land; the hinge sits just in front of the gatehouse face (x = 10.6)
 
   function canvasTex(w, h, draw) {
     const c = document.createElement('canvas');
@@ -41,7 +53,6 @@
 
   function siege(canvas) {
     const stage = canvas.parentElement;
-    const stamp = stage.querySelector('.siege-stamp');
     let r, scene, camera, ready = false;
     const disposables = [];
     const dummy = new THREE.Object3D(), m4 = new THREE.Matrix4(), v3 = new THREE.Vector3();
@@ -68,7 +79,7 @@
       o.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), v3.normalize());
     }
 
-    let ground, groundBase, bridge, chains = [], flags = [], maintainers = [], torches = [];
+    let ground, groundBase, bridge, chains = [], flags = [], torches = [], signOpen, signClosed;
     let swarm, leads = [], boss, dust, splash, embers;
 
     function init() {
@@ -77,6 +88,7 @@
       r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       r.setSize(W, H, false);
       r.shadowMap.enabled = true;
+      r.localClippingEnabled = true; // the OPEN board is clipped at the slot it drops into
       r.shadowMap.type = THREE.PCFSoftShadowMap;
       r.toneMapping = THREE.ACESFilmicToneMapping;
       r.toneMappingExposure = 1.45;
@@ -108,9 +120,10 @@
       scene.add(fill);
 
       buildLand();
+      buildGrass();
+      buildForest();
       buildCastle();
       buildBridge();
-      buildMaintainers();
       buildSwarm();
       buildBoss();
       buildParticles();
@@ -135,18 +148,35 @@
       ground.receiveShadow = true;
       scene.add(ground);
 
+      // the same grass, not rippled, filling everything past the field so the hills stand on land
+      const grassCols = [0x3d5f58, 0x456a5f, 0x35524c, 0x4a6e5e];
+      const grassRand = rng(11);
+      const farGrass = (w, d, cx, cz, nx, nz) => {
+        const fg = geo(new THREE.PlaneGeometry(w, d, nx, nz));
+        fg.rotateX(-Math.PI / 2);
+        const n = fg.attributes.position.count, fc = new Float32Array(n * 3), col = new THREE.Color();
+        for (let i = 0; i < n; i++) { col.setHex(grassCols[Math.floor(grassRand() * 4)]); fc.set([col.r, col.g, col.b], i * 3); fg.attributes.position.array[i * 3 + 1] = (grassRand() - 0.5) * 0.18; }
+        fg.setAttribute('color', new THREE.BufferAttribute(fc, 3));
+        fg.computeVertexNormals();
+        const m = new THREE.Mesh(fg, mat(0xffffff, { vertexColors: true, roughness: 0.95 }));
+        m.position.set(cx, 0, cz);
+        m.receiveShadow = true;
+        scene.add(m);
+      };
+      farGrass(420, 100, -20, -120, 140, 34); // behind the field and the castle, out under the hills
+      farGrass(100, 120, -174, -10, 34, 40); // past the field's left edge
+
       // castle-side ground and moat
-      const right = box(70, 2, 120, mat(0x3a5a50, { roughness: 0.95 }), MOAT_R + 35, -1, -10);
-      right.castShadow = false;
-      const water = new THREE.Mesh(geo(new THREE.PlaneGeometry(MOAT_R - MOAT_L, 120)), mat(0x2f6f8f, { roughness: 0.15, metalness: 0.3, flatShading: false, transparent: true, opacity: 0.92, emissive: 0x0b2a3a }));
+      farGrass(220, 210, MOAT_R + 110, -45, 70, 70); // the castle's side of the moat gets the same grass, far past the castle
+      const water = new THREE.Mesh(geo(new THREE.PlaneGeometry(MOAT_R - MOAT_L, 210)), mat(0x2f6f8f, { roughness: 0.15, metalness: 0.3, flatShading: false, transparent: true, opacity: 0.92, emissive: 0x0b2a3a }));
       water.rotation.x = -Math.PI / 2;
-      water.position.set((MOAT_L + MOAT_R) / 2, WATER_Y, -10);
+      water.position.set((MOAT_L + MOAT_R) / 2, WATER_Y, -45);
       water.receiveShadow = true;
       scene.add(water);
       const bank = mat(0x2a3f38);
-      box(0.4, 2.2, 120, bank, MOAT_L - 0.2, -1.1, -10).castShadow = false;
-      box(0.4, 2.2, 120, bank, MOAT_R + 0.2, -1.1, -10).castShadow = false;
-      box(MOAT_R - MOAT_L, 0.3, 120, mat(0x1b2f2a), (MOAT_L + MOAT_R) / 2, -2.2, -10);
+      box(0.4, 2.2, 210, bank, MOAT_L - 0.2, -1.1, -45).castShadow = false;
+      box(0.4, 2.2, 210, bank, MOAT_R + 0.2, -1.1, -45).castShadow = false;
+      box(MOAT_R - MOAT_L, 0.3, 210, mat(0x1b2f2a), (MOAT_L + MOAT_R) / 2, -2.2, -45);
 
       // distant low-poly hills
       const hillMats = [mat(0x2a403b, { fog: true }), mat(0x22352f), mat(0x31504a)];
@@ -158,10 +188,19 @@
         cone.rotation.y = rh() * 3;
         scene.add(cone);
       }
+      // a range of mountains closing off the right side, so the edge of the land never shows
+      const rr = rng(33);
+      for (let i = 0; i < 26; i++) {
+        const row = i % 3, h = 12 + rr() * 16 + row * 3;
+        const cone = new THREE.Mesh(geo(new THREE.ConeGeometry(14 + rr() * 14, h, 6 + Math.floor(rr() * 3))), hillMats[i % 3]);
+        cone.position.set(52 + Math.floor(i / 3) * 17 + rr() * 8, h / 2 - 1, -34 - row * 24 - rr() * 14 + (i % 2 ? 0 : -50));
+        cone.rotation.y = rr() * 3;
+        scene.add(cone);
+      }
       // scattered rocks and shrubs for depth
       const rock = mat(0x5d6b62), shrub = mat(0x2c4a3e);
       for (let i = 0; i < 26; i++) {
-        const x = -60 + rh() * 64, z = -30 + rh() * 40;
+        const x = -60 + rh() * (MOAT_L - 1.5 + 60), z = -30 + rh() * 40; // stay on the field side of the moat
         if (Math.abs(z - BRIDGE_Z) < 3 && x > -2) continue;
         const s = 0.4 + rh() * 0.9;
         const m = new THREE.Mesh(geo(new THREE.DodecahedronGeometry(s, 0)), rh() < 0.5 ? rock : shrub);
@@ -171,7 +210,116 @@
       }
     }
 
-    /* ── the maintainers' castle ── */
+    /* ── 3D grass: tens of thousands of instanced blades that sway in the wind and heave with each footfall ── */
+    let grassMat;
+    function buildGrass() {
+      // one blade: a bent, tapered strip, dark at the root and light at the tip
+      const gp = new Float32Array([-0.5, 0, 0, 0.5, 0, 0, -0.34, 0.5, 0.04, 0.34, 0.5, 0.04, 0.1, 1, 0.14]);
+      const gc = new Float32Array([0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.78, 0.78, 0.78, 0.78, 0.78, 0.78, 1.15, 1.15, 1.15]);
+      const g = geo(new THREE.BufferGeometry());
+      g.setAttribute('position', new THREE.BufferAttribute(gp, 3));
+      g.setAttribute('color', new THREE.BufferAttribute(gc, 3));
+      g.setIndex([0, 1, 2, 1, 3, 2, 2, 3, 4]);
+      g.computeVertexNormals();
+      grassMat = mat(0xffffff, { vertexColors: true, side: THREE.DoubleSide, flatShading: false, roughness: 0.9 });
+      grassMat.onBeforeCompile = (sh) => {
+        sh.uniforms.uTime = { value: 0 };
+        sh.uniforms.uImp = { value: IMPACTS.map((p) => new THREE.Vector3(p.x, p.z, p.t)) };
+        sh.vertexShader = 'uniform float uTime;\nuniform vec3 uImp[8];\n' + sh.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
+          vec2 bw = (instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xz;
+          float hh = position.y;
+          float sway = sin(uTime * 1.6 + bw.x * 0.35 + bw.y * 0.27) * 0.16 + sin(uTime * 3.1 + bw.x * 0.9) * 0.05;
+          transformed.x += sway * hh * hh;
+          float dy = 0.0;
+          for (int i = 0; i < 8; i++) {
+            vec3 im = uImp[i];
+            float a = uTime - im.z;
+            if (a >= 0.0 && a < 2.4) {
+              float d = distance(bw, im.xy), front = a * 16.0;
+              if (d < front && d > 3.0) dy += 0.55 * exp(-a * 1.8) * exp(-(front - d) * 0.25) * sin((d - front) * 1.1);
+            }
+          }
+          transformed.y += dy / instanceMatrix[1][1];`);
+        grassMat.userData.shader = sh;
+      };
+      const rand = rng(77), pal = [0x4c7640, 0x588545, 0x436b3b, 0x628f50, 0x56803a].map((h) => new THREE.Color(h));
+      const spots = [];
+      const inCastle = (x, z) => x > 8.6 && x < 28.5 && z > -13.5 && z < 8.8; // keep blades out of the castle's footprint
+      const scatter = (x0, x1, z0, z1, per) => {
+        const n = Math.round((x1 - x0) * (z1 - z0) * per);
+        for (let i = 0; i < n; i++) { const x = x0 + rand() * (x1 - x0), z = z0 + rand() * (z1 - z0); if (!inCastle(x, z)) spots.push([x, z]); }
+      };
+      const bank = MOAT_L - 0.7, far = MOAT_R + 0.6;
+      // the field side of the moat: dense close in, thinning out to the left and back
+      scatter(-52, bank, -26, 24, 9);
+      scatter(-110, -52, -40, 24, 4.4);
+      scatter(-150, -110, -48, 24, 2.4);
+      scatter(-52, bank, -60, -26, 3.2);
+      // the castle side of the moat, round the castle and out to the mountains
+      scatter(far, 28.5, 8.8, 24, 7);
+      scatter(far, 28.5, -26, -13.5, 7);
+      scatter(28.5, 75, -26, 24, 5);
+      scatter(far, 75, -60, -26, 2.8);
+      scatter(75, 135, -60, 24, 2.2);
+      const im = new THREE.InstancedMesh(g, grassMat, spots.length);
+      im.receiveShadow = true;
+      im.frustumCulled = false;
+      const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), sc = new THREE.Vector3();
+      spots.forEach(([x, z], i) => {
+        const hgt = 0.5 + rand() * 0.85;
+        e.set(0, rand() * Math.PI * 2, 0); q.setFromEuler(e);
+        m.compose(p.set(x, 0, z), q, sc.set(0.16 + rand() * 0.16, hgt, 1));
+        im.setMatrixAt(i, m);
+        im.setColorAt(i, pal[Math.floor(rand() * pal.length)]);
+      });
+      scene.add(im);
+    }
+
+    /* ── forest: instanced low-poly pines, in clumps along the foot of the mountains on both sides ── */
+    function buildForest() {
+      const rand = rng(55);
+      const clump = (x, z) => 0.5 + 0.5 * Math.sin(x * 0.09 + Math.sin(z * 0.13) * 2.2) * Math.cos(z * 0.08 - x * 0.05); // 0..1 blobs
+      const trees = [];
+      // keep the giant's whole walk (and the dust it throws up) clear of trees
+      const path = [];
+      for (let i = 0; i < BOSS_STEPS; i++) for (let k = 0; k < 4; k++) path.push([WALK.c[i][0] + (WALK.c[i + 1][0] - WALK.c[i][0]) * k / 4, WALK.c[i][1] + (WALK.c[i + 1][1] - WALK.c[i][1]) * k / 4]);
+      path.push(WALK.c[BOSS_STEPS]);
+      const nearBoss = (x, z) => path.some(([bx, bz]) => Math.hypot(x - bx, z - bz) < 27);
+      const place = (x0, x1, z0, z1, tries, thresh) => {
+        for (let i = 0; i < tries; i++) {
+          const x = x0 + rand() * (x1 - x0), z = z0 + rand() * (z1 - z0);
+          if (clump(x, z) < thresh) continue;
+          if (x > 6 && x < 34 && z > -18 && z < 14) continue; // not on the castle or its gate
+          if (nearBoss(x, z)) continue;
+          trees.push([x, z, 0.55 + rand() * 0.55 + (z < -50 ? 0.25 : 0)]);
+        }
+      };
+      place(-150, -8, -78, -46, 900, 0.58); // along the far edge of the field, low enough to leave the mountains showing
+      place(-150, -80, -46, 24, 380, 0.66); // out on the left
+      place(12, 150, -80, -34, 900, 0.56); // behind and beside the castle
+      place(34, 150, -34, 26, 460, 0.64);  // down the right-hand side
+      const n = trees.length;
+      const parts = [
+        { g: new THREE.CylinderGeometry(0.22, 0.32, 1.5, 5), y: 0.75, col: 0x4a3626 },
+        { g: new THREE.ConeGeometry(1.9, 3.3, 7), y: 2.7, col: 0xffffff },
+        { g: new THREE.ConeGeometry(1.4, 2.7, 7), y: 4.5, col: 0xffffff },
+      ];
+      const pal = [0x2d5a3a, 0x356a45, 0x28503a, 0x3f7448, 0x2f5f40].map((h) => new THREE.Color(h));
+      const m = new THREE.Matrix4(), q = new THREE.Quaternion(), e = new THREE.Euler(), p = new THREE.Vector3(), sc = new THREE.Vector3();
+      parts.forEach((pt, k) => {
+        const im = new THREE.InstancedMesh(geo(pt.g), mat(k ? 0xffffff : pt.col), n);
+        im.frustumCulled = false; im.receiveShadow = true;
+        trees.forEach(([x, z, s], i) => {
+          e.set(0, ((i * 2.399) % 6.283), 0); q.setFromEuler(e);
+          m.compose(p.set(x, pt.y * s, z), q, sc.set(s, s, s));
+          im.setMatrixAt(i, m);
+          if (k) im.setColorAt(i, pal[i % pal.length]);
+        });
+        scene.add(im);
+      });
+    }
+
+    /* ── the code castle ── */
     function merlons(parent, m, x0, x1, z0, z1, y, step) {
       const lx = x1 - x0, lz = z1 - z0, n = Math.max(1, Math.round(Math.hypot(lx, lz) / step));
       for (let i = 0; i <= n; i += 2) {
@@ -219,14 +367,14 @@
       // gatehouse
       box(3.6, 9, 4.6, stone2, 12.4, 4.5, BRIDGE_Z);
       merlons(null, dark, 10.75, 10.75, BRIDGE_Z - 2.1, BRIDGE_Z + 2.1, 9, 0.7);
-      box(0.3, 3.6, 3.2, hole, 10.6, 1.8, BRIDGE_Z);
-      const arch = new THREE.Mesh(geo(new THREE.CylinderGeometry(1.6, 1.6, 0.3, 12, 1, false, 0, Math.PI)), hole);
-      arch.rotation.set(0, 0, Math.PI / 2); arch.rotation.order = 'ZYX';
-      arch.position.set(10.6, 3.6, BRIDGE_Z); scene.add(arch);
-      arch.rotation.set(Math.PI / 2, 0, Math.PI / 2);
+      // the dark gateway is a flat panel on the gatehouse face (nothing sticks out for the raised bridge to cut through)
+      box(0.06, 3.6, 3.2, hole, 10.57, 1.8, BRIDGE_Z);
+      const arch = new THREE.Mesh(geo(new THREE.CircleGeometry(1.6, 20, 0, Math.PI)), hole);
+      arch.rotation.y = -Math.PI / 2; // face the field
+      arch.position.set(10.535, 3.6, BRIDGE_Z); scene.add(arch);
       // portcullis bars
       const iron = mat(0x2b2b2b, { metalness: 0.6, roughness: 0.4 });
-      for (let i = -3; i <= 3; i++) box(0.12, 4.6, 0.12, iron, 10.5, 2.3, BRIDGE_Z + i * 0.42);
+      for (let i = -3; i <= 3; i++) box(0.12, 4.6, 0.12, iron, 10.56, 2.3, BRIDGE_Z + i * 0.42);
       // towers at the corners of the front wall
       tower(11.8, -10.2, 2.0, 10.5, BRAND.orange, BRAND.ochre);
       tower(11.8, 5.8, 2.0, 10.5, BRAND.orange, BRAND.sky);
@@ -239,14 +387,14 @@
       const win = mat(0xf5b726, { emissive: 0xf5a020, emissiveIntensity: 1.2 });
       [[8.5, -4], [8.5, -0.8], [11.5, -2.4]].forEach(([y, z]) => box(0.15, 1.1, 0.6, win, 16.45, y, z));
 
-      // MAINTAINERS banner on the keep, facing the camera
+      // CODE CASTLE banner on the keep, facing the camera
       const tex = canvasTex(1024, 220, (g, w, h) => {
         g.fillStyle = '#F2F2EB'; g.fillRect(0, 0, w, h);
         g.fillStyle = '#2E4742'; g.fillRect(10, 10, w - 20, h - 20);
         g.strokeStyle = '#F5B726'; g.lineWidth = 6; g.strokeRect(26, 26, w - 52, h - 52);
         g.fillStyle = '#F2F2EB'; g.font = '700 118px "Martian Mono", ui-monospace, monospace';
         g.textAlign = 'center'; g.textBaseline = 'middle';
-        g.fillText('MAINTAINERS', w / 2, h / 2 + 6, w - 90);
+        g.fillText('CODE CASTLE', w / 2, h / 2 + 6, w - 90);
       });
       disposables.push(tex);
       const banner = new THREE.Mesh(geo(new THREE.PlaneGeometry(7.6, 1.64)), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.8, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.35 }));
@@ -254,6 +402,41 @@
       banner.position.set(20.6, 11.2, 1.2);
       scene.add(banner);
       cyl(0.08, 0.08, 8.4, 5, mat(0x3b3226), 20.6, 12, 1.3).rotation.z = Math.PI / 2;
+
+      // the castle's sign, hung under the CODE CASTLE banner: an OPEN TO CONTRIBUTION board that drops into a slot
+      // in the wall (it is clipped at the slot's edge) and reveals the CLOSED board behind it
+      const signTex = (bg, lines, size) => {
+        const t = canvasTex(1024, 340, (g, w, h) => {
+          g.fillStyle = '#F2F2EB'; g.fillRect(0, 0, w, h);
+          g.fillStyle = bg; g.fillRect(14, 14, w - 28, h - 28);
+          g.fillStyle = '#F2F2EB'; g.textAlign = 'center'; g.textBaseline = 'middle';
+          g.font = `800 ${size}px "Barlow Semi Condensed", "Arial Narrow", sans-serif`;
+          lines.forEach((ln, i) => g.fillText(ln, w / 2, h / 2 + (i - (lines.length - 1) / 2) * size * 0.98 + 4, w - 80));
+        });
+        disposables.push(t);
+        return t;
+      };
+      const SIGN_X = 20.6, SIGN_Y = 8.5, SLOT_Y = SIGN_Y - 1.0; // the slot is the bottom edge of the board
+      const slot = new THREE.Plane(new THREE.Vector3(0, 1, 0), -SLOT_Y); // keeps everything above y = SLOT_Y
+      const makeBoard = (tex, z, clip) => {
+        const g = new THREE.Group();
+        const wood = mat(0x4a3320, clip ? { clippingPlanes: [slot] } : {});
+        box(5.6, 2.0, 0.14, wood, 0, 0, 0, g);
+        const fm = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.7, emissive: 0xffffff, emissiveMap: tex, emissiveIntensity: 0.4, ...(clip ? { clippingPlanes: [slot] } : {}) });
+        disposables.push(fm);
+        const face = new THREE.Mesh(geo(new THREE.PlaneGeometry(5.4, 1.8)), fm);
+        face.position.z = 0.08;
+        g.add(face);
+        g.position.set(SIGN_X, SIGN_Y, z);
+        scene.add(g);
+        return g;
+      };
+      signClosed = makeBoard(signTex(`#${new THREE.Color(BRAND.orange).getHexString()}`, ['CLOSED'], 190), 1.3, false);
+      signOpen = makeBoard(signTex('#2f8f4a', ['OPEN TO', 'CONTRIBUTION'], 120), 1.5, true);
+      // rod and two chains the boards hang from, and the ledge of the slot
+      box(5.8, 0.14, 0.14, iron, SIGN_X, SIGN_Y + 1.55, 1.4);
+      [-2.4, 2.4].forEach((x) => box(0.07, 0.6, 0.07, iron, SIGN_X + x, SIGN_Y + 1.28, 1.4));
+      box(5.9, 0.14, 0.5, mat(0x4a3320), SIGN_X, SLOT_Y - 0.07, 1.4);
 
       // torches either side of the gate
       [BRIDGE_Z - 2.8, BRIDGE_Z + 2.8].forEach((z) => {
@@ -288,40 +471,6 @@
     function onPlank(d, t, out) {
       const a = bridgeAngle(t);
       return out.set(HINGE_X - d * Math.cos(a), 0.33 + d * Math.sin(a), BRIDGE_Z);
-    }
-
-    /* ── maintainers on the wall walk ── */
-    function buildMaintainers() {
-      const skins = [0xf1c9a5, 0xc68d62, 0x8d5a3b, 0xe8b48f];
-      const shirts = [BRAND.sky, BRAND.ochre, BRAND.pink, BRAND.paper, BRAND.sky, BRAND.ochre];
-      const spots = [
-        { x: 11.9, y: 6, z: -7.6, role: 'wave' }, { x: 11.9, y: 6, z: -5.6, role: 'laptop' },
-        { x: 12.1, y: 9, z: BRIDGE_Z - 1.3, role: 'pull' }, { x: 12.1, y: 9, z: BRIDGE_Z + 1.3, role: 'pull' },
-        { x: 11.9, y: 6, z: 2.4, role: 'laptop' }, { x: 11.9, y: 6, z: 4.0, role: 'wave' },
-        { x: 16.9, y: 14, z: -3.6, role: 'wave' },
-      ];
-      const rand = rng(5);
-      const laptopMat = mat(0x2b2f2e, { metalness: 0.4 }), screen = mat(0x8bb2de, { emissive: 0x8bb2de, emissiveIntensity: 1.1 });
-      spots.forEach((s, i) => {
-        const g = new THREE.Group();
-        g.position.set(s.x, s.y, s.z);
-        g.rotation.y = -Math.PI / 2 + 0.25; // face the field (-x), a touch toward camera
-        const body = new THREE.Group(); g.add(body);
-        cyl(0.32, 0.38, 0.95, 7, mat(shirts[i % shirts.length]), 0, 0.75, 0, body);
-        const head = new THREE.Mesh(geo(new THREE.IcosahedronGeometry(0.3, 1)), mat(skins[i % 4]));
-        head.position.y = 1.5; head.castShadow = true; body.add(head);
-        box(0.62, 0.14, 0.62, mat(0x231f20), 0, 1.72, 0, body); // hair
-        const armL = new THREE.Group(), armR = new THREE.Group();
-        armL.position.set(-0.42, 1.1, 0); armR.position.set(0.42, 1.1, 0);
-        [armL, armR].forEach((a) => { box(0.16, 0.7, 0.16, mat(skins[i % 4]), 0, -0.35, 0, a); body.add(a); });
-        if (s.role === 'laptop') {
-          const lap = new THREE.Group(); lap.position.set(0, 0.95, 0.45); body.add(lap);
-          box(0.7, 0.05, 0.45, laptopMat, 0, 0, 0, lap);
-          const lid = box(0.7, 0.45, 0.04, screen, 0, 0.22, -0.22, lap); lid.rotation.x = -0.25;
-        }
-        scene.add(g);
-        maintainers.push({ g, body, armL, armR, role: s.role, phase: rand() * 6, y: s.y });
-      });
     }
 
     /* ── robot swarm: instanced parts, one matrix per part per robot ── */
@@ -360,12 +509,12 @@
       for (let i = 0; i < N; i++) {
         // rest spot: piled up along the moat's edge, later arrivals climb on top
         const row = i % 3, col = Math.floor(i / 3);
-        const zf = -13 + ((col * 0.83 + rand() * 0.6) % 19);
+        const zf = -8 + ((col * 0.83 + rand() * 0.6) % 14);
         const xf = MOAT_L - 0.8 - row * 1.05 - rand() * 0.35;
         const arrive = 3.6 + (i / N) * 7.0 + rand() * 0.8;
         const x0 = -44 - rand() * 18;
         bots.push({
-          x0, xf, zf, z0: zf + (rand() - 0.5) * 6, arrive, start: Math.max(0, arrive - (xf - x0) / (6.5 + rand() * 3)),
+          x0, xf, zf, z0: zf + (rand() - 0.5) * 2.5, arrive, start: Math.max(0, arrive - (xf - x0) / (6.5 + rand() * 3)),
           phase: rand() * 6.28, rate: rand() * 3, hop: 0.6 + rand() * 1.0, color: new THREE.Color(tint[Math.floor(rand() * tint.length)]), scale: 1.15 + rand() * 0.35, stack: 0,
         });
       }
@@ -374,25 +523,24 @@
       swarm = { bots, mats, meshes: BOT_PARTS.map((p) => {
         const im = new THREE.InstancedMesh(geo(new THREE.BoxGeometry(p[0], p[1], p[2])), mats[p[6]], N + 2);
         im.castShadow = p[6] !== 'eye' && p[6] !== 'bulb';
+        im.frustumCulled = false; // instances are spread over the scene; the origin leaving the view must not hide them all
         im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
         scene.add(im);
         return im;
       }) };
       bots.forEach((b, i) => { swarm.meshes[0].setColorAt(i, b.color); swarm.meshes[1].setColorAt(i, b.color); });
-      // the two lead bots (instances N, N+1) race onto the bridge
+      // the two lead bots (instances N, N+1) sprint up to the bank just as the bridge is hauled up, and run straight into the moat
+      const leadColor = new THREE.Color(tint[0]);
       leads = [
-        { i: N, s: 1.7, run0: -27, speed: 7.7, z: BRIDGE_Z - 0.6, spin: 7, vx: -2.6, vy: 3.2, color: new THREE.Color(0xe97b77) },
-        { i: N + 1, s: 1.7, run0: -31, speed: 8.9, z: BRIDGE_Z + 0.7, spin: -6, vx: -1.6, vy: 4.2, color: new THREE.Color(0xf5b726) },
+        { i: N, s: 1.7, speed: 7.7, tb: 4.5, z: BRIDGE_Z - 0.6, vx: 6.4, vy: 2.4, spin: 5, color: leadColor },
+        { i: N + 1, s: 1.7, speed: 8.9, tb: 4.85, z: BRIDGE_Z + 0.7, vx: 7.4, vy: 3.4, spin: -4, color: leadColor },
       ];
       leads.forEach((l) => {
         swarm.meshes[0].setColorAt(l.i, l.color); swarm.meshes[1].setColorAt(l.i, l.color);
-        const DET = RAISE_AT + 0.32;
-        const d = HINGE_X - (l.run0 + l.speed * DET);
-        l.det = DET; l.p0 = onPlank(clamp(d, 0.4, BRIDGE_LEN), DET, new THREE.Vector3());
-        // solve splash time analytically
-        const g = 18, a = -g / 2, b = l.vy, c = l.p0.y - WATER_Y;
-        l.splash = DET + (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
-        l.sx = l.p0.x + l.vx * (l.splash - DET);
+        // time to fall from the bank to the water, then where they hit it
+        const dtFall = (l.vy + Math.sqrt(l.vy * l.vy + 36 * -WATER_Y)) / 18;
+        l.splash = l.tb + dtFall;
+        l.sx = MOAT_L + l.vx * dtFall;
       });
       swarm.meshes.forEach((im) => { if (im.instanceColor) im.instanceColor.needsUpdate = true; });
     }
@@ -416,17 +564,13 @@
       };
     }
     function leadPose(t, l) {
-      const xr = l.run0 + l.speed * t, cyc = t * 15 + l.i;
-      if (t < l.det) {
-        if (xr < MOAT_L + 0.2) return { x: xr, y: Math.abs(Math.sin(cyc)) * 0.35, z: l.z, rx: 0.25, rz: 0, swing: Math.sin(cyc) * 0.9, wave: Math.sin(cyc) * 0.4, s: l.s };
-        const p = onPlank(clamp(HINGE_X - xr, 0.4, BRIDGE_LEN), t, v3);
-        return { x: p.x, y: p.y, z: l.z, rx: 0.25, rz: bridgeAngle(t) * 0.8, swing: Math.sin(cyc) * 0.9, wave: 0.6, s: l.s };
-      }
-      const dt = Math.min(t, l.splash + 0.6) - l.det;
-      const sink = Math.max(0, t - l.splash);
+      const cyc = t * 15 + l.i;
+      if (t < l.tb) return { x: MOAT_L + l.speed * (t - l.tb), y: Math.abs(Math.sin(cyc)) * 0.35, z: l.z, rx: 0.25, rz: 0, swing: Math.sin(cyc) * 0.9, s: l.s };
+      // off the edge: a short hop, then the drop into the water and out of sight
+      const dt = Math.min(t, l.splash) - l.tb, sink = Math.max(0, t - l.splash);
       return {
-        x: l.p0.x + l.vx * Math.min(dt, l.splash - l.det), y: Math.max(WATER_Y - sink * 2.4, l.p0.y + l.vy * dt - 9 * dt * dt), z: l.z,
-        rx: 0, rz: bridgeAngle(l.det) + l.spin * Math.min(dt, l.splash - l.det), swing: Math.sin(t * 30) * 1.2, wave: Math.sin(t * 25), s: sink > 0.9 ? 0 : l.s,
+        x: MOAT_L + l.vx * dt, y: Math.max(WATER_Y - sink * 2.4, l.vy * dt - 9 * dt * dt), z: l.z,
+        rx: 0, rz: -l.spin * dt, swing: Math.sin(t * 30) * 1.2, s: sink > 0.9 ? 0 : l.s,
       };
     }
 
@@ -483,40 +627,41 @@
         boss.letters.push({ m, L, light });
       });
     }
-    // a letter's pose at time t. Each rock: tip onto one base corner (heavy ease up), hang for a beat while the
-    // raised side shimmies forward with a little yaw, then slam down and squash. Corners alternate.
-    function letterPose(t, L) {
-      const tt = (t - BOSS_T0 - L.delay) / BOSS_P;
-      const x0 = L.x1 - BOSS_STRIDE * BOSS_STEPS;
-      const i = Math.floor(tt), f = tt - i;
-      if (tt < 0) return { x: x0, tilt: 0, side: 1, yaw: 0, sq: 1 };
-      const done = i >= BOSS_STEPS;
-      const step = done ? BOSS_STEPS - 1 : i, ff = done ? 1 : f;
-      const side = step % 2 ? -1 : 1; // +1 pivots on the front (+x) corner
+    // the word's pose at time t. Each rock: a base corner stays planted, the word tips up onto it, hangs a beat while it
+    // twists about that corner (the far end swinging forward), then the raised corner slams down and the word squashes.
+    function letterPose(t) {
+      const { side, psi, c, T, P } = WALK;
+      let i = 0; while (i < BOSS_STEPS - 1 && t >= T[i + 1]) i++;
+      if (t < T[0]) return { px: 0, pz: 0, cx: c[0][0], cz: c[0][1], yaw: psi[0], tilt: 0, side: side[0], sq: 1, still: true };
+      const done = t >= T[BOSS_STEPS], s = side[i], ff = done ? 1 : (t - T[i]) / P[i];
+      const e = ease((ff - 0.18) / (SLAM - 0.18)), yaw = psi[i] + (psi[i + 1] - psi[i]) * e;
+      // the planted corner, fixed in the world for the whole rock
+      const px = c[i][0] + s * BOSS_A * Math.cos(psi[i]), pz = c[i][1] - s * BOSS_A * Math.sin(psi[i]);
+      const amp = i === BOSS_STEPS - 1 ? 0.3 : 0.16; // ~9 degrees, a heavier heave for the big swing
       const up = ease(ff / 0.36), down = ease((ff - 0.56) / (SLAM - 0.56));
-      const tilt = 0.16 * up * (1 - down); // ~9 degrees
-      const x = x0 + BOSS_STRIDE * (step + ease((ff - 0.18) / (SLAM - 0.18)));
-      // settle after the thud: damped squash
-      const a = (tt - (step + SLAM)) * BOSS_P;
-      const sq = a > 0 ? 1 - 0.07 * Math.exp(-a * 6) * Math.cos(a * 22) : 1;
-      // it turns a good way round on every rock, with an extra twist about the pivot corner as the far side swings through
-      const yaw = yawAt(step, ff) + side * 0.3 * Math.sin(Math.PI * clamp(ff / SLAM));
-      return { x, tilt, side, yaw, sq };
+      const a = t - (T[i] + P[i] * SLAM); // settle after the thud: damped squash
+      const sq = a > 0 ? 1 - 0.09 * Math.exp(-a * 6) * Math.cos(a * 22) : 1;
+      return { px, pz, yaw, tilt: amp * up * (1 - down), side: s, sq, still: false };
     }
     function poseBoss(t) {
       const pulse = 0.75 + 0.25 * Math.sin(t * 5);
-      boss.letters.forEach(({ m, L, light }) => {
-        const p = letterPose(t, L), h = 9 * LS * p.sq, w = reach(L, p.yaw);
-        // rotate the centre about the pivot corner (in the letter's own x/y plane)
-        const th = -p.side * p.tilt, px = p.x + p.side * w;
-        const cx = p.x - px, cy = h;
-        m.position.set(px + cx * Math.cos(th) - cy * Math.sin(th), cx * Math.sin(th) + cy * Math.cos(th), BOSS_Z);
-        m.rotation.set(0, p.yaw, th);
+      boss.letters.forEach(({ m, light }) => {
+        const p = letterPose(t);
+        let x, y, z, th = 0;
+        if (p.still) { x = p.cx; z = p.cz; y = 9 * LS; } else {
+          // centre = planted corner + the word's own offset from it (tilted about the corner), turned by the current facing
+          const h = 9 * LS * p.sq;
+          th = -p.side * p.tilt;
+          const ox = -p.side * BOSS_A * Math.cos(th) - h * Math.sin(th), oy = -p.side * BOSS_A * Math.sin(th) + h * Math.cos(th);
+          x = p.px + ox * Math.cos(p.yaw); z = p.pz - ox * Math.sin(p.yaw); y = oy;
+        }
+        m.position.set(x, y, z);
+        m.rotation.set(0, p.yaw ?? WALK.psi[0], th);
         m.scale.set(LS * (1 + (1 - p.sq) * 0.5), LS * p.sq, LS);
-        light.position.set(p.x, 2.5, BOSS_Z + 8);
+        light.position.set(x, 2.5, z + 8);
         light.intensity = 9 + pulse * 5 + 18 * p.tilt;
       });
-          }
+    }
 
     /* ── particles: footfall dust, splash, embers ── */
     function dotTex() {
@@ -591,7 +736,7 @@
     // footfall shock: sum of decaying impulses
     function shock(t) {
       let s = 0;
-      for (const { t: ti } of IMPACTS) { const a = t - ti; if (a >= 0 && a < 1.2) s += Math.exp(-a * 5) * Math.sin(a * 55) * 0.8; }
+      for (const { t: ti } of IMPACTS) { const a = t - ti; if (a >= 0 && a < 1.2) s += Math.exp(-a * 4) * Math.sin(a * 48) * 1.7; }
       return s;
     }
 
@@ -661,36 +806,14 @@
       bridge.rotation.z = -a;
       chains.forEach((c) => {
         const tip = onPlank(BRIDGE_LEN - 0.3, t, new THREE.Vector3()); tip.z += c.dz;
-        stretch(c.mesh, new THREE.Vector3(10.55, 7.6, BRIDGE_Z + c.dz), tip);
+        stretch(c.mesh, new THREE.Vector3(10.55, 9.4, BRIDGE_Z + c.dz), tip);
       });
 
-      // maintainers
-      const raising = t > RAISE_AT - 0.4 && t < RAISE_AT + RAISE_DUR + 0.2;
-      maintainers.forEach((m) => {
-        const ph = t * 6 + m.phase;
-        m.body.position.set(0, 0, 0); m.body.rotation.set(0, 0, 0);
-        m.armL.rotation.set(0, 0, 0); m.armR.rotation.set(0, 0, 0);
-        const scared = t > IMPACTS[5].t;
-        if (m.role === 'pull') {
-          if (raising || t > RAISE_AT) {
-            const heave = raising ? 0.5 + 0.5 * Math.sin(ph * 2) : 0.3;
-            m.body.rotation.z = 0.35 * heave + 0.1; // lean back, hauling chains
-            m.armL.rotation.x = m.armR.rotation.x = -1.3;
-          } else { m.armR.rotation.z = Math.sin(ph) * 0.6 + 2.4; }
-          if (t > RAISE_AT + RAISE_DUR + 0.3) { m.body.rotation.z = 0; m.armL.rotation.z = -2.6; m.armR.rotation.z = 2.6 + Math.sin(ph * 1.5) * 0.2; }
-        } else if (scared) {
-          // duck behind the battlements on each footfall, then peek
-          const dip = 0.55 + 0.35 * Math.exp(-((t - IMPACTS.filter((x) => x.t <= t).pop().t) * 3));
-          m.body.position.y = -dip;
-          m.armL.rotation.z = -2.8; m.armR.rotation.z = 2.8; // hands on head
-        } else if (m.role === 'wave') {
-          m.armR.rotation.z = 2.5 + Math.sin(ph * 1.4) * 0.5;
-          m.body.position.y = Math.max(0, Math.sin(ph)) * 0.12;
-        } else {
-          m.body.position.y = Math.max(0, Math.sin(ph * 0.7)) * 0.06; // typing
-          m.armL.rotation.x = m.armR.rotation.x = -1.1 + Math.sin(ph * 3) * 0.1;
-        }
-      });
+      // castle sign: the OPEN board drops into its slot as the drawbridge goes up, revealing CLOSED (which gives a little jolt)
+      const swapAt = RAISE_AT + 0.9, u = clamp((t - swapAt) / 0.5), landed = t - swapAt - 0.5;
+      signOpen.position.y = 8.5 - 2.6 * u * u + 0.04 * Math.sin(t * 2) * (1 - u);
+      signOpen.visible = u < 1;
+      signClosed.position.y = 8.5 + (landed > 0 ? 0.12 * Math.exp(-landed * 7) * Math.sin(landed * 30) : 0);
 
       // flags flutter
       flags.forEach((f) => {
@@ -710,23 +833,16 @@
         tc.light.intensity = 12 * fl;
       });
 
+      if (grassMat.userData.shader) grassMat.userData.shader.uniforms.uTime.value = t;
       updateParticles(t);
       rippleGround(t);
 
       // camera: wide, push in on the gate for the drawbridge, pull back out for the boss; shaken by footfalls
-      const sh = shock(t) * 0.35;
+      const sh = shock(t) * 0.6;
       cameraAt(t);
-      camera.position.x += sh * 0.4; camera.position.y += sh;
-      camTarget.y += sh * 0.3;
+      camera.position.x += sh * 0.8; camera.position.y += sh; camera.position.z += sh * 0.4;
+      camTarget.y += sh * 0.5; camTarget.x += sh * 0.4;
       camera.lookAt(camTarget);
-
-      // the "blocked" stamp slams onto the sky, top right (position in CSS)
-      if (stamp) {
-        const p = clamp((t - SIGN_AT) / 0.45);
-        const sc = p <= 0 ? 0 : 2.2 - 1.2 * easeOut(p);
-        stamp.style.opacity = p <= 0 ? 0 : Math.min(1, p * 3);
-        stamp.style.transform = `translate(-50%, -50%) rotate(-7deg) scale(${sc.toFixed(3)})`;
-      }
 
       r.render(scene, camera);
     }
