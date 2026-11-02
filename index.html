@@ -255,6 +255,13 @@
   <aside class="notes">Walk the six steps. Each click advances one step. The example is my own low-poly repo README PR.</aside>
 </section>
 
+<!-- ───────────── 24 · Section: The AI ───────────── -->
+<section class="divider" data-background-color="#2E4742">
+  <div class="pixels" data-seed="27"></div>
+  <h2 class="mono type-line"><span class="type">&gt; The AI</span></h2>
+  <p class="divider-sub">Walls go up, doors open</p>
+</section>
+
 <!-- ───────────── 23 · AI etiquette ───────────── -->
 <section id="etiquette" class="s" data-background-color="#3D5F58">
   <p class="kicker">Contributing in the age of AI</p>
@@ -292,13 +299,6 @@
   <aside class="notes">If you can't explain what the AI wrote, don't send it. It looks bad on you and it makes the maintainer's life harder. Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change.</aside>
 </section>
 
-<!-- ───────────── 24 · Section: The AI ───────────── -->
-<section class="divider" data-background-color="#2E4742">
-  <div class="pixels" data-seed="27"></div>
-  <h2 class="mono type-line"><span class="type">&gt; The AI</span></h2>
-  <p class="divider-sub">Walls go up, doors open</p>
-</section>
-
 <!-- ───────────── 25 · The siege ───────────── -->
 <section id="siege" class="s siege" data-background-color="#2E4742" data-export="video" data-export-seconds="14">
   <p class="kicker">The AI</p>
@@ -307,8 +307,31 @@
     <canvas class="scene" data-scene="siege"></canvas>
     <p class="siege-fallback mono"><span>🤖🤖🤖 → 🏰</span>CODE CASTLE · open to contribution → closed</p>
   </div>
-  <p class="lead fragment fade-up">AI made sending a PR effortless, so projects are raising walls: AI policies, contribution gates and PR limits.</p>
-  <aside class="notes">Animation plays on its own: a swarm of bots and a giant AI boss march on the walled Code Castle, which pulls up its drawbridge to block AI contributions. This is the onslaught of low-effort AI contributions, and open source building walls to keep up. Move on to the next slide for the other side of the story.</aside>
+  <p class="mono walls-k fragment fade-up">Projects raising walls</p>
+  <div class="walls">
+    <div class="wall fragment fade-up" style="--c:#E53927">
+      <div class="wall-head"><b><a href="https://godotengine.org/article/contribution-policy-2026/" target="_blank" rel="noopener">Godot</a></b><span class="chip">BANNED</span></div>
+      <p>AI agents out; code must be human-written</p>
+    </div>
+    <div class="wall fragment fade-up" style="--c:#E97B77">
+      <div class="wall-head"><b><a href="https://tldraw.dev/blog/stay-away-from-my-trash" target="_blank" rel="noopener">tldraw</a></b><span class="chip">PRs CLOSED</span></div>
+      <p>Stopped taking outside pull requests</p>
+    </div>
+    <div class="wall fragment fade-up" style="--c:#E97B77">
+      <div class="wall-head"><b><a href="https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/" target="_blank" rel="noopener">curl</a></b><span class="chip">BOUNTY ENDED</span></div>
+      <p>Dropped its bug bounty; about 1 in 5 reports was AI slop</p>
+    </div>
+    <div class="wall fragment fade-up" style="--c:#E53927">
+      <div class="wall-head"><b><a href="https://www.qemu.org/docs/master/devel/code-provenance.html#use-of-ai-generated-content" target="_blank" rel="noopener">QEMU</a></b><span class="chip">BANNED</span></div>
+      <p>Declines code that includes or derives from AI output</p>
+    </div>
+    <div class="wall fragment fade-up" style="--c:#E53927">
+      <div class="wall-head"><b><a href="https://ziglang.org/code-of-conduct/#strict-no-llm-no-ai-policy" target="_blank" rel="noopener">Zig</a></b><span class="chip">BANNED</span></div>
+      <p>Strict no-LLM policy: no AI-generated code or prose</p>
+</div>
+  </div>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">Animation plays on its own: a swarm of bots and a giant AI boss march on the walled Code Castle, which pulls up its drawbridge to block AI contributions. This is the onslaught of low-effort AI contributions, and open source building walls to keep up. The cards along the bottom are real examples of projects that have put up walls: Godot banned AI agents and AI-written code (June 30, 2026), tldraw closed outside pull requests (January 15, 2026), curl ended its bug bounty (January 31, 2026) because so many reports were AI slop, QEMU declines AI-generated code, and Zig has a strict no-LLM, no-AI policy. Verify against each project's own announcement before quoting. Move on to the next slide for the other side of the story.</aside>
 </section>
 
 <!-- ───────────── 26 · The panic (newspaper) ───────────── -->
@@ -324,22 +347,24 @@
       <h3>PHP Cracked Open! AI-Found Flaws Hit Millions of Sites</h3>
       <p class="np-by">"PHP2Shell" · CVE-2026-109618 and CVE-2026-109619 · severity 9.2</p>
       <p>Two critical remote-code-execution bugs in PHP core, found by Wiz Research with help from frontier AI models, reach nearly every PHP version back to 5.4, the language Wiz says powers 70% of websites. Reported in August and patched on October 21 (8.5.12, 8.4.27, 8.3.36, 8.2.35), they are already being used against exposed PAN-OS management interfaces. Palo Alto counts over 22 million potentially vulnerable instances.</p>
+      <p class="np-cite">Source: Wiz Research and Palo Alto Unit 42</p>
     </article>
     <article class="np-art fragment fade-up">
       <p class="np-tag">Extra! Extra!</p>
       <h3>AI Gateway Seized by Attackers!</h3>
       <p class="np-by">LiteLLM · CVE-2026-42271 · on CISA's exploited list</p>
       <p>A command-injection hole in a popular open source AI gateway let anyone with an API key run commands on the host. Chained with a Host-header bug, no key was needed. CISA listed it on June 8, five weeks after the fix. Attackers planted web shells and lifted credentials.</p>
+      <p class="np-cite">Source: Cloud Security Alliance and CISA KEV</p>
     </article>
     <article class="np-art fragment fade-up">
       <p class="np-tag">Agents Outwitted</p>
       <h3>Coding Agents Tricked by a Git Config</h3>
       <p class="np-by">"GitSpawn" · eight flaws in seven tools</p>
       <p>Manifold Security found a repo's own git settings can name a command that AI coding agents run outside their sandbox, without asking. Fixed in Claude Code, Cursor and goose; others still ran it on retest. No exploitation reported.</p>
+      <p class="np-cite">Source: Manifold Security via The Hacker News</p>
     </article>
   </div>
   <p class="np-foot fragment fade-up"><b>The moral:</b> AI now finds bugs faster than ever, and so do attackers. Patch fast, sandbox what you run, and read the advisories.</p>
-  <p class="np-src">Sources: Wiz Research and Palo Alto Unit 42 (PHP2Shell) · Cloud Security Alliance and CISA KEV (LiteLLM) · Manifold Security via The Hacker News (GitSpawn)</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">The recent run of AI-related CVEs, framed as breaking news. Lead story: PHP2Shell, two critical PHP RCEs (CVE-2026-109618 and -109619) that Wiz Research found with frontier AI models, reported in August and patched October 21; Palo Alto Unit 42 reports active exploitation against exposed PAN-OS management interfaces and counts over 22 million potentially vulnerable instances. LiteLLM CVE-2026-42271 was added to CISA's known-exploited list on June 8. GitSpawn (Manifold Security, September) found eight flaws in seven coding agents via git config. The point: it is ordinary software with ordinary bugs, but AI is speeding up both finding and exploiting them. Verify details against the primary advisories before quoting.</aside>
 </section>
@@ -363,6 +388,7 @@
     </div>
   </div>
   <p class="lead fragment fade-up">Use it to learn the project, then own every line you send.</p>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">The same tools that flood maintainers also lower the barrier for contributors: getting a project into a dev environment, understanding the code, and digging through past decisions. The rule is to use it to learn, not to spam.</aside>
 </section>
 
