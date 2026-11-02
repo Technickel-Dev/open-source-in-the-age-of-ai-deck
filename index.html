@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Open Source in the age of AI</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Martian+Mono:wght@400;600&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playfair+Display:wght@700;900&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -199,10 +203,10 @@
 <!-- ───────────── 07 · The now (+ xkcd 2347) ───────────── -->
 <section id="now" class="s" data-reset data-background-color="#3D5F58">
   <p class="kicker">The now</p>
-  <h2 class="title">Nothing has changed</h2>
+  <h2 class="title">Nothing has changed,<br>everything is different</h2>
   <div class="now">
     <div class="now-main">
-      <p class="lead">We need Open Source more than ever.</p>
+      <p class="lead">Thriving as ever, but with new pressures.</p>
       <div class="examples fragment fade-up">
         <p class="mono eg">A few examples</p>
         <div class="facts">
@@ -216,11 +220,11 @@
           </div>
           <div class="fact" style="--c:var(--pink)">
             <p class="mono card-k">The AI stack</p><h3>Open Source underneath</h3>
-            <p>PyTorch, Transformers and open-weight models.</p>
+            <p>PyTorch, Hugging Face Transformers and open-weight models.</p>
           </div>
         </div>
       </div>
-      <p class="lead fragment fade-up">But it all leans on tiny projects and a few underappreciated maintainers.</p>
+      <p class="lead fragment fade-up">It all leans on a complex ecosystem of projects and a few underappreciated maintainers.</p>
     </div>
     <figure class="xkcd fragment fade-up">
       <div class="tw-box">
@@ -238,11 +242,10 @@
   <aside class="notes">Hacktoberfest changed its rules, but the need for Open Source did not. Linux runs the cloud, Android and, yes, your broken CI/CD pipeline. Most tools we use daily are Open Source, and so is the foundation of modern AI. Then the catch: xkcd 2347, "Dependency", a tower of modern infrastructure resting on one tiny block that a single person maintains. This is why contributing well matters.</aside>
 </section>
 
-<!-- ───────────── 19 · Section: Open Source still ───────────── -->
 <section class="divider" data-background-color="#2E4742">
-  <div class="pixels" data-seed="19"></div>
-  <h2 class="mono type-line"><span class="type">&gt; But for reals, how?</span></h2>
-  <p class="divider-sub">Open Source runs 365 days a year. PRs still matter, they just aren't the scoreboard.</p>
+  <div class="pixels" data-seed="17"></div>
+  <h2 class="mono type-line"><span class="type">&gt; The how</span></h2>
+  <p class="divider-sub">Making your first contribution</p>
 </section>
 
 <!-- ───────────── 20 · Where to look ───────────── -->
@@ -269,7 +272,7 @@
 <!-- ───────────── 21 · Section: Seriously how ───────────── -->
 <section class="divider" data-background-color="#2E4742">
   <div class="pixels" data-seed="21"></div>
-  <h2 class="mono type-line"><span class="type">&gt; But seriously, how?</span></h2>
+  <h2 class="mono type-line"><span class="type">&gt; But for reals, how?</span></h2>
   <p class="divider-sub">Steps to contributing to Open Source</p>
 </section>
 
@@ -287,7 +290,10 @@
       <li data-at="5"><span class="mono">06</span>Open the pull request!</li>
     </ol>
     <div class="step-stage">
-      <figure data-at="0"><img src="assets/img/step-issue.png" alt="Commenting on a GitHub issue"><figcaption>Comment before you code. Ask to be assigned.</figcaption></figure>
+      <figure data-at="0" class="pts"><img src="assets/img/step-issue.png" alt="Commenting on a GitHub issue"><ul class="step-points">
+        <li><b>Read the rules.</b> CONTRIBUTING.md, and the project's AI policy if it has one.</li>
+        <li><b>Talk first.</b> Comment on the issue before you open a PR. Ask to be assigned.</li>
+      </ul></figure>
       <figure data-at="1"><img src="assets/img/step-fork.png" alt="Forking a repository"><figcaption>Your own copy to experiment in.</figcaption></figure>
       <figure data-at="2"><img src="assets/img/step-clone.png" alt="Cloning a repository"><figcaption><code>git clone https://github.com/&lt;you&gt;/&lt;repo&gt;.git</code></figcaption></figure>
       <figure data-at="3"><img src="assets/img/step-change.gif" alt="Making a change"><figcaption>Read CONTRIBUTING.md first. Keep it focused.</figcaption></figure>
@@ -295,26 +301,15 @@
 <span class="prompt">$</span> git add README.md
 <span class="prompt">$</span> git commit -m "More descriptive README"
 <span class="prompt">$</span> git push origin better-readme</pre><img src="assets/img/step-open-pr.png" alt="Fork is one commit ahead"><figcaption><a href="https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/">Git basics in 10 minutes (freeCodeCamp)</a></figcaption></figure>
-      <figure data-at="5"><img src="assets/img/step-pr-form.png" alt="Creating a pull request"><figcaption>Say what changed, and link the issue it closes.</figcaption></figure>
+      <figure data-at="5" class="pts"><img src="assets/img/step-pr-form.png" alt="Creating a pull request"><ul class="step-points">
+        <li><b>Say what changed.</b> Link the issue it closes.</li>
+        <li><b>Quality over quantity.</b> One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</li>
+      </ul></figure>
     </div>
   </div>
   <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">Walk the six steps. Each click advances one step. The example is my own low-poly repo README PR.</aside>
-</section>
-
-<!-- ───────────── 23 · AI etiquette ───────────── -->
-<section id="etiquette" class="s" data-background-color="#3D5F58">
-  <p class="kicker">Contributing in the age of AI</p>
-  <h2 class="title">Don't be the reason PRs stopped counting</h2>
-  <ol class="rules">
-    <li class="fragment fade-up"><span class="mono">01</span><div><h3>Read the rules</h3><p>CONTRIBUTING.md, and the project's AI policy if it has one.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">02</span><div><h3>Talk first</h3><p>Comment on the issue before you open a PR.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">03</span><div><h3>Own every line</h3><p>If AI wrote it, you reviewed it, tested it and can explain it.</p></div></li>
-    <li class="fragment fade-up"><span class="mono">04</span><div><h3>Quality over quantity</h3><p>One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</p></div></li>
-  </ol>
-  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">Etiquette for contributing with AI. This ties back to why PRs stopped counting: low-effort AI PRs burned maintainers out. Follow the project's rules, talk before you code, and stand behind every line you send.</aside>
 </section>
 
 <!-- ───────────── 24 · Section: The AI ───────────── -->
@@ -447,6 +442,28 @@
   <p class="lead fragment fade-up">Use it to learn the project, then own every line you send.</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">The same tools that flood maintainers also lower the barrier for contributors: getting a project into a dev environment, understanding the code, and digging through past decisions. The rule is to use it to learn, not to spam.</aside>
+</section>
+
+<section id="owndevices" class="s" data-background-color="#2E4742">
+  <p class="kicker">The trend</p>
+  <h2 class="title">Own your own devices</h2>
+  <p class="lead">People are taking back the hardware and software they paid for.</p>
+  <div class="frame-wall fragment">
+    <figure class="fr hero" style="--c:var(--ochre); --i:0">
+      <div class="scr"><p class="clock">9:41</p><p class="date mono">Sat 7 Nov</p><div class="mini-cal"><i></i><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div><p class="wx mono">☀ 18°  Rain at 4</p></div>
+      <figcaption><a href="https://github.com/wesbos/photo-frame-dashboard">wesbos/photo-frame-dashboard</a></figcaption>
+    </figure>
+    <figure class="fr" style="--c:var(--sky); --i:1"><div class="scr"><p class="mono k">Calendar</p><div class="mini-cal"><i></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div></div><figcaption>Family calendar</figcaption></figure>
+    <figure class="fr" style="--c:var(--pink); --i:2"><div class="scr"><p class="mono k">Weather</p><p class="big">18°</p><p class="mono">Sunny</p></div><figcaption>Weather</figcaption></figure>
+    <figure class="fr" style="--c:var(--ochre); --i:3"><div class="scr"><p class="mono k">To-do</p><ul class="ticks"><li class="done">Bins</li><li class="done">Call mum</li><li>Fix frame</li></ul></div><figcaption>To-do</figcaption></figure>
+    <figure class="fr" style="--c:var(--pink); --i:4"><div class="scr"><p class="mono k">Now playing</p><p class="big">♪</p><div class="bar"><b></b></div></div><figcaption>Now playing</figcaption></figure>
+    <figure class="fr" style="--c:var(--sky); --i:5"><div class="scr"><p class="mono k">Shopping</p><ul class="ticks"><li>Milk</li><li class="done">Eggs</li><li>Coffee</li></ul></div><figcaption>Shopping list</figcaption></figure>
+    <figure class="fr" style="--c:var(--ochre); --i:6"><div class="scr"><p class="mono k">Agent</p><p class="mono term">&gt; build ok<br>&gt; PR opened<span class="cur">_</span></p></div><figcaption>Agent status</figcaption></figure>
+  </div>
+  <p class="mono wall-cap fragment fade-up">One guide, many frames</p>
+  <p class="lead fragment fade-up">AI makes it easier to start. Open Source is what lets everyone share the result.</p>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">A recent trend: owning your own devices and software. Wes Bos's $50 photo frame hack turned into a community project (Syntax #1048 "Deno Is Dead", segment "I Accidentally Started a $50 Photo Frame Movement", and #1050 "Everyone Is Hacking Their TV"). The pattern is the same everywhere: one person documents the hack in the open, others fork it and add their own builds. Verify the details against the episodes and the repo before presenting.</aside>
 </section>
 
 <!-- ───────────── 24 · Section: Show and tell ───────────── -->
