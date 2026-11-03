@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "node tools/dev.mjs",
     "serve": "python3 -m http.server 5173",
-    "export": "node tools/export.mjs"
+    "export": "node tools/export.mjs",
+    "record": "node tools/record-steps.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.48.0",

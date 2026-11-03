@@ -143,6 +143,8 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .terminal .prompt, .code-fig .prompt { color: var(--ochre); }
 .terminal .ok { color: var(--ink); background: var(--ochre); padding: 0 10px; }
 .terminal .fragment { display: inline; }
+.step-stage .terminal { margin: 0 auto; width: 100%; }
+.step-stage .terminal.agenda pre { font-size: 30px; }
 .terminal.agenda pre { font-size: 28px; line-height: 1.55; padding: 26px 44px 30px; }
 
 /* ── dividers ────────────────────────────────────── */
@@ -186,7 +188,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .grid-2x2 code { font-size: .8em; }
 
 /* ── where ───────────────────────────────────────── */
-.where { display: grid; grid-template-columns: 1fr 600px; gap: 64px; margin: auto 0; }
+.where { display: grid; grid-template-columns: 1fr 600px; gap: 64px; margin: auto 0; align-items: center; }
 .links { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 26px; font-size: 38px; }
 .links li { display: flex; align-items: baseline; gap: 28px; }
 .links .src { font-size: 20px; text-transform: uppercase; letter-spacing: .08em; background: rgba(0,0,0,.2); padding: 6px 12px; border-radius: 4px; min-width: 110px; text-align: center; }
@@ -196,23 +198,29 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .callout p { font-size: 30px; line-height: 1.4; margin-top: 10px !important; }
 
 /* ── stepper ─────────────────────────────────────── */
-.stepper { display: grid; grid-template-columns: 660px 1fr; gap: 56px; flex: 1; min-height: 0; }
+.stepper { display: grid; grid-template-columns: 470px 1fr; gap: 36px; flex: 1; min-height: 0; margin: -36px -68px -68px 0; } /* breaks out into the header and side margins for room */
 .step-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
-.step-list li { font-family: var(--display); font-size: 42px; font-weight: 600; padding: 14px 22px; border-radius: 4px; display: flex; gap: 22px; align-items: baseline; opacity: .38; transition: all .35s; }
-.step-list li .mono { font-size: 22px; color: var(--ochre); }
+.step-list li { flex-wrap: wrap; font-family: var(--display); font-size: 31px; font-weight: 600; padding: 11px 18px; border-radius: 4px; display: flex; gap: 22px; align-items: baseline; white-space: nowrap; opacity: .38; transition: all .35s; }
+.step-list li .mono { font-size: 19px; color: var(--ochre); }
+.step-note { white-space: normal; flex-basis: 100%; font-family: var(--body, inherit); font-size: 22px; font-weight: 400; line-height: 1.35; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .4s, opacity .35s; }
+.step-note code { background: none; padding: 0; font-size: .9em; }
+.step-note b { font-weight: 700; }
+.step-note a { color: inherit; text-decoration: underline; }
+.step-list li.active .step-note { max-height: 160px; opacity: 1; margin-top: 4px; }
 .step-list li.past { opacity: .7; }
-.step-list li.active { opacity: 1; background: var(--ochre); color: var(--ink); transform: translateX(16px); }
+.step-list li.active { opacity: 1; background: var(--ochre); color: var(--ink); transform: translateX(12px); }
 .step-list li.active .mono { color: var(--ink); }
 .step-stage { position: relative; }
 .step-stage figure { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 22px; opacity: 0; transform: translateY(30px) scale(.98); transition: opacity .45s, transform .45s; }
 .step-stage figure.active { opacity: 1; transform: none; }
-.step-stage img { max-width: 100%; max-height: 600px; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4); align-self: center; }
-.step-stage .pts img { max-height: 300px; }
+.step-stage img, .step-stage video { max-width: 100%; max-height: 700px; object-fit: contain; border-radius: 8px; box-shadow: 0 24px 60px rgba(0,0,0,.4); align-self: center; }
+.step-stage .pts img, .step-stage .pts video { max-height: 510px; }
+.step-stage .pts { gap: 14px; }
 .step-points { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 24px; line-height: 1.3; opacity: .92; }
 .step-points b { color: var(--ochre); }
 .step-stage figcaption { font-size: 30px; text-align: center; opacity: .9; }
 .code-fig pre { font-family: var(--mono); font-size: 26px; line-height: 1.7; background: var(--ink); padding: 26px 32px; border-radius: 8px; }
-.code-fig img { max-height: 300px; }
+.code-fig img, .code-fig video { max-height: 300px; }
 
 /* ── two versions of the year ───────────────────── */
 .calendar { gap: 28px; }
@@ -288,18 +296,22 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .con h3 { font-family: var(--display); font-size: 46px; font-weight: 700; line-height: 1.05; }
 .con p { font-size: 30px; line-height: 1.35; color: rgba(242,242,235,.86); margin-top: 8px !important; }
 .prompts { display: flex; flex-direction: column; gap: 10px; }
-#own { gap: 24px; padding-top: 80px !important; }
+#own { gap: 44px; }
+#own .prompts { gap: 18px; }
+#own .prompts li { font-size: 26px; padding: 16px 24px 16px 20px; }
+#own .prompts ul { gap: 20px 26px; }
 .prompts-k { font-size: 22px; text-transform: uppercase; letter-spacing: .1em; color: var(--ochre); }
 .prompts ul { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
 .prompts li { font-family: var(--mono); font-size: 22px; line-height: 1.3; background: #1c1f22; border: 2px solid rgba(242,242,235,.14); border-radius: 6px; padding: 10px 18px 10px 16px; display: flex; gap: 12px; color: rgba(242,242,235,.92); }
 .prompts li span { color: var(--ochre); font-weight: 600; }
 .prompts li:last-child:nth-child(odd) { grid-column: 1 / -1; }
-.proof { background: rgba(242,242,235,.06); border: 2px solid rgba(242,242,235,.14); border-top: 10px solid var(--sky); border-radius: 6px; padding: 24px 36px 26px; display: flex; flex-direction: column; gap: 16px; }
-.proof-k { font-size: 24px; text-transform: uppercase; letter-spacing: .08em; color: var(--sky); }
+.proof { display: flex; flex-direction: column; gap: 22px; }
+.proof-k { font-size: 26px; text-transform: uppercase; letter-spacing: .1em; color: var(--sky); }
 .proof-k span { color: rgba(242,242,235,.7); }
-.proof ul { list-style: none; padding: 0; display: flex; gap: 22px; flex-wrap: wrap; }
-.proof li { display: flex; align-items: center; gap: 12px; font-family: var(--display); font-weight: 700; font-size: 42px; background: rgba(139,178,222,.14); border-radius: 4px; padding: 6px 22px 6px 14px; }
-.proof li b { color: #5CB87A; font-size: 36px; }
+.proof ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.proof li { display: flex; align-items: center; background: rgba(242,242,235,.06); border-bottom: 8px solid var(--c); border-radius: 6px 6px 0 0; padding: 18px 20px; }
+.proof li h3 { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1.05; text-transform: uppercase; }
+.proof li p { font-size: 22px; opacity: .75; margin-top: 4px !important; }
 .proof .fine { margin: 0; }
 
 /* ── newspaper slide ──────────────────────────────── */
@@ -371,6 +383,20 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .nolic .card-k { font-size: 22px; text-transform: uppercase; letter-spacing: .08em; color: var(--pink); }
 .nolic h3 { font-family: var(--display); font-size: 52px; font-weight: 700; line-height: 1.05; }
 .nolic p { font-size: 30px; line-height: 1.35; color: rgba(242,242,235,.9); }
+
+/* ── fun-fact aside (open source inspiration) ───── */
+.fun-fact { display: flex; align-items: center; gap: 26px; border-left: 10px solid var(--ochre); background: rgba(242,242,235,.07); border-radius: 0 6px 6px 0; padding: 16px 28px 16px 22px; }
+.fun-fact > div { display: flex; flex-direction: column; gap: 4px; }
+.fun-fact .fun-k { font-size: 20px; text-transform: uppercase; letter-spacing: .1em; color: var(--ochre); }
+.fun-fact p:not(.fun-k) { font-size: 28px; line-height: 1.3; color: rgba(242,242,235,.92); }
+.fun-fact a { color: var(--ochre); text-decoration: underline; text-underline-offset: 5px; white-space: nowrap; }
+.ing-icon { flex: none; width: 96px; height: 80px; animation: ing-hover 3s ease-in-out infinite; }
+.ing-icon .ing-rotor { transform-box: fill-box; transform-origin: center; }
+.ing-icon .r1 { animation: ing-spin .18s linear infinite; }
+.ing-icon .r2 { animation: ing-spin .26s linear infinite reverse; }
+@keyframes ing-spin { 0% { transform: scaleX(1); } 50% { transform: scaleX(.12); } 100% { transform: scaleX(1); } }
+@keyframes ing-hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@media (prefers-reduced-motion: reduce) { .ing-icon, .ing-icon .ing-rotor { animation: none; } }
 
 /* ── carousel ────────────────────────────────────── */
 .carousel { display: grid; grid-template-columns: 640px 1fr; gap: 40px; height: 760px; }
@@ -508,3 +534,52 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .dslide .door-leaf { background: linear-gradient(180deg, color-mix(in srgb, var(--c) 80%, #fff), color-mix(in srgb, var(--c) 62%, #000)); }
 .chk { font-size: 24px; }
 .door-in .rdy { font-size: 24px; }
+
+/* door 4: log rewind */
+.logwin { position: relative; flex: none; height: 400px; margin-top: 10px; overflow: hidden; -webkit-mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(transparent, #000 10%, #000 90%, transparent); }
+.logs { list-style: none; padding: 0; margin: 0; will-change: transform; }
+.logs li { height: 30px; line-height: 30px; font-family: var(--mono); font-size: 14px; white-space: nowrap; overflow: hidden; color: rgba(242,242,235,.7); }
+.logs .ts { opacity: .5; margin-right: 10px; }
+.logs .lv { display: inline-block; width: 62px; font-weight: 600; }
+.logs .warn .lv { color: var(--ochre); }
+.logs .info .lv { color: var(--sky); }
+.logs .dbg .lv { color: rgba(242,242,235,.45); }
+.logs .err { color: #fff; }
+.logs .err .lv { color: #ff6a5c; }
+.logs .sub { color: rgba(242,242,235,.8); }
+.pin { position: absolute; left: -4px; right: -4px; top: 185px; height: 30px; border: 3px solid #ff6a5c; border-radius: 6px; background: rgba(255,106,92,.18); opacity: 0; }
+.rew { position: absolute; right: 6px; top: 8px; font-size: 18px; color: var(--ochre); background: rgba(0,0,0,.55); padding: 2px 10px; border-radius: 4px; opacity: 0; }
+/* a diagonal corner banner across the door's top-right */
+/* a diagonal corner banner across the door's top-right; centred well inside the corner so the lettering clears both edges */
+/* a diagonal banner across the door's top-right corner, above the frame and everything else (it overhangs the door, so it lives outside it) */
+.door-wrap { position: relative; }
+.rootc { position: absolute; z-index: 20; top: 69px; right: -58px; width: 320px; text-align: center; white-space: nowrap; transform: rotate(45deg); font-size: 22px; line-height: 46px; letter-spacing: .12em; text-transform: uppercase; background: #ff6a5c; color: var(--ink); font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,.4); opacity: 0; pointer-events: none; }
+/* the log is already tailing before the door opens (it starts with the slide), then rewinds to the root cause */
+#door4.present .logs { animation: logs-run 5.4s linear forwards; }
+.door.visible .pin { animation: show .3s ease 3.9s forwards, pin-pulse 1.2s ease-in-out 4.2s infinite; }
+.door.visible .rew { animation: rew-flash 1.2s steps(2) 2.4s 1 forwards; }
+.door.visible ~ .rootc { animation: show .4s ease 4.1s forwards; }
+@keyframes logs-run {
+  0% { transform: translateY(0); filter: blur(0); }
+  5% { filter: blur(1.5px); }
+  46% { transform: translateY(-1760px); filter: blur(1.5px); }
+  56% { transform: translateY(-1760px); filter: blur(0); animation-timing-function: ease-in-out; }
+  67% { filter: blur(1.5px); }
+  78% { transform: translateY(-1495px); filter: blur(0); }
+  100% { transform: translateY(-1495px); filter: blur(0); }
+}
+}
+}
+}
+}
+@keyframes rew-flash { 0% { opacity: 1; } 90% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pin-pulse { 50% { background: rgba(255,106,92,.32); } }
+
+
+/* ── PR comparison (proof slide): real GitHub screenshots ── */
+.prcmp { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.prcmp figure { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.prcmp figcaption { font-size: 22px; text-transform: uppercase; letter-spacing: .1em; color: var(--orange); }
+.prcmp .good figcaption { color: #5CB87A; }
+.prcmp img { width: 100%; aspect-ratio: 1272 / 660; object-fit: cover; object-position: top left; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,.4); border-top: 8px solid var(--orange); }
+.prcmp .good img { border-top-color: #5CB87A; }

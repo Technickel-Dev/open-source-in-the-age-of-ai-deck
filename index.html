@@ -26,7 +26,7 @@
     <h1>Open Source<br><span class="hl-ochre">in the age of AI</span></h1>
     <p class="mono byline">By Technickel · November 2026</p>
   </div>
-  <aside class="notes">Welcome everyone. Hacktoberfest inspired this talk, but it has changed and so has the talk. Today: how to contribute to Open Source well in the age of AI, plus some real contributions.</aside>
+  <aside class="notes">Fun fact: NASA's Ingenuity Mars helicopter ran an embedded Linux, JPL's open source F Prime flight framework and Python, and GitHub gave about 12,000 developers a badge for contributing to the projects used on the mission (GitHub README feature on Ingenuity). Welcome everyone. Hacktoberfest inspired this talk, but it has changed and so has the talk. Today: how to contribute to Open Source well in the age of AI, plus some real contributions.</aside>
 </section>
 
 <!-- ───────────── 02 · Record reminder (skipped in exports) ───────────── -->
@@ -258,13 +258,28 @@
       <li><span class="mono src">GitLab</span><a href="https://go.gitlab.com/ubCLKL">go.gitlab.com/ubCLKL</a></li>
       <li><span class="mono src">GitHub</span><a href="https://up-for-grabs.net/">up-for-grabs.net</a></li>
       <li><span class="mono src">GitHub</span><a href="https://goodfirstissue.dev/">goodfirstissue.dev</a></li>
-      <li><span class="mono src">GitHub</span><a href="https://hacktoberfest-projects.vercel.app/">hacktoberfest-projects.vercel.app</a></li>
     </ul>
     <div class="where-side">
       <div class="callout" style="--c:var(--ochre)"><h3>Ask AI</h3><p>"Find beginner-friendly issues in tools I already use."</p></div>
       <div class="callout" style="--c:var(--sky)"><h3>Look around</h3><p>Pull inspiration from your work, your stack, your browser tabs.</p></div>
     </div>
   </div>
+  <aside class="fun-fact fragment fade-up">
+    <svg class="ing-icon" viewBox="0 0 120 100" aria-hidden="true">
+      <g class="ing-body">
+        <rect x="57" y="26" width="6" height="22" fill="#1d1a14"/>
+        <g class="ing-rotor r1"><rect x="8" y="22" width="104" height="5" rx="2.5" fill="#F2F2EB"/></g>
+        <g class="ing-rotor r2"><rect x="16" y="33" width="88" height="5" rx="2.5" fill="#F2F2EB"/></g>
+        <rect x="46" y="48" width="28" height="24" rx="4" fill="#d9d4c4" stroke="#F2F2EB" stroke-width="3"/>
+        <rect x="51" y="54" width="18" height="8" rx="2" fill="#2E4742"/>
+        <path d="M48 70 L30 90 M72 70 L90 90 M54 72 L46 92 M66 72 L74 92" stroke="#F2F2EB" stroke-width="4" stroke-linecap="round" fill="none"/>
+      </g>
+    </svg>
+    <div>
+      <p class="mono fun-k">Open source inspiration</p>
+      <p>NASA's Mars helicopter, Ingenuity, ran on Open Source. <a href="https://github.com/readme/featured/nasa-ingenuity-helicopter" target="_blank" rel="noopener">Read the story</a></p>
+    </div>
+  </aside>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
   <aside class="notes">[Check these links still work in 2026, since the hacktoberfest topic may be quieter now that PRs don't count.] Good first issue labels are still the best entry point.</aside>
 </section>
@@ -282,29 +297,23 @@
   <h2 class="title">Six steps to your first PR</h2>
   <div class="stepper">
     <ol class="step-list">
-      <li data-at="0"><span class="mono">01</span>Find an issue + communicate</li>
-      <li data-at="1"><span class="mono">02</span>Fork the repo</li>
-      <li data-at="2"><span class="mono">03</span>Clone it with Git</li>
-      <li data-at="3"><span class="mono">04</span>Make the changes</li>
-      <li data-at="4"><span class="mono">05</span>Stage, commit + push</li>
-      <li data-at="5"><span class="mono">06</span>Open the pull request!</li>
+      <li data-at="0"><span class="mono">01</span>Find an issue + communicate<span class="step-note"><b>Read the rules.</b> CONTRIBUTING.md, and the project's AI policy if it has one.<br><b>Talk first.</b> Comment on the issue before you open a PR.</span></li>
+      <li data-at="1"><span class="mono">02</span>Fork the repo<span class="step-note">Your own copy to experiment in.</span></li>
+      <li data-at="2"><span class="mono">03</span>Clone it with Git<span class="step-note"><code>git clone https://github.com/&lt;you&gt;/&lt;repo&gt;.git</code></span></li>
+      <li data-at="3"><span class="mono">04</span>Make the changes<span class="step-note"><b>Test it.</b> Run the project's tests and try your change.<br><b>Keep it focused.</b> Split unrelated changes into separate PRs, or stack them if one builds on another.</span></li>
+      <li data-at="4"><span class="mono">05</span>Stage, commit + push<span class="step-note"><a href="https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/" target="_blank" rel="noopener">Git basics in 10 minutes (freeCodeCamp)</a></span></li>
+      <li data-at="5"><span class="mono">06</span>Open the pull request!<span class="step-note"><b>Say what changed.</b> Link the issue it closes.<br><b>Quality over quantity.</b> One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</span></li>
     </ol>
     <div class="step-stage">
-      <figure data-at="0" class="pts"><img src="assets/img/step-issue.png" alt="Commenting on a GitHub issue"><ul class="step-points">
-        <li><b>Read the rules.</b> CONTRIBUTING.md, and the project's AI policy if it has one.</li>
-        <li><b>Talk first.</b> Comment on the issue before you open a PR. Ask to be assigned.</li>
-      </ul></figure>
-      <figure data-at="1"><img src="assets/img/step-fork.png" alt="Forking a repository"><figcaption>Your own copy to experiment in.</figcaption></figure>
-      <figure data-at="2"><img src="assets/img/step-clone.png" alt="Cloning a repository"><figcaption><code>git clone https://github.com/&lt;you&gt;/&lt;repo&gt;.git</code></figcaption></figure>
-      <figure data-at="3"><img src="assets/img/step-change.gif" alt="Making a change"><figcaption>Read CONTRIBUTING.md first. Keep it focused.</figcaption></figure>
-      <figure data-at="4" class="code-fig"><pre><span class="prompt">$</span> git checkout -b better-readme
+      <figure data-at="0" ><img data-clip="assets/img/steps/step-01-issue.mp4" src="assets/img/step-issue.png" alt="Commenting on a GitHub issue"></figure>
+      <figure data-at="1"><img data-clip="assets/img/steps/step-02-fork.mp4" src="assets/img/step-fork.png" alt="Forking a repository"></figure>
+      <figure data-at="2"><img data-clip="assets/img/steps/step-03-clone.mp4" src="assets/img/step-clone.png" alt="Cloning a repository"></figure>
+      <figure data-at="3"><img src="assets/img/step-change.gif" alt="Making a change"></figure>
+      <figure data-at="4"><div class="terminal agenda"><div class="term-bar"><i></i><i></i><i></i><span>~/low-poly</span></div><pre><span class="prompt">$</span> git checkout -b better-readme
 <span class="prompt">$</span> git add README.md
 <span class="prompt">$</span> git commit -m "More descriptive README"
-<span class="prompt">$</span> git push origin better-readme</pre><img src="assets/img/step-open-pr.png" alt="Fork is one commit ahead"><figcaption><a href="https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/">Git basics in 10 minutes (freeCodeCamp)</a></figcaption></figure>
-      <figure data-at="5" class="pts"><img src="assets/img/step-pr-form.png" alt="Creating a pull request"><ul class="step-points">
-        <li><b>Say what changed.</b> Link the issue it closes.</li>
-        <li><b>Quality over quantity.</b> One thoughtful PR beats ten drive-bys. Disclose AI help when asked.</li>
-      </ul></figure>
+<span class="prompt">$</span> git push origin better-readme</pre></div></figure>
+      <figure data-at="5" ><img data-clip="assets/img/steps/step-06-pr-form.mp4" src="assets/img/step-pr-form.png" alt="Creating a pull request"></figure>
     </div>
   </div>
   <span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span><span class="fragment step"></span>
@@ -323,7 +332,7 @@
 <section id="own" class="s" data-background-color="#2E4742">
   <p class="kicker">Contributing in the age of AI</p>
   <h2 class="title">Own your AI output</h2>
-  <p class="own-big">If you don't know what it's doing, <span class="hl-ochre">don't contribute it.</span> Don't be a <span class="hl-red">MEAT proxy.</span></p>
+  <p class="own-big">If you don't know what it's doing, <span class="hl-ochre">don't contribute it.</span> Don't be a <span class="hl-red">MEAT proxy.</span> 🥩</p>
   <div class="cons fragment fade-up">
     <div class="con" style="--c:var(--orange)"><h3>It looks bad on you</h3><p>A PR you can't explain costs you trust.</p></div>
     <div class="con" style="--c:var(--pink)"><h3>It makes the maintainer's life harder</h3><p>They review, debug and fix what you couldn't.</p></div>
@@ -337,18 +346,34 @@
       <li><span>&gt;</span>"Explain how X works and why you did it that way instead of the alternatives."</li>
     </ul>
   </div>
-  <div class="proof fragment fade-up">
-    <p class="mono proof-k">Prove it works <span>· and let AI automate the proof</span></p>
+  <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
+  <aside class="notes">If you can't explain what the AI wrote, don't send it, and don't be a meat proxy: a human who just passes the AI's output along without understanding it. It looks bad on you and it makes the maintainer's life harder. Use AI to interrogate its own output: ask it to explain the diff, list what could break, predict maintainer pushback and explain the parts you'd have to defend.</aside>
+</section>
+
+<!-- ───────────── 24b · Prove it works ───────────── -->
+<section id="proof" class="s" data-background-color="#2E4742">
+  <p class="kicker">Contributing in the age of AI</p>
+  <h2 class="title">Prove it works</h2>
+  <div class="proof">
+    <p class="mono proof-k">What reviewers like to see <span>· and let AI automate the proof</span></p>
     <ul>
-      <li><b>✓</b>Tests</li>
-      <li><b>✓</b>Screenshots</li>
-      <li><b>✓</b>Short recordings</li>
-      <li><b>✓</b>Before / after</li>
+      <li style="--c:#5CB87A"><div><h3>Tests</h3><p>Show it passes</p></div></li>
+      <li style="--c:var(--sky)"><div><h3>Screenshots</h3><p>Show the result</p></div></li>
+      <li style="--c:var(--ochre)"><div><h3>Short recordings</h3><p>Show it moving</p></div></li>
+      <li style="--c:var(--pink)"><div><h3>Before / after</h3><p>Show what changed</p></div></li>
     </ul>
     <p class="fine">Proof helps the review. It never replaces understanding the change.</p>
   </div>
+  <div class="prcmp fragment fade-up">
+    <figure class="bad"><figcaption class="mono">Without proof</figcaption><img src="assets/img/pr-without-proof.png" alt="A pull request form with a one-line description"></figure>
+    <figure class="good"><figcaption class="mono">With proof</figcaption><img src="assets/img/pr-with-proof.png" alt="A pull request form with a structured description and a screenshot"></figure>
+  </div>
+  <aside class="fun-fact fragment fade-up">
+    <div><p class="mono fun-k">Automated with AI</p>
+    <p>Every screen recording on the six-steps slide was recorded by an AI-written Playwright script.</p></div>
+  </aside>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">If you can't explain what the AI wrote, don't send it, and don't be a meat proxy: a human who just passes the AI's output along without understanding it. It looks bad on you and it makes the maintainer's life harder. Use AI to interrogate its own output: ask it to explain the diff, list what could break, predict maintainer pushback and explain the parts you'd have to defend. Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change.</aside>
+  <aside class="notes">Tests, screenshots and short recordings that prove the change works are supplemental and really help reviewers, and AI can generate and automate a lot of that proof. But they never replace understanding the change. The recordings in the six steps slide were all automated with AI: a Playwright script drives a signed-in browser, glides the cursor, types, and encodes the clips.</aside>
 </section>
 
 <!-- ───────────── 25 · The siege ───────────── -->
@@ -359,25 +384,25 @@
     <canvas class="scene" data-scene="siege"></canvas>
     <p class="siege-fallback mono"><span>🤖🤖🤖 → 🏰</span>CODE CASTLE · open to contribution → closed</p>
   </div>
-  <p class="mono walls-k fragment fade-up">Projects raising walls</p>
-  <div class="walls">
-    <div class="wall fragment fade-up" style="--c:#E53927">
+  <p class="mono walls-k fragment fade-up" data-fragment-index="0">Projects raising walls</p>
+  <div class="walls fragment fade-up" data-fragment-index="0">
+    <div class="wall" style="--c:#E53927">
       <div class="wall-head"><b><a href="https://godotengine.org/article/contribution-policy-2026/" target="_blank" rel="noopener">Godot</a></b><span class="chip">BANNED</span></div>
       <p>AI agents out; code must be human-written</p>
     </div>
-    <div class="wall fragment fade-up" style="--c:#E97B77">
+    <div class="wall" style="--c:#E97B77">
       <div class="wall-head"><b><a href="https://tldraw.dev/blog/stay-away-from-my-trash" target="_blank" rel="noopener">tldraw</a></b><span class="chip">PRs CLOSED</span></div>
       <p>Stopped taking outside pull requests</p>
     </div>
-    <div class="wall fragment fade-up" style="--c:#E97B77">
+    <div class="wall" style="--c:#E97B77">
       <div class="wall-head"><b><a href="https://daniel.haxx.se/blog/2026/01/26/the-end-of-the-curl-bug-bounty/" target="_blank" rel="noopener">curl</a></b><span class="chip">BOUNTY ENDED</span></div>
       <p>Dropped its bug bounty; about 1 in 5 reports was AI slop</p>
     </div>
-    <div class="wall fragment fade-up" style="--c:#E53927">
+    <div class="wall" style="--c:#E53927">
       <div class="wall-head"><b><a href="https://www.qemu.org/docs/master/devel/code-provenance.html#use-of-ai-generated-content" target="_blank" rel="noopener">QEMU</a></b><span class="chip">BANNED</span></div>
       <p>Declines code that includes or derives from AI output</p>
     </div>
-    <div class="wall fragment fade-up" style="--c:#E53927">
+    <div class="wall" style="--c:#E53927">
       <div class="wall-head"><b><a href="https://ziglang.org/code-of-conduct/#strict-no-llm-no-ai-policy" target="_blank" rel="noopener">Zig</a></b><span class="chip">BANNED</span></div>
       <p>Strict no-LLM policy: no AI-generated code or prose</p>
 </div>
@@ -423,7 +448,7 @@
 
 <!-- ───────────── 26 · The other side ───────────── -->
 <section id="door1" class="s" data-background-color="#3D5F58">
-  <p class="kicker">But it also opens the doors · 1 of 3</p>
+  <p class="kicker">But it also opens the doors · 1 of 4</p>
   <h2 class="title">Dev setup in minutes</h2>
   <div class="dslide">
     <div class="door fragment" style="--c:var(--sky)">
@@ -453,7 +478,7 @@
 </section>
 
 <section id="door2" class="s" data-background-color="#2E4742">
-  <p class="kicker">But it also opens the doors · 2 of 3</p>
+  <p class="kicker">But it also opens the doors · 2 of 4</p>
   <h2 class="title">Understand any repo</h2>
   <div class="dslide">
     <div class="door fragment" style="--c:var(--ochre)">
@@ -481,7 +506,7 @@
 </section>
 
 <section id="door3" class="s" data-background-color="#3D5F58">
-  <p class="kicker">But it also opens the doors · 3 of 3</p>
+  <p class="kicker">But it also opens the doors · 3 of 4</p>
   <h2 class="title">Read the history</h2>
   <div class="dslide">
     <div class="door fragment" style="--c:var(--pink)">
@@ -508,56 +533,33 @@
   <aside class="notes">Door three: code looks strange until you know the story. git blame shows who changed a line and when; the commit message links to the PR and issue with the reasoning. Have AI read that trail and summarise it, including whether an idea was already tried and reverted. The timeline is illustrative only.</aside>
 </section>
 
-<section id="owndevices" class="s" data-background-color="#2E4742">
-  <p class="kicker">The trend</p>
-  <h2 class="title">Give old hardware new life</h2>
-  <p class="lead">People are taking back the hardware they paid for, and keeping it running.</p>
-  <div class="cord-wall fragment">
-    <svg viewBox="0 0 1664 600" role="img" aria-label="Devices hanging from a vendor cloud; the cords are cut and the devices link to each other instead">
-      <g class="cloud">
-        <g fill="#8a9591"><circle cx="772" cy="78" r="36"/><circle cx="822" cy="56" r="44"/><circle cx="880" cy="70" r="40"/><circle cx="916" cy="92" r="26"/><circle cx="752" cy="98" r="24"/><rect x="752" y="80" width="190" height="44" rx="22"/></g>
-        <text x="832" y="96" text-anchor="middle" class="ctext">VENDOR CLOUD</text>
-        <g class="badges"><rect x="950" y="40" width="250" height="34" rx="17"/><text x="1075" y="63" text-anchor="middle">subscription required</text><rect x="470" y="84" width="200" height="34" rx="17"/><text x="570" y="107" text-anchor="middle">account locked</text></g>
-      </g>
-      <g class="cord" style="--d:1.0s">
-        <path class="cord-top" d="M644 128L402 215"/>
-        <path class="cord-bot" d="M402 215L160 302"/>
-        <text class="snip" x="402" y="223" text-anchor="middle">✂</text>
-      </g><g class="cord" style="--d:1.6s">
-        <path class="cord-top" d="M739 128L620 223"/>
-        <path class="cord-bot" d="M620 223L501 306"/>
-        <text class="snip" x="620" y="231" text-anchor="middle">✂</text>
-      </g><g class="cord" style="--d:2.2s">
-        <path class="cord-top" d="M925 128L1044 214"/>
-        <path class="cord-bot" d="M1044 214L1163 300"/>
-        <text class="snip" x="1044" y="222" text-anchor="middle">✂</text>
-      </g><g class="cord" style="--d:2.8s">
-        <path class="cord-top" d="M1020 128L1262 220"/>
-        <path class="cord-bot" d="M1262 220L1504 288"/>
-        <text class="snip" x="1262" y="228" text-anchor="middle">✂</text>
-      </g><g class="cord" style="--d:3.6s">
-        <path class="cord-top" d="M832 128L832 198"/>
-        <path class="cord-bot" d="M832 198L832 268"/>
-        <text class="snip" x="832" y="206" text-anchor="middle">✂</text>
-      </g><g class="dev dev-tv" style="--c:var(--sky); --d:1.0s" transform="translate(160 350)"><g class="dev-in"><rect x="-72" y="-48" width="144" height="92" rx="9"/><path d="M-32 58H32M0 44V58"/></g></g>
-      <text class="dlabel dl-tv" x="160" y="478" text-anchor="middle" style="--c:var(--sky); --d:1.0s">TV</text>
-      <text class="ddesc" x="160" y="512" text-anchor="middle" style="--d:1.0s">Clean up the smart TV<tspan x="160" dy="28">you already paid for</tspan></text><g class="dev dev-cam" style="--c:var(--pink); --d:1.6s" transform="translate(501 350)"><g class="dev-in"><rect x="-62" y="-42" width="124" height="80" rx="8"/><path d="M-84 52H84L70 38H-70Z"/></g></g>
-      <text class="dlabel dl-cam" x="501" y="478" text-anchor="middle" style="--c:var(--pink); --d:1.6s">Old laptop</text>
-      <text class="ddesc" x="501" y="512" text-anchor="middle" style="--d:1.6s">Put Linux on the laptop<tspan x="501" dy="28">the vendor stopped updating</tspan></text><g class="dev dev-bike" style="--c:var(--sky); --d:2.2s" transform="translate(1163 350)"><g class="dev-in"><circle cx="-50" cy="28" r="30"/><circle cx="50" cy="28" r="30"/><path d="M-50 28L-10 -18H34L50 28M-10 -18L-20 -40H-4M34 -18L28 -40H44"/></g></g>
-      <text class="dlabel dl-bike" x="1163" y="478" text-anchor="middle" style="--c:var(--sky); --d:2.2s">Bike</text>
-      <text class="ddesc" x="1163" y="512" text-anchor="middle" style="--d:2.2s">Hack a Peloton to run<tspan x="1163" dy="28">your own software</tspan></text><g class="dev dev-gym" style="--c:var(--pink); --d:2.8s" transform="translate(1504 350)"><g class="dev-in"><rect x="-34" y="-62" width="68" height="124" rx="12"/><path d="M-10 -46H10M-8 46H8"/></g></g>
-      <text class="dlabel dl-gym" x="1504" y="478" text-anchor="middle" style="--c:var(--pink); --d:2.8s">Old phone</text>
-      <text class="ddesc" x="1504" y="512" text-anchor="middle" style="--d:2.8s">A custom OS on a phone<tspan x="1504" dy="28">no longer getting updates</tspan></text><g class="dev dev-frame" style="--c:var(--ochre); --d:3.6s" transform="translate(832 350)"><g class="dev-in"><rect x="-108" y="-76" width="216" height="152" rx="12"/><rect x="-90" y="-58" width="180" height="116" rx="4"/><text class="fclock" x="0" y="8" text-anchor="middle">9:41</text><path class="fcal" d="M-70 32H70M-70 44H20"/></g></g>
-      <text class="dlabel dl-frame" x="832" y="478" text-anchor="middle" style="--c:var(--ochre); --d:3.6s">Photo frame</text>
-      <text class="ddesc" x="832" y="512" text-anchor="middle" style="--d:3.6s">Root a $50 Android frame<tspan x="832" dy="28">and run your own dashboard</tspan></text>
-      
-      <text class="osrc" x="832" y="104" text-anchor="middle">OPEN SOURCE</text>
-      <text class="repo" x="832" y="580" text-anchor="middle">wesbos/photo-frame-dashboard</text>
-    </svg>
+<section id="door4" class="s" data-background-color="#2E4742">
+  <p class="kicker">But it also opens the doors · 4 of 4</p>
+  <h2 class="title">Debug with the logs</h2>
+  <div class="dslide">
+    <div class="door-wrap"><div class="door fragment" style="--c:var(--orange)">
+      <div class="door-in"><div class="sc sc4">
+        <p class="mono sc-k">$ tail -f app.log</p>
+        <div class="logwin"><ul class="logs"><li class="dbg"><span class="ts">12:00:02</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="info"><span class="ts">12:00:04</span><span class="lv">INFO</span>worker 3 idle</li><li class="info"><span class="ts">12:00:05</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:00:08</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="dbg"><span class="ts">12:00:10</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="info"><span class="ts">12:00:11</span><span class="lv">INFO</span>GET /health 200 1ms</li><li class="info"><span class="ts">12:00:12</span><span class="lv">INFO</span>server started on :3000</li><li class="warn"><span class="ts">12:00:13</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:00:15</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:00:16</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="warn"><span class="ts">12:00:19</span><span class="lv">WARN</span>slow query 312ms</li><li class="dbg"><span class="ts">12:00:20</span><span class="lv">DEBUG</span>token validated</li><li class="info"><span class="ts">12:00:23</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:00:24</span><span class="lv">INFO</span>worker 3 idle</li><li class="dbg"><span class="ts">12:00:27</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="dbg"><span class="ts">12:00:28</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="warn"><span class="ts">12:00:31</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:00:32</span><span class="lv">INFO</span>job queued sync-repos</li><li class="info"><span class="ts">12:00:33</span><span class="lv">INFO</span>GET /health 200 1ms</li><li class="dbg"><span class="ts">12:00:34</span><span class="lv">DEBUG</span>config loaded</li><li class="dbg"><span class="ts">12:00:36</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="info"><span class="ts">12:00:39</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="dbg"><span class="ts">12:00:42</span><span class="lv">DEBUG</span>config loaded</li><li class="dbg"><span class="ts">12:00:45</span><span class="lv">DEBUG</span>token validated</li><li class="dbg"><span class="ts">12:00:48</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="dbg"><span class="ts">12:00:49</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="info"><span class="ts">12:00:52</span><span class="lv">INFO</span>worker 3 idle</li><li class="info"><span class="ts">12:00:53</span><span class="lv">INFO</span>POST /api/login 200 48ms</li><li class="info"><span class="ts">12:00:54</span><span class="lv">INFO</span>GET /health 200 1ms</li><li class="info"><span class="ts">12:00:57</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:01:00</span><span class="lv">INFO</span>server started on :3000</li><li class="info"><span class="ts">12:01:03</span><span class="lv">INFO</span>job queued sync-repos</li><li class="info"><span class="ts">12:01:05</span><span class="lv">INFO</span>worker 3 idle</li><li class="warn"><span class="ts">12:01:08</span><span class="lv">WARN</span>slow query 312ms</li><li class="dbg"><span class="ts">12:01:10</span><span class="lv">DEBUG</span>session refreshed</li><li class="dbg"><span class="ts">12:01:13</span><span class="lv">DEBUG</span>session refreshed</li><li class="dbg"><span class="ts">12:01:15</span><span class="lv">DEBUG</span>config loaded</li><li class="info"><span class="ts">12:01:16</span><span class="lv">INFO</span>GET /api/repos 200 21ms</li><li class="warn"><span class="ts">12:01:17</span><span class="lv">WARN</span>deprecated option "legacy"</li><li class="info"><span class="ts">12:01:18</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="dbg"><span class="ts">12:01:21</span><span class="lv">DEBUG</span>config loaded</li><li class="dbg"><span class="ts">12:01:24</span><span class="lv">DEBUG</span>session refreshed</li><li class="warn"><span class="ts">12:01:26</span><span class="lv">WARN</span>deprecated option "legacy"</li><li class="dbg"><span class="ts">12:01:28</span><span class="lv">DEBUG</span>config loaded</li><li class="info"><span class="ts">12:01:31</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:01:32</span><span class="lv">INFO</span>GET /health 200 1ms</li><li class="dbg"><span class="ts">12:01:34</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="dbg"><span class="ts">12:01:36</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="warn"><span class="ts">12:01:38</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:01:39</span><span class="lv">INFO</span>worker 3 idle</li><li class="info"><span class="ts">12:01:40</span><span class="lv">INFO</span>GET /api/repos 200 21ms</li><li class="dbg"><span class="ts">12:01:43</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="info"><span class="ts">12:01:45</span><span class="lv">INFO</span>POST /api/login 200 48ms</li><li class="info"><span class="ts">12:01:48</span><span class="lv">INFO</span>POST /api/login 200 48ms</li><li class="dbg"><span class="ts">12:01:51</span><span class="lv">DEBUG</span>session refreshed</li><li class="warn"><span class="ts">12:01:54</span><span class="lv">WARN</span>empty Authorization header</li><li class="err"><span class="ts">12:01:56</span><span class="lv">ERROR</span>null token (auth.ts:42)</li><li class="err sub"><span class="ts">12:01:57</span><span class="lv">ERROR</span>  at check (auth.ts:42)</li><li class="dbg"><span class="ts">12:01:58</span><span class="lv">DEBUG</span>config loaded</li><li class="warn"><span class="ts">12:02:00</span><span class="lv">WARN</span>deprecated option "legacy"</li><li class="info"><span class="ts">12:02:03</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="warn"><span class="ts">12:02:04</span><span class="lv">WARN</span>deprecated option "legacy"</li><li class="dbg"><span class="ts">12:02:07</span><span class="lv">DEBUG</span>config loaded</li><li class="dbg"><span class="ts">12:02:10</span><span class="lv">DEBUG</span>retry 1/3 webhook</li><li class="dbg"><span class="ts">12:02:13</span><span class="lv">DEBUG</span>token validated</li><li class="dbg"><span class="ts">12:02:15</span><span class="lv">DEBUG</span>config loaded</li><li class="warn"><span class="ts">12:02:18</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:02:21</span><span class="lv">INFO</span>POST /api/login 200 48ms</li><li class="dbg"><span class="ts">12:02:22</span><span class="lv">DEBUG</span>session refreshed</li><li class="dbg"><span class="ts">12:02:24</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="info"><span class="ts">12:02:27</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="info"><span class="ts">12:02:29</span><span class="lv">INFO</span>server started on :3000</li><li class="info"><span class="ts">12:02:30</span><span class="lv">INFO</span>GET /api/repos 200 21ms</li><li class="dbg"><span class="ts">12:02:32</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="info"><span class="ts">12:02:35</span><span class="lv">INFO</span>job queued sync-repos</li><li class="warn"><span class="ts">12:02:37</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:02:39</span><span class="lv">INFO</span>GET /api/users 200 12ms</li><li class="dbg"><span class="ts">12:02:40</span><span class="lv">DEBUG</span>session refreshed</li><li class="info"><span class="ts">12:02:42</span><span class="lv">INFO</span>GET /health 200 1ms</li><li class="dbg"><span class="ts">12:02:44</span><span class="lv">DEBUG</span>cache hit user:42</li><li class="dbg"><span class="ts">12:02:46</span><span class="lv">DEBUG</span>token validated</li><li class="dbg"><span class="ts">12:02:49</span><span class="lv">DEBUG</span>config loaded</li><li class="warn"><span class="ts">12:02:52</span><span class="lv">WARN</span>slow query 312ms</li><li class="info"><span class="ts">12:02:54</span><span class="lv">INFO</span>worker 3 idle</li></ul><div class="pin"></div><p class="rew mono">◀◀ rewind</p></div>
+      </div></div>
+      <div class="door-leaf"><span class="mono">Read the logs</span></div>
+    </div>
+    <p class="rootc mono">root cause</p></div>
+    <div class="dright">
+      <div class="prompts one fragment fade-up">
+        <p class="mono prompts-k">Prompts to debug with an agent</p>
+        <ul>
+        <li><span>&gt;</span>"Here are the logs and the stack trace. What's the root cause?"</li>
+        <li><span>&gt;</span>"Find the first error in these logs and explain what led up to it."</li>
+        <li><span>&gt;</span>"Reproduce this bug locally and tell me which line to fix."</li>
+        <li><span>&gt;</span>"Compare the logs from a good run and a failing run. What's different?"</li>
+        </ul>
+      </div>
+      <p class="lead fragment fade-up">Let an agent dig through the logs, then check its answer yourself.</p>
+    </div>
   </div>
-  <p class="lead fragment fade-up late">AI makes it easier to start. Open Source is what lets everyone share the result.</p>
   <footer class="foot"><span>Open Source in the age of AI · Technickel</span></footer>
-  <aside class="notes">A recent trend: owning your own devices and giving old hardware new life. Wes Bos's $50 photo frame hack turned into a community project (Syntax #1048 "Deno Is Dead", segment "I Accidentally Started a $50 Photo Frame Movement", and #1050 "Everyone Is Hacking Their TV"). The pattern is the same everywhere: one person documents the hack in the open, others fork it and add their own builds. Verify the details against the episodes and the repo before presenting.</aside>
+  <aside class="notes">Door four: agentic debugging. Open source bug reports come with walls of logs. An agent can scan thousands of lines, rewind to the first sign of trouble and pinpoint the root cause, and it can reproduce the bug locally to confirm. You still verify the fix and own the change. The log lines in the doorway are made up for illustration.</aside>
 </section>
 
 <!-- ───────────── 24 · Section: Show and tell ───────────── -->

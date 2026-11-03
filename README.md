@@ -22,6 +22,18 @@ Or serve it: `npm run serve`, then http://localhost:5173 (uses `python3`).
 - **Click-through slides** (six steps, carousel) use `data-steps` plus invisible `<span class="fragment step">` markers. Each click shows the next `[data-at="n"]` element.
 - Placeholders to fill are in `[square brackets]`.
 
+## Record the steps slide
+
+The "Six steps" slide shows a screenshot per step. `npm run record` replaces them with short screen recordings of GitHub (dark mode, with a visible cursor): clips land in `assets/img/steps/step-NN-name.mp4` and the slide swaps each screenshot for its clip when the file exists.
+
+```bash
+node tools/record-steps.mjs --login          # once: sign in; saves .auth/github.json (git-ignored)
+node tools/record-steps.mjs --repo owner/repo --issue 12 --fork you/repo --branch better-readme
+node tools/record-steps.mjs --only 3         # just one step; add --headed to watch, --light for the light theme
+```
+
+It is a dry run: every request that is not a GET is blocked, so nothing is forked, committed, commented on or opened. Needs Chrome or Edge and ffmpeg.
+
 ## Share as normal slides
 
 ```bash

@@ -60,6 +60,15 @@
     box.innerHTML = html;
   });
 
+  // Steps slide: each screenshot is swapped for its screen recording once the clip exists (tools/record-steps.mjs)
+  document.querySelectorAll('img[data-clip]').forEach((img) => {
+    const v = document.createElement('video');
+    v.muted = v.loop = v.playsInline = v.autoplay = true;
+    v.setAttribute('aria-label', img.alt);
+    v.addEventListener('loadeddata', () => img.replaceWith(v), { once: true });
+    v.src = img.dataset.clip; // no clip yet: the load errors and the screenshot stays
+  });
+
   // Typewriter headings know their own length
   document.querySelectorAll('.type').forEach((el) => el.style.setProperty('--n', el.textContent.length));
 
@@ -77,6 +86,10 @@
       el.classList.toggle('past', at < step);
     });
     slide.querySelectorAll('[data-from]').forEach((el) => el.classList.toggle('shown', step >= Number(el.dataset.from)));
+    // a step's screen recording starts from the top and loops while that step is showing, and rests otherwise
+    slide.querySelectorAll('figure video').forEach((v) => {
+      if (v.closest('figure').classList.contains('active')) { v.currentTime = 0; v.play().catch(() => {}); } else v.pause();
+    });
     slide.querySelectorAll('.ring').forEach((ring) => ring.style.setProperty('--step', step));
     slide.querySelectorAll('.ring-card').forEach((c, i) => c.classList.toggle('active', i === step));
   }
