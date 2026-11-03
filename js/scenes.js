@@ -34,7 +34,8 @@
   function pixelField(canvas, opts) {
     const seed = Number(opts.seed || 1);
     const end = opts.variant === 'end';
-    const cols = 46, rows = 28;
+    const cols = 46, rows = 28, extraRows = 14; // the extra rows (nearest the camera) fill the space below the slide on tall screens
+    let extra = 0;
     let r, scene, camera, mesh, cells;
     const dummy = new THREE.Object3D();
 
@@ -53,11 +54,11 @@
       const accents = [BRAND.sky, BRAND.ochre, BRAND.pink, BRAND.orange];
       const geo = new THREE.BoxGeometry(0.9, 1, 0.9);
       const mat = new THREE.MeshStandardMaterial({ roughness: 0.55, metalness: 0.05 });
-      mesh = new THREE.InstancedMesh(geo, mat, cols * rows);
+      mesh = new THREE.InstancedMesh(geo, mat, cols * (rows + extraRows));
       cells = [];
       const c = new THREE.Color();
       let i = 0;
-      for (let z = 0; z < rows; z++) {
+      for (let z = 0; z < rows + extraRows; z++) {
         for (let x = 0; x < cols; x++) {
           const accent = rand() < (end ? 0.07 : 0.045);
           c.setHex(accent ? accents[Math.floor(rand() * accents.length)] : base[Math.floor(rand() * base.length)]);
@@ -69,7 +70,21 @@
       scene.add(mesh);
     }
 
+    // on screens taller than 16:9 the scene runs on past the bottom of the slide to the screen's edge (the top is unchanged)
+    function fit() {
+      const scale = window.Reveal && Reveal.getScale ? Reveal.getScale() : 1;
+      const e = Math.min(700, Math.max(0, Math.round((window.innerHeight / scale - H) / 2)));
+      if (e === extra) return;
+      extra = e;
+      r.setSize(W, H + e, false);
+      canvas.style.height = H + e + 'px';
+      camera.aspect = W / (H + e);
+      camera.setViewOffset(W, H, 0, 0, W, H + e);
+      camera.updateProjectionMatrix();
+    }
+
     function render(t) {
+      fit();
       for (let i = 0; i < cells.length; i++) {
         const k = cells[i];
         let h = 0.3 + 1.1 * (0.5 + 0.5 * Math.sin(k.x * 0.3 + t * 1.05) * Math.cos(k.z * 0.36 - t * 0.75));
