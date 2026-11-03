@@ -658,3 +658,7 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 /* the closing note on the workflow slide sits on the slide itself, not in a box */
 #heading .fun-fact { background: none; border-left: 0; padding: 0; border-radius: 0; }
 #heading .fun-fact p:not(.fun-k) { font-size: 34px; }
+
+/* Chromium card: the (public domain) Chromium logo, centred on a soft blue glow */
+.ring-card.logo { background: radial-gradient(circle at 50% 50%, #3b6db8 0%, #25416e 34%, #16222b 74%); }
+.ring-card.logo img { position: absolute; inset: 0; margin: auto; width: auto; height: 62%; object-fit: contain; object-position: center; filter: drop-shadow(0 12px 30px rgba(0,0,0,.45)); }
