@@ -814,3 +814,9 @@ canvas.scene { position: absolute; inset: 0; width: 1920px; height: 1080px; disp
 .dd-lv i + i { opacity: 1; }
 .present .dd-sc, .present .dd-mod, .present .dd-skills li u.on, .present .dd-lv i:first-child, .present .dd-lv i + i { animation: none; }
 .dd-pb b { position: relative; top: -4px; }
+#why.s { padding: 72px var(--pad-x) 110px !important; gap: 14px; }
+#proof.s { padding: 72px var(--pad-x) 100px !important; gap: 18px; }
+#proof .prcmp { gap: 24px; }
+#proof .prcmp img { aspect-ratio: 1272 / 480; }
+#proof .fun-fact { padding: 10px 24px 10px 20px; }
+#proof .fun-fact p:not(.fun-k) { font-size: 26px; }
